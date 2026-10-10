@@ -1,0 +1,12700 @@
+{
+ "baseline_chars": 2849,
+ "days_surveyed": 364,
+ "unique_candidates": 2335,
+ "unique_propers": 3871,
+ "days": [
+  {
+   "date": "01-01",
+   "events": 124,
+   "cand": 47,
+   "proper": 67,
+   "unknown_chars": 76
+  },
+  {
+   "date": "01-02",
+   "events": 39,
+   "cand": 16,
+   "proper": 28,
+   "unknown_chars": 34
+  },
+  {
+   "date": "01-03",
+   "events": 45,
+   "cand": 25,
+   "proper": 38,
+   "unknown_chars": 47
+  },
+  {
+   "date": "01-04",
+   "events": 37,
+   "cand": 23,
+   "proper": 21,
+   "unknown_chars": 41
+  },
+  {
+   "date": "01-05",
+   "events": 40,
+   "cand": 15,
+   "proper": 22,
+   "unknown_chars": 35
+  },
+  {
+   "date": "01-06",
+   "events": 26,
+   "cand": 21,
+   "proper": 27,
+   "unknown_chars": 40
+  },
+  {
+   "date": "01-07",
+   "events": 30,
+   "cand": 18,
+   "proper": 27,
+   "unknown_chars": 40
+  },
+  {
+   "date": "01-08",
+   "events": 26,
+   "cand": 14,
+   "proper": 25,
+   "unknown_chars": 32
+  },
+  {
+   "date": "01-09",
+   "events": 37,
+   "cand": 26,
+   "proper": 36,
+   "unknown_chars": 51
+  },
+  {
+   "date": "01-10",
+   "events": 43,
+   "cand": 27,
+   "proper": 27,
+   "unknown_chars": 45
+  },
+  {
+   "date": "01-11",
+   "events": 37,
+   "cand": 23,
+   "proper": 18,
+   "unknown_chars": 31
+  },
+  {
+   "date": "01-12",
+   "events": 32,
+   "cand": 24,
+   "proper": 18,
+   "unknown_chars": 35
+  },
+  {
+   "date": "01-13",
+   "events": 28,
+   "cand": 23,
+   "proper": 31,
+   "unknown_chars": 35
+  },
+  {
+   "date": "01-14",
+   "events": 39,
+   "cand": 23,
+   "proper": 22,
+   "unknown_chars": 36
+  },
+  {
+   "date": "01-15",
+   "events": 44,
+   "cand": 30,
+   "proper": 37,
+   "unknown_chars": 55
+  },
+  {
+   "date": "01-16",
+   "events": 30,
+   "cand": 17,
+   "proper": 27,
+   "unknown_chars": 37
+  },
+  {
+   "date": "01-17",
+   "events": 32,
+   "cand": 26,
+   "proper": 26,
+   "unknown_chars": 46
+  },
+  {
+   "date": "01-18",
+   "events": 32,
+   "cand": 13,
+   "proper": 19,
+   "unknown_chars": 30
+  },
+  {
+   "date": "01-19",
+   "events": 31,
+   "cand": 19,
+   "proper": 18,
+   "unknown_chars": 34
+  },
+  {
+   "date": "01-20",
+   "events": 54,
+   "cand": 22,
+   "proper": 24,
+   "unknown_chars": 39
+  },
+  {
+   "date": "01-21",
+   "events": 36,
+   "cand": 21,
+   "proper": 30,
+   "unknown_chars": 43
+  },
+  {
+   "date": "01-22",
+   "events": 26,
+   "cand": 22,
+   "proper": 19,
+   "unknown_chars": 34
+  },
+  {
+   "date": "01-23",
+   "events": 30,
+   "cand": 23,
+   "proper": 23,
+   "unknown_chars": 39
+  },
+  {
+   "date": "01-24",
+   "events": 41,
+   "cand": 34,
+   "proper": 33,
+   "unknown_chars": 57
+  },
+  {
+   "date": "01-25",
+   "events": 57,
+   "cand": 33,
+   "proper": 36,
+   "unknown_chars": 59
+  },
+  {
+   "date": "01-26",
+   "events": 36,
+   "cand": 24,
+   "proper": 33,
+   "unknown_chars": 43
+  },
+  {
+   "date": "01-27",
+   "events": 30,
+   "cand": 17,
+   "proper": 21,
+   "unknown_chars": 36
+  },
+  {
+   "date": "01-28",
+   "events": 35,
+   "cand": 26,
+   "proper": 20,
+   "unknown_chars": 46
+  },
+  {
+   "date": "01-29",
+   "events": 25,
+   "cand": 26,
+   "proper": 20,
+   "unknown_chars": 44
+  },
+  {
+   "date": "01-30",
+   "events": 31,
+   "cand": 28,
+   "proper": 23,
+   "unknown_chars": 45
+  },
+  {
+   "date": "01-31",
+   "events": 34,
+   "cand": 15,
+   "proper": 17,
+   "unknown_chars": 23
+  },
+  {
+   "date": "02-01",
+   "events": 42,
+   "cand": 36,
+   "proper": 40,
+   "unknown_chars": 50
+  },
+  {
+   "date": "02-02",
+   "events": 31,
+   "cand": 13,
+   "proper": 27,
+   "unknown_chars": 34
+  },
+  {
+   "date": "02-03",
+   "events": 42,
+   "cand": 41,
+   "proper": 34,
+   "unknown_chars": 59
+  },
+  {
+   "date": "02-04",
+   "events": 37,
+   "cand": 28,
+   "proper": 28,
+   "unknown_chars": 47
+  },
+  {
+   "date": "02-05",
+   "events": 35,
+   "cand": 21,
+   "proper": 37,
+   "unknown_chars": 44
+  },
+  {
+   "date": "02-06",
+   "events": 35,
+   "cand": 24,
+   "proper": 19,
+   "unknown_chars": 39
+  },
+  {
+   "date": "02-07",
+   "events": 42,
+   "cand": 37,
+   "proper": 25,
+   "unknown_chars": 49
+  },
+  {
+   "date": "02-08",
+   "events": 32,
+   "cand": 20,
+   "proper": 20,
+   "unknown_chars": 36
+  },
+  {
+   "date": "02-09",
+   "events": 43,
+   "cand": 33,
+   "proper": 17,
+   "unknown_chars": 39
+  },
+  {
+   "date": "02-10",
+   "events": 27,
+   "cand": 23,
+   "proper": 21,
+   "unknown_chars": 36
+  },
+  {
+   "date": "02-11",
+   "events": 29,
+   "cand": 24,
+   "proper": 30,
+   "unknown_chars": 48
+  },
+  {
+   "date": "02-12",
+   "events": 39,
+   "cand": 22,
+   "proper": 28,
+   "unknown_chars": 43
+  },
+  {
+   "date": "02-13",
+   "events": 33,
+   "cand": 21,
+   "proper": 30,
+   "unknown_chars": 40
+  },
+  {
+   "date": "02-14",
+   "events": 41,
+   "cand": 32,
+   "proper": 34,
+   "unknown_chars": 51
+  },
+  {
+   "date": "02-15",
+   "events": 35,
+   "cand": 26,
+   "proper": 25,
+   "unknown_chars": 39
+  },
+  {
+   "date": "02-16",
+   "events": 16,
+   "cand": 12,
+   "proper": 13,
+   "unknown_chars": 25
+  },
+  {
+   "date": "02-17",
+   "events": 27,
+   "cand": 20,
+   "proper": 16,
+   "unknown_chars": 30
+  },
+  {
+   "date": "02-18",
+   "events": 33,
+   "cand": 26,
+   "proper": 33,
+   "unknown_chars": 40
+  },
+  {
+   "date": "02-19",
+   "events": 30,
+   "cand": 17,
+   "proper": 30,
+   "unknown_chars": 38
+  },
+  {
+   "date": "02-20",
+   "events": 31,
+   "cand": 22,
+   "proper": 28,
+   "unknown_chars": 37
+  },
+  {
+   "date": "02-21",
+   "events": 23,
+   "cand": 25,
+   "proper": 19,
+   "unknown_chars": 42
+  },
+  {
+   "date": "02-22",
+   "events": 21,
+   "cand": 25,
+   "proper": 17,
+   "unknown_chars": 35
+  },
+  {
+   "date": "02-23",
+   "events": 30,
+   "cand": 15,
+   "proper": 23,
+   "unknown_chars": 32
+  },
+  {
+   "date": "02-24",
+   "events": 32,
+   "cand": 25,
+   "proper": 35,
+   "unknown_chars": 42
+  },
+  {
+   "date": "02-25",
+   "events": 33,
+   "cand": 30,
+   "proper": 32,
+   "unknown_chars": 52
+  },
+  {
+   "date": "02-26",
+   "events": 31,
+   "cand": 29,
+   "proper": 16,
+   "unknown_chars": 42
+  },
+  {
+   "date": "02-27",
+   "events": 24,
+   "cand": 22,
+   "proper": 30,
+   "unknown_chars": 41
+  },
+  {
+   "date": "02-28",
+   "events": 30,
+   "cand": 23,
+   "proper": 26,
+   "unknown_chars": 35
+  },
+  {
+   "date": "02-29",
+   "events": 24,
+   "cand": 16,
+   "proper": 15,
+   "unknown_chars": 28
+  },
+  {
+   "date": "03-01",
+   "events": 72,
+   "cand": 58,
+   "proper": 48,
+   "unknown_chars": 66
+  },
+  {
+   "date": "03-02",
+   "events": 32,
+   "cand": 23,
+   "proper": 24,
+   "unknown_chars": 42
+  },
+  {
+   "date": "03-03",
+   "events": 37,
+   "cand": 32,
+   "proper": 30,
+   "unknown_chars": 51
+  },
+  {
+   "date": "03-04",
+   "events": 37,
+   "cand": 19,
+   "proper": 23,
+   "unknown_chars": 33
+  },
+  {
+   "date": "03-05",
+   "events": 40,
+   "cand": 24,
+   "proper": 28,
+   "unknown_chars": 39
+  },
+  {
+   "date": "03-06",
+   "events": 28,
+   "cand": 16,
+   "proper": 27,
+   "unknown_chars": 37
+  },
+  {
+   "date": "03-07",
+   "events": 36,
+   "cand": 25,
+   "proper": 21,
+   "unknown_chars": 39
+  },
+  {
+   "date": "03-08",
+   "events": 30,
+   "cand": 26,
+   "proper": 30,
+   "unknown_chars": 41
+  },
+  {
+   "date": "03-09",
+   "events": 43,
+   "cand": 31,
+   "proper": 33,
+   "unknown_chars": 52
+  },
+  {
+   "date": "03-10",
+   "events": 32,
+   "cand": 24,
+   "proper": 25,
+   "unknown_chars": 36
+  },
+  {
+   "date": "03-11",
+   "events": 46,
+   "cand": 35,
+   "proper": 39,
+   "unknown_chars": 52
+  },
+  {
+   "date": "03-12",
+   "events": 36,
+   "cand": 25,
+   "proper": 28,
+   "unknown_chars": 46
+  },
+  {
+   "date": "03-13",
+   "events": 30,
+   "cand": 27,
+   "proper": 22,
+   "unknown_chars": 38
+  },
+  {
+   "date": "03-14",
+   "events": 35,
+   "cand": 23,
+   "proper": 31,
+   "unknown_chars": 44
+  },
+  {
+   "date": "03-15",
+   "events": 32,
+   "cand": 28,
+   "proper": 32,
+   "unknown_chars": 52
+  },
+  {
+   "date": "03-16",
+   "events": 27,
+   "cand": 20,
+   "proper": 20,
+   "unknown_chars": 33
+  },
+  {
+   "date": "03-17",
+   "events": 37,
+   "cand": 24,
+   "proper": 30,
+   "unknown_chars": 49
+  },
+  {
+   "date": "03-18",
+   "events": 39,
+   "cand": 21,
+   "proper": 34,
+   "unknown_chars": 42
+  },
+  {
+   "date": "03-19",
+   "events": 35,
+   "cand": 36,
+   "proper": 17,
+   "unknown_chars": 43
+  },
+  {
+   "date": "03-20",
+   "events": 40,
+   "cand": 28,
+   "proper": 29,
+   "unknown_chars": 47
+  },
+  {
+   "date": "03-21",
+   "events": 40,
+   "cand": 38,
+   "proper": 32,
+   "unknown_chars": 55
+  },
+  {
+   "date": "03-22",
+   "events": 39,
+   "cand": 29,
+   "proper": 37,
+   "unknown_chars": 49
+  },
+  {
+   "date": "03-23",
+   "events": 43,
+   "cand": 29,
+   "proper": 29,
+   "unknown_chars": 49
+  },
+  {
+   "date": "03-24",
+   "events": 37,
+   "cand": 33,
+   "proper": 29,
+   "unknown_chars": 49
+  },
+  {
+   "date": "03-25",
+   "events": 42,
+   "cand": 32,
+   "proper": 25,
+   "unknown_chars": 44
+  },
+  {
+   "date": "03-26",
+   "events": 37,
+   "cand": 31,
+   "proper": 30,
+   "unknown_chars": 45
+  },
+  {
+   "date": "03-27",
+   "events": 28,
+   "cand": 24,
+   "proper": 24,
+   "unknown_chars": 38
+  },
+  {
+   "date": "03-28",
+   "events": 37,
+   "cand": 33,
+   "proper": 32,
+   "unknown_chars": 48
+  },
+  {
+   "date": "03-29",
+   "events": 36,
+   "cand": 25,
+   "proper": 28,
+   "unknown_chars": 50
+  },
+  {
+   "date": "03-30",
+   "events": 28,
+   "cand": 22,
+   "proper": 22,
+   "unknown_chars": 39
+  },
+  {
+   "date": "03-31",
+   "events": 38,
+   "cand": 28,
+   "proper": 29,
+   "unknown_chars": 46
+  },
+  {
+   "date": "04-01",
+   "events": 73,
+   "cand": 44,
+   "proper": 44,
+   "unknown_chars": 69
+  },
+  {
+   "date": "04-02",
+   "events": 24,
+   "cand": 16,
+   "proper": 25,
+   "unknown_chars": 36
+  },
+  {
+   "date": "04-03",
+   "events": 34,
+   "cand": 25,
+   "proper": 32,
+   "unknown_chars": 46
+  },
+  {
+   "date": "04-04",
+   "events": 24,
+   "cand": 22,
+   "proper": 14,
+   "unknown_chars": 31
+  },
+  {
+   "date": "04-05",
+   "events": 21,
+   "cand": 15,
+   "proper": 20,
+   "unknown_chars": 30
+  },
+  {
+   "date": "04-06",
+   "events": 27,
+   "cand": 18,
+   "proper": 27,
+   "unknown_chars": 35
+  },
+  {
+   "date": "04-07",
+   "events": 48,
+   "cand": 29,
+   "proper": 23,
+   "unknown_chars": 39
+  },
+  {
+   "date": "04-08",
+   "events": 30,
+   "cand": 21,
+   "proper": 18,
+   "unknown_chars": 31
+  },
+  {
+   "date": "04-09",
+   "events": 33,
+   "cand": 19,
+   "proper": 22,
+   "unknown_chars": 34
+  },
+  {
+   "date": "04-10",
+   "events": 31,
+   "cand": 19,
+   "proper": 17,
+   "unknown_chars": 34
+  },
+  {
+   "date": "04-11",
+   "events": 35,
+   "cand": 20,
+   "proper": 37,
+   "unknown_chars": 46
+  },
+  {
+   "date": "04-13",
+   "events": 31,
+   "cand": 26,
+   "proper": 19,
+   "unknown_chars": 37
+  },
+  {
+   "date": "04-14",
+   "events": 26,
+   "cand": 23,
+   "proper": 19,
+   "unknown_chars": 32
+  },
+  {
+   "date": "04-15",
+   "events": 30,
+   "cand": 20,
+   "proper": 19,
+   "unknown_chars": 34
+  },
+  {
+   "date": "04-16",
+   "events": 43,
+   "cand": 26,
+   "proper": 35,
+   "unknown_chars": 50
+  },
+  {
+   "date": "04-17",
+   "events": 36,
+   "cand": 27,
+   "proper": 36,
+   "unknown_chars": 54
+  },
+  {
+   "date": "04-18",
+   "events": 33,
+   "cand": 16,
+   "proper": 22,
+   "unknown_chars": 37
+  },
+  {
+   "date": "04-19",
+   "events": 31,
+   "cand": 24,
+   "proper": 26,
+   "unknown_chars": 40
+  },
+  {
+   "date": "04-20",
+   "events": 35,
+   "cand": 22,
+   "proper": 18,
+   "unknown_chars": 33
+  },
+  {
+   "date": "04-21",
+   "events": 34,
+   "cand": 22,
+   "proper": 36,
+   "unknown_chars": 46
+  },
+  {
+   "date": "04-22",
+   "events": 29,
+   "cand": 29,
+   "proper": 17,
+   "unknown_chars": 39
+  },
+  {
+   "date": "04-23",
+   "events": 32,
+   "cand": 22,
+   "proper": 25,
+   "unknown_chars": 42
+  },
+  {
+   "date": "04-24",
+   "events": 28,
+   "cand": 15,
+   "proper": 19,
+   "unknown_chars": 28
+  },
+  {
+   "date": "04-25",
+   "events": 28,
+   "cand": 26,
+   "proper": 14,
+   "unknown_chars": 37
+  },
+  {
+   "date": "04-26",
+   "events": 32,
+   "cand": 26,
+   "proper": 33,
+   "unknown_chars": 45
+  },
+  {
+   "date": "04-27",
+   "events": 27,
+   "cand": 21,
+   "proper": 23,
+   "unknown_chars": 40
+  },
+  {
+   "date": "04-28",
+   "events": 30,
+   "cand": 24,
+   "proper": 29,
+   "unknown_chars": 43
+  },
+  {
+   "date": "04-29",
+   "events": 28,
+   "cand": 15,
+   "proper": 24,
+   "unknown_chars": 34
+  },
+  {
+   "date": "04-30",
+   "events": 63,
+   "cand": 36,
+   "proper": 50,
+   "unknown_chars": 66
+  },
+  {
+   "date": "05-01",
+   "events": 64,
+   "cand": 38,
+   "proper": 38,
+   "unknown_chars": 60
+  },
+  {
+   "date": "05-02",
+   "events": 32,
+   "cand": 14,
+   "proper": 36,
+   "unknown_chars": 39
+  },
+  {
+   "date": "05-03",
+   "events": 25,
+   "cand": 18,
+   "proper": 13,
+   "unknown_chars": 30
+  },
+  {
+   "date": "05-04",
+   "events": 44,
+   "cand": 25,
+   "proper": 21,
+   "unknown_chars": 40
+  },
+  {
+   "date": "05-05",
+   "events": 34,
+   "cand": 26,
+   "proper": 27,
+   "unknown_chars": 44
+  },
+  {
+   "date": "05-06",
+   "events": 36,
+   "cand": 19,
+   "proper": 24,
+   "unknown_chars": 36
+  },
+  {
+   "date": "05-07",
+   "events": 24,
+   "cand": 13,
+   "proper": 21,
+   "unknown_chars": 31
+  },
+  {
+   "date": "05-08",
+   "events": 38,
+   "cand": 31,
+   "proper": 28,
+   "unknown_chars": 48
+  },
+  {
+   "date": "05-09",
+   "events": 31,
+   "cand": 32,
+   "proper": 28,
+   "unknown_chars": 37
+  },
+  {
+   "date": "05-10",
+   "events": 38,
+   "cand": 35,
+   "proper": 31,
+   "unknown_chars": 49
+  },
+  {
+   "date": "05-11",
+   "events": 32,
+   "cand": 21,
+   "proper": 39,
+   "unknown_chars": 43
+  },
+  {
+   "date": "05-12",
+   "events": 29,
+   "cand": 27,
+   "proper": 26,
+   "unknown_chars": 42
+  },
+  {
+   "date": "05-13",
+   "events": 29,
+   "cand": 30,
+   "proper": 39,
+   "unknown_chars": 56
+  },
+  {
+   "date": "05-14",
+   "events": 27,
+   "cand": 28,
+   "proper": 27,
+   "unknown_chars": 43
+  },
+  {
+   "date": "05-15",
+   "events": 53,
+   "cand": 43,
+   "proper": 44,
+   "unknown_chars": 75
+  },
+  {
+   "date": "05-16",
+   "events": 38,
+   "cand": 38,
+   "proper": 32,
+   "unknown_chars": 58
+  },
+  {
+   "date": "05-17",
+   "events": 41,
+   "cand": 38,
+   "proper": 34,
+   "unknown_chars": 56
+  },
+  {
+   "date": "05-18",
+   "events": 70,
+   "cand": 43,
+   "proper": 44,
+   "unknown_chars": 63
+  },
+  {
+   "date": "05-19",
+   "events": 29,
+   "cand": 19,
+   "proper": 29,
+   "unknown_chars": 39
+  },
+  {
+   "date": "05-20",
+   "events": 59,
+   "cand": 45,
+   "proper": 36,
+   "unknown_chars": 58
+  },
+  {
+   "date": "05-21",
+   "events": 47,
+   "cand": 40,
+   "proper": 26,
+   "unknown_chars": 54
+  },
+  {
+   "date": "05-22",
+   "events": 45,
+   "cand": 41,
+   "proper": 45,
+   "unknown_chars": 63
+  },
+  {
+   "date": "05-23",
+   "events": 29,
+   "cand": 35,
+   "proper": 27,
+   "unknown_chars": 58
+  },
+  {
+   "date": "05-24",
+   "events": 38,
+   "cand": 41,
+   "proper": 26,
+   "unknown_chars": 49
+  },
+  {
+   "date": "05-25",
+   "events": 47,
+   "cand": 39,
+   "proper": 31,
+   "unknown_chars": 64
+  },
+  {
+   "date": "05-26",
+   "events": 45,
+   "cand": 35,
+   "proper": 46,
+   "unknown_chars": 57
+  },
+  {
+   "date": "05-27",
+   "events": 57,
+   "cand": 52,
+   "proper": 52,
+   "unknown_chars": 74
+  },
+  {
+   "date": "05-28",
+   "events": 38,
+   "cand": 32,
+   "proper": 27,
+   "unknown_chars": 51
+  },
+  {
+   "date": "05-29",
+   "events": 28,
+   "cand": 14,
+   "proper": 23,
+   "unknown_chars": 33
+  },
+  {
+   "date": "05-30",
+   "events": 51,
+   "cand": 25,
+   "proper": 42,
+   "unknown_chars": 45
+  },
+  {
+   "date": "05-31",
+   "events": 44,
+   "cand": 34,
+   "proper": 32,
+   "unknown_chars": 51
+  },
+  {
+   "date": "06-01",
+   "events": 31,
+   "cand": 22,
+   "proper": 22,
+   "unknown_chars": 40
+  },
+  {
+   "date": "06-02",
+   "events": 33,
+   "cand": 23,
+   "proper": 18,
+   "unknown_chars": 39
+  },
+  {
+   "date": "06-03",
+   "events": 36,
+   "cand": 28,
+   "proper": 25,
+   "unknown_chars": 42
+  },
+  {
+   "date": "06-04",
+   "events": 41,
+   "cand": 39,
+   "proper": 36,
+   "unknown_chars": 55
+  },
+  {
+   "date": "06-05",
+   "events": 33,
+   "cand": 35,
+   "proper": 32,
+   "unknown_chars": 55
+  },
+  {
+   "date": "06-06",
+   "events": 40,
+   "cand": 24,
+   "proper": 32,
+   "unknown_chars": 44
+  },
+  {
+   "date": "06-07",
+   "events": 29,
+   "cand": 26,
+   "proper": 30,
+   "unknown_chars": 45
+  },
+  {
+   "date": "06-08",
+   "events": 33,
+   "cand": 19,
+   "proper": 27,
+   "unknown_chars": 41
+  },
+  {
+   "date": "06-09",
+   "events": 44,
+   "cand": 33,
+   "proper": 33,
+   "unknown_chars": 47
+  },
+  {
+   "date": "06-10",
+   "events": 38,
+   "cand": 36,
+   "proper": 40,
+   "unknown_chars": 61
+  },
+  {
+   "date": "06-11",
+   "events": 21,
+   "cand": 20,
+   "proper": 17,
+   "unknown_chars": 30
+  },
+  {
+   "date": "06-12",
+   "events": 32,
+   "cand": 28,
+   "proper": 29,
+   "unknown_chars": 48
+  },
+  {
+   "date": "06-13",
+   "events": 33,
+   "cand": 32,
+   "proper": 24,
+   "unknown_chars": 49
+  },
+  {
+   "date": "06-14",
+   "events": 33,
+   "cand": 26,
+   "proper": 24,
+   "unknown_chars": 42
+  },
+  {
+   "date": "06-15",
+   "events": 31,
+   "cand": 26,
+   "proper": 21,
+   "unknown_chars": 41
+  },
+  {
+   "date": "06-16",
+   "events": 56,
+   "cand": 37,
+   "proper": 32,
+   "unknown_chars": 60
+  },
+  {
+   "date": "06-17",
+   "events": 38,
+   "cand": 19,
+   "proper": 30,
+   "unknown_chars": 39
+  },
+  {
+   "date": "06-18",
+   "events": 42,
+   "cand": 35,
+   "proper": 28,
+   "unknown_chars": 52
+  },
+  {
+   "date": "06-19",
+   "events": 40,
+   "cand": 23,
+   "proper": 27,
+   "unknown_chars": 46
+  },
+  {
+   "date": "06-20",
+   "events": 30,
+   "cand": 22,
+   "proper": 24,
+   "unknown_chars": 31
+  },
+  {
+   "date": "06-21",
+   "events": 34,
+   "cand": 21,
+   "proper": 28,
+   "unknown_chars": 40
+  },
+  {
+   "date": "06-22",
+   "events": 41,
+   "cand": 30,
+   "proper": 36,
+   "unknown_chars": 55
+  },
+  {
+   "date": "06-23",
+   "events": 33,
+   "cand": 22,
+   "proper": 22,
+   "unknown_chars": 38
+  },
+  {
+   "date": "06-24",
+   "events": 35,
+   "cand": 32,
+   "proper": 41,
+   "unknown_chars": 55
+  },
+  {
+   "date": "06-25",
+   "events": 36,
+   "cand": 30,
+   "proper": 17,
+   "unknown_chars": 39
+  },
+  {
+   "date": "06-26",
+   "events": 54,
+   "cand": 33,
+   "proper": 30,
+   "unknown_chars": 56
+  },
+  {
+   "date": "06-27",
+   "events": 48,
+   "cand": 21,
+   "proper": 28,
+   "unknown_chars": 37
+  },
+  {
+   "date": "06-28",
+   "events": 60,
+   "cand": 48,
+   "proper": 49,
+   "unknown_chars": 65
+  },
+  {
+   "date": "06-29",
+   "events": 38,
+   "cand": 24,
+   "proper": 26,
+   "unknown_chars": 48
+  },
+  {
+   "date": "06-30",
+   "events": 67,
+   "cand": 40,
+   "proper": 34,
+   "unknown_chars": 66
+  },
+  {
+   "date": "07-01",
+   "events": 122,
+   "cand": 61,
+   "proper": 58,
+   "unknown_chars": 84
+  },
+  {
+   "date": "07-02",
+   "events": 41,
+   "cand": 30,
+   "proper": 36,
+   "unknown_chars": 54
+  },
+  {
+   "date": "07-03",
+   "events": 41,
+   "cand": 30,
+   "proper": 31,
+   "unknown_chars": 46
+  },
+  {
+   "date": "07-04",
+   "events": 50,
+   "cand": 39,
+   "proper": 28,
+   "unknown_chars": 56
+  },
+  {
+   "date": "07-05",
+   "events": 70,
+   "cand": 42,
+   "proper": 50,
+   "unknown_chars": 71
+  },
+  {
+   "date": "07-06",
+   "events": 79,
+   "cand": 50,
+   "proper": 69,
+   "unknown_chars": 81
+  },
+  {
+   "date": "07-07",
+   "events": 78,
+   "cand": 55,
+   "proper": 59,
+   "unknown_chars": 73
+  },
+  {
+   "date": "07-08",
+   "events": 61,
+   "cand": 63,
+   "proper": 55,
+   "unknown_chars": 77
+  },
+  {
+   "date": "07-09",
+   "events": 52,
+   "cand": 44,
+   "proper": 35,
+   "unknown_chars": 55
+  },
+  {
+   "date": "07-10",
+   "events": 49,
+   "cand": 28,
+   "proper": 32,
+   "unknown_chars": 47
+  },
+  {
+   "date": "07-11",
+   "events": 39,
+   "cand": 29,
+   "proper": 23,
+   "unknown_chars": 42
+  },
+  {
+   "date": "07-12",
+   "events": 32,
+   "cand": 22,
+   "proper": 26,
+   "unknown_chars": 43
+  },
+  {
+   "date": "07-13",
+   "events": 46,
+   "cand": 29,
+   "proper": 39,
+   "unknown_chars": 52
+  },
+  {
+   "date": "07-14",
+   "events": 35,
+   "cand": 26,
+   "proper": 25,
+   "unknown_chars": 48
+  },
+  {
+   "date": "07-15",
+   "events": 37,
+   "cand": 27,
+   "proper": 24,
+   "unknown_chars": 45
+  },
+  {
+   "date": "07-16",
+   "events": 50,
+   "cand": 41,
+   "proper": 53,
+   "unknown_chars": 66
+  },
+  {
+   "date": "07-17",
+   "events": 53,
+   "cand": 30,
+   "proper": 41,
+   "unknown_chars": 52
+  },
+  {
+   "date": "07-18",
+   "events": 58,
+   "cand": 52,
+   "proper": 48,
+   "unknown_chars": 77
+  },
+  {
+   "date": "07-19",
+   "events": 59,
+   "cand": 39,
+   "proper": 54,
+   "unknown_chars": 65
+  },
+  {
+   "date": "07-20",
+   "events": 45,
+   "cand": 31,
+   "proper": 37,
+   "unknown_chars": 51
+  },
+  {
+   "date": "07-21",
+   "events": 51,
+   "cand": 53,
+   "proper": 39,
+   "unknown_chars": 70
+  },
+  {
+   "date": "07-22",
+   "events": 60,
+   "cand": 43,
+   "proper": 47,
+   "unknown_chars": 60
+  },
+  {
+   "date": "07-23",
+   "events": 62,
+   "cand": 44,
+   "proper": 55,
+   "unknown_chars": 61
+  },
+  {
+   "date": "07-24",
+   "events": 41,
+   "cand": 30,
+   "proper": 35,
+   "unknown_chars": 49
+  },
+  {
+   "date": "07-25",
+   "events": 75,
+   "cand": 60,
+   "proper": 58,
+   "unknown_chars": 77
+  },
+  {
+   "date": "07-26",
+   "events": 65,
+   "cand": 22,
+   "proper": 50,
+   "unknown_chars": 51
+  },
+  {
+   "date": "07-27",
+   "events": 42,
+   "cand": 20,
+   "proper": 30,
+   "unknown_chars": 38
+  },
+  {
+   "date": "07-28",
+   "events": 54,
+   "cand": 27,
+   "proper": 52,
+   "unknown_chars": 57
+  },
+  {
+   "date": "07-29",
+   "events": 39,
+   "cand": 48,
+   "proper": 30,
+   "unknown_chars": 56
+  },
+  {
+   "date": "07-30",
+   "events": 47,
+   "cand": 21,
+   "proper": 31,
+   "unknown_chars": 45
+  },
+  {
+   "date": "07-31",
+   "events": 50,
+   "cand": 35,
+   "proper": 44,
+   "unknown_chars": 59
+  },
+  {
+   "date": "08-01",
+   "events": 54,
+   "cand": 25,
+   "proper": 36,
+   "unknown_chars": 46
+  },
+  {
+   "date": "08-02",
+   "events": 41,
+   "cand": 28,
+   "proper": 29,
+   "unknown_chars": 47
+  },
+  {
+   "date": "08-03",
+   "events": 32,
+   "cand": 17,
+   "proper": 26,
+   "unknown_chars": 32
+  },
+  {
+   "date": "08-04",
+   "events": 36,
+   "cand": 16,
+   "proper": 24,
+   "unknown_chars": 31
+  },
+  {
+   "date": "08-05",
+   "events": 32,
+   "cand": 30,
+   "proper": 26,
+   "unknown_chars": 47
+  },
+  {
+   "date": "08-07",
+   "events": 30,
+   "cand": 24,
+   "proper": 31,
+   "unknown_chars": 42
+  },
+  {
+   "date": "08-08",
+   "events": 43,
+   "cand": 20,
+   "proper": 24,
+   "unknown_chars": 33
+  },
+  {
+   "date": "08-09",
+   "events": 32,
+   "cand": 21,
+   "proper": 28,
+   "unknown_chars": 42
+  },
+  {
+   "date": "08-10",
+   "events": 32,
+   "cand": 34,
+   "proper": 28,
+   "unknown_chars": 50
+  },
+  {
+   "date": "08-11",
+   "events": 31,
+   "cand": 17,
+   "proper": 35,
+   "unknown_chars": 43
+  },
+  {
+   "date": "08-12",
+   "events": 36,
+   "cand": 25,
+   "proper": 20,
+   "unknown_chars": 41
+  },
+  {
+   "date": "08-13",
+   "events": 33,
+   "cand": 21,
+   "proper": 29,
+   "unknown_chars": 48
+  },
+  {
+   "date": "08-14",
+   "events": 42,
+   "cand": 35,
+   "proper": 31,
+   "unknown_chars": 55
+  },
+  {
+   "date": "08-15",
+   "events": 40,
+   "cand": 20,
+   "proper": 25,
+   "unknown_chars": 41
+  },
+  {
+   "date": "08-16",
+   "events": 33,
+   "cand": 16,
+   "proper": 27,
+   "unknown_chars": 31
+  },
+  {
+   "date": "08-17",
+   "events": 40,
+   "cand": 41,
+   "proper": 30,
+   "unknown_chars": 54
+  },
+  {
+   "date": "08-18",
+   "events": 30,
+   "cand": 13,
+   "proper": 13,
+   "unknown_chars": 26
+  },
+  {
+   "date": "08-19",
+   "events": 48,
+   "cand": 42,
+   "proper": 35,
+   "unknown_chars": 66
+  },
+  {
+   "date": "08-20",
+   "events": 41,
+   "cand": 19,
+   "proper": 29,
+   "unknown_chars": 36
+  },
+  {
+   "date": "08-21",
+   "events": 45,
+   "cand": 37,
+   "proper": 44,
+   "unknown_chars": 60
+  },
+  {
+   "date": "08-22",
+   "events": 55,
+   "cand": 35,
+   "proper": 35,
+   "unknown_chars": 56
+  },
+  {
+   "date": "08-23",
+   "events": 37,
+   "cand": 45,
+   "proper": 32,
+   "unknown_chars": 57
+  },
+  {
+   "date": "08-24",
+   "events": 59,
+   "cand": 36,
+   "proper": 25,
+   "unknown_chars": 46
+  },
+  {
+   "date": "08-25",
+   "events": 51,
+   "cand": 39,
+   "proper": 39,
+   "unknown_chars": 58
+  },
+  {
+   "date": "08-26",
+   "events": 35,
+   "cand": 19,
+   "proper": 32,
+   "unknown_chars": 34
+  },
+  {
+   "date": "08-27",
+   "events": 38,
+   "cand": 27,
+   "proper": 22,
+   "unknown_chars": 40
+  },
+  {
+   "date": "08-28",
+   "events": 55,
+   "cand": 37,
+   "proper": 33,
+   "unknown_chars": 55
+  },
+  {
+   "date": "08-29",
+   "events": 46,
+   "cand": 25,
+   "proper": 30,
+   "unknown_chars": 46
+  },
+  {
+   "date": "08-30",
+   "events": 43,
+   "cand": 28,
+   "proper": 53,
+   "unknown_chars": 63
+  },
+  {
+   "date": "08-31",
+   "events": 51,
+   "cand": 32,
+   "proper": 48,
+   "unknown_chars": 58
+  },
+  {
+   "date": "09-01",
+   "events": 65,
+   "cand": 39,
+   "proper": 42,
+   "unknown_chars": 65
+  },
+  {
+   "date": "09-02",
+   "events": 48,
+   "cand": 32,
+   "proper": 28,
+   "unknown_chars": 44
+  },
+  {
+   "date": "09-03",
+   "events": 48,
+   "cand": 37,
+   "proper": 25,
+   "unknown_chars": 47
+  },
+  {
+   "date": "09-04",
+   "events": 38,
+   "cand": 25,
+   "proper": 40,
+   "unknown_chars": 51
+  },
+  {
+   "date": "09-05",
+   "events": 46,
+   "cand": 28,
+   "proper": 39,
+   "unknown_chars": 50
+  },
+  {
+   "date": "09-06",
+   "events": 37,
+   "cand": 30,
+   "proper": 43,
+   "unknown_chars": 51
+  },
+  {
+   "date": "09-07",
+   "events": 38,
+   "cand": 19,
+   "proper": 24,
+   "unknown_chars": 34
+  },
+  {
+   "date": "09-08",
+   "events": 62,
+   "cand": 33,
+   "proper": 45,
+   "unknown_chars": 55
+  },
+  {
+   "date": "09-09",
+   "events": 41,
+   "cand": 27,
+   "proper": 31,
+   "unknown_chars": 44
+  },
+  {
+   "date": "09-10",
+   "events": 48,
+   "cand": 39,
+   "proper": 41,
+   "unknown_chars": 66
+  },
+  {
+   "date": "09-11",
+   "events": 60,
+   "cand": 50,
+   "proper": 41,
+   "unknown_chars": 61
+  },
+  {
+   "date": "09-12",
+   "events": 68,
+   "cand": 39,
+   "proper": 47,
+   "unknown_chars": 59
+  },
+  {
+   "date": "09-13",
+   "events": 55,
+   "cand": 46,
+   "proper": 40,
+   "unknown_chars": 65
+  },
+  {
+   "date": "09-14",
+   "events": 47,
+   "cand": 30,
+   "proper": 43,
+   "unknown_chars": 54
+  },
+  {
+   "date": "09-15",
+   "events": 39,
+   "cand": 32,
+   "proper": 25,
+   "unknown_chars": 45
+  },
+  {
+   "date": "09-16",
+   "events": 45,
+   "cand": 38,
+   "proper": 27,
+   "unknown_chars": 55
+  },
+  {
+   "date": "09-17",
+   "events": 61,
+   "cand": 45,
+   "proper": 53,
+   "unknown_chars": 67
+  },
+  {
+   "date": "09-18",
+   "events": 56,
+   "cand": 69,
+   "proper": 32,
+   "unknown_chars": 69
+  },
+  {
+   "date": "09-19",
+   "events": 70,
+   "cand": 40,
+   "proper": 47,
+   "unknown_chars": 60
+  },
+  {
+   "date": "09-20",
+   "events": 52,
+   "cand": 36,
+   "proper": 25,
+   "unknown_chars": 52
+  },
+  {
+   "date": "09-21",
+   "events": 47,
+   "cand": 28,
+   "proper": 37,
+   "unknown_chars": 50
+  },
+  {
+   "date": "09-22",
+   "events": 48,
+   "cand": 37,
+   "proper": 34,
+   "unknown_chars": 50
+  },
+  {
+   "date": "09-23",
+   "events": 42,
+   "cand": 32,
+   "proper": 29,
+   "unknown_chars": 52
+  },
+  {
+   "date": "09-24",
+   "events": 44,
+   "cand": 40,
+   "proper": 33,
+   "unknown_chars": 61
+  },
+  {
+   "date": "09-25",
+   "events": 53,
+   "cand": 30,
+   "proper": 34,
+   "unknown_chars": 59
+  },
+  {
+   "date": "09-26",
+   "events": 56,
+   "cand": 38,
+   "proper": 33,
+   "unknown_chars": 54
+  },
+  {
+   "date": "09-27",
+   "events": 51,
+   "cand": 24,
+   "proper": 31,
+   "unknown_chars": 48
+  },
+  {
+   "date": "09-28",
+   "events": 55,
+   "cand": 29,
+   "proper": 36,
+   "unknown_chars": 57
+  },
+  {
+   "date": "09-29",
+   "events": 53,
+   "cand": 34,
+   "proper": 24,
+   "unknown_chars": 47
+  },
+  {
+   "date": "09-30",
+   "events": 69,
+   "cand": 45,
+   "proper": 41,
+   "unknown_chars": 70
+  },
+  {
+   "date": "10-01",
+   "events": 57,
+   "cand": 37,
+   "proper": 35,
+   "unknown_chars": 53
+  },
+  {
+   "date": "10-02",
+   "events": 37,
+   "cand": 22,
+   "proper": 27,
+   "unknown_chars": 37
+  },
+  {
+   "date": "10-03",
+   "events": 41,
+   "cand": 22,
+   "proper": 36,
+   "unknown_chars": 44
+  },
+  {
+   "date": "10-04",
+   "events": 29,
+   "cand": 21,
+   "proper": 25,
+   "unknown_chars": 39
+  },
+  {
+   "date": "10-05",
+   "events": 38,
+   "cand": 31,
+   "proper": 23,
+   "unknown_chars": 46
+  },
+  {
+   "date": "10-06",
+   "events": 40,
+   "cand": 26,
+   "proper": 28,
+   "unknown_chars": 45
+  },
+  {
+   "date": "10-07",
+   "events": 46,
+   "cand": 24,
+   "proper": 42,
+   "unknown_chars": 44
+  },
+  {
+   "date": "10-08",
+   "events": 55,
+   "cand": 49,
+   "proper": 42,
+   "unknown_chars": 69
+  },
+  {
+   "date": "10-09",
+   "events": 41,
+   "cand": 21,
+   "proper": 30,
+   "unknown_chars": 39
+  },
+  {
+   "date": "10-10",
+   "events": 36,
+   "cand": 28,
+   "proper": 22,
+   "unknown_chars": 43
+  },
+  {
+   "date": "10-11",
+   "events": 34,
+   "cand": 22,
+   "proper": 29,
+   "unknown_chars": 45
+  },
+  {
+   "date": "10-12",
+   "events": 34,
+   "cand": 22,
+   "proper": 24,
+   "unknown_chars": 40
+  },
+  {
+   "date": "10-13",
+   "events": 51,
+   "cand": 29,
+   "proper": 40,
+   "unknown_chars": 53
+  },
+  {
+   "date": "10-14",
+   "events": 41,
+   "cand": 30,
+   "proper": 28,
+   "unknown_chars": 51
+  },
+  {
+   "date": "10-15",
+   "events": 32,
+   "cand": 27,
+   "proper": 31,
+   "unknown_chars": 47
+  },
+  {
+   "date": "10-16",
+   "events": 47,
+   "cand": 43,
+   "proper": 46,
+   "unknown_chars": 72
+  },
+  {
+   "date": "10-17",
+   "events": 41,
+   "cand": 41,
+   "proper": 41,
+   "unknown_chars": 63
+  },
+  {
+   "date": "10-18",
+   "events": 33,
+   "cand": 33,
+   "proper": 37,
+   "unknown_chars": 58
+  },
+  {
+   "date": "10-19",
+   "events": 30,
+   "cand": 37,
+   "proper": 34,
+   "unknown_chars": 56
+  },
+  {
+   "date": "10-20",
+   "events": 38,
+   "cand": 31,
+   "proper": 45,
+   "unknown_chars": 51
+  },
+  {
+   "date": "10-21",
+   "events": 50,
+   "cand": 41,
+   "proper": 41,
+   "unknown_chars": 63
+  },
+  {
+   "date": "10-22",
+   "events": 48,
+   "cand": 29,
+   "proper": 45,
+   "unknown_chars": 61
+  },
+  {
+   "date": "10-23",
+   "events": 51,
+   "cand": 32,
+   "proper": 42,
+   "unknown_chars": 58
+  },
+  {
+   "date": "10-24",
+   "events": 38,
+   "cand": 26,
+   "proper": 26,
+   "unknown_chars": 45
+  },
+  {
+   "date": "10-25",
+   "events": 39,
+   "cand": 23,
+   "proper": 23,
+   "unknown_chars": 34
+  },
+  {
+   "date": "10-26",
+   "events": 58,
+   "cand": 38,
+   "proper": 53,
+   "unknown_chars": 70
+  },
+  {
+   "date": "10-27",
+   "events": 61,
+   "cand": 34,
+   "proper": 50,
+   "unknown_chars": 59
+  },
+  {
+   "date": "10-28",
+   "events": 47,
+   "cand": 26,
+   "proper": 30,
+   "unknown_chars": 49
+  },
+  {
+   "date": "10-29",
+   "events": 55,
+   "cand": 31,
+   "proper": 49,
+   "unknown_chars": 61
+  },
+  {
+   "date": "10-30",
+   "events": 46,
+   "cand": 25,
+   "proper": 34,
+   "unknown_chars": 48
+  },
+  {
+   "date": "10-31",
+   "events": 40,
+   "cand": 29,
+   "proper": 27,
+   "unknown_chars": 45
+  },
+  {
+   "date": "11-01",
+   "events": 55,
+   "cand": 14,
+   "proper": 36,
+   "unknown_chars": 36
+  },
+  {
+   "date": "11-02",
+   "events": 44,
+   "cand": 30,
+   "proper": 29,
+   "unknown_chars": 50
+  },
+  {
+   "date": "11-03",
+   "events": 45,
+   "cand": 28,
+   "proper": 26,
+   "unknown_chars": 48
+  },
+  {
+   "date": "11-04",
+   "events": 51,
+   "cand": 33,
+   "proper": 37,
+   "unknown_chars": 49
+  },
+  {
+   "date": "11-05",
+   "events": 46,
+   "cand": 27,
+   "proper": 28,
+   "unknown_chars": 49
+  },
+  {
+   "date": "11-06",
+   "events": 42,
+   "cand": 28,
+   "proper": 24,
+   "unknown_chars": 44
+  },
+  {
+   "date": "11-07",
+   "events": 57,
+   "cand": 37,
+   "proper": 37,
+   "unknown_chars": 61
+  },
+  {
+   "date": "11-08",
+   "events": 51,
+   "cand": 32,
+   "proper": 34,
+   "unknown_chars": 57
+  },
+  {
+   "date": "11-09",
+   "events": 54,
+   "cand": 37,
+   "proper": 39,
+   "unknown_chars": 51
+  },
+  {
+   "date": "11-10",
+   "events": 38,
+   "cand": 26,
+   "proper": 41,
+   "unknown_chars": 54
+  },
+  {
+   "date": "11-11",
+   "events": 59,
+   "cand": 38,
+   "proper": 51,
+   "unknown_chars": 61
+  },
+  {
+   "date": "11-12",
+   "events": 55,
+   "cand": 24,
+   "proper": 40,
+   "unknown_chars": 54
+  },
+  {
+   "date": "11-13",
+   "events": 43,
+   "cand": 28,
+   "proper": 24,
+   "unknown_chars": 42
+  },
+  {
+   "date": "11-14",
+   "events": 48,
+   "cand": 30,
+   "proper": 32,
+   "unknown_chars": 51
+  },
+  {
+   "date": "11-15",
+   "events": 40,
+   "cand": 19,
+   "proper": 34,
+   "unknown_chars": 38
+  },
+  {
+   "date": "11-16",
+   "events": 57,
+   "cand": 37,
+   "proper": 40,
+   "unknown_chars": 62
+  },
+  {
+   "date": "11-17",
+   "events": 48,
+   "cand": 33,
+   "proper": 40,
+   "unknown_chars": 51
+  },
+  {
+   "date": "11-18",
+   "events": 39,
+   "cand": 25,
+   "proper": 34,
+   "unknown_chars": 47
+  },
+  {
+   "date": "11-19",
+   "events": 56,
+   "cand": 35,
+   "proper": 44,
+   "unknown_chars": 61
+  },
+  {
+   "date": "11-20",
+   "events": 52,
+   "cand": 31,
+   "proper": 50,
+   "unknown_chars": 70
+  },
+  {
+   "date": "11-21",
+   "events": 56,
+   "cand": 42,
+   "proper": 25,
+   "unknown_chars": 50
+  },
+  {
+   "date": "11-22",
+   "events": 59,
+   "cand": 31,
+   "proper": 31,
+   "unknown_chars": 48
+  },
+  {
+   "date": "11-23",
+   "events": 43,
+   "cand": 24,
+   "proper": 32,
+   "unknown_chars": 43
+  },
+  {
+   "date": "11-24",
+   "events": 44,
+   "cand": 36,
+   "proper": 29,
+   "unknown_chars": 46
+  },
+  {
+   "date": "11-25",
+   "events": 39,
+   "cand": 23,
+   "proper": 32,
+   "unknown_chars": 49
+  },
+  {
+   "date": "11-26",
+   "events": 45,
+   "cand": 35,
+   "proper": 33,
+   "unknown_chars": 55
+  },
+  {
+   "date": "11-27",
+   "events": 52,
+   "cand": 43,
+   "proper": 36,
+   "unknown_chars": 53
+  },
+  {
+   "date": "11-28",
+   "events": 36,
+   "cand": 22,
+   "proper": 31,
+   "unknown_chars": 46
+  },
+  {
+   "date": "11-29",
+   "events": 55,
+   "cand": 34,
+   "proper": 30,
+   "unknown_chars": 49
+  },
+  {
+   "date": "11-30",
+   "events": 42,
+   "cand": 23,
+   "proper": 24,
+   "unknown_chars": 41
+  },
+  {
+   "date": "12-01",
+   "events": 74,
+   "cand": 38,
+   "proper": 44,
+   "unknown_chars": 61
+  },
+  {
+   "date": "12-02",
+   "events": 45,
+   "cand": 30,
+   "proper": 30,
+   "unknown_chars": 50
+  },
+  {
+   "date": "12-03",
+   "events": 51,
+   "cand": 32,
+   "proper": 29,
+   "unknown_chars": 53
+  },
+  {
+   "date": "12-04",
+   "events": 40,
+   "cand": 29,
+   "proper": 24,
+   "unknown_chars": 44
+  },
+  {
+   "date": "12-05",
+   "events": 38,
+   "cand": 25,
+   "proper": 28,
+   "unknown_chars": 47
+  },
+  {
+   "date": "12-06",
+   "events": 47,
+   "cand": 41,
+   "proper": 36,
+   "unknown_chars": 67
+  },
+  {
+   "date": "12-07",
+   "events": 34,
+   "cand": 23,
+   "proper": 25,
+   "unknown_chars": 41
+  },
+  {
+   "date": "12-08",
+   "events": 37,
+   "cand": 27,
+   "proper": 27,
+   "unknown_chars": 42
+  },
+  {
+   "date": "12-09",
+   "events": 27,
+   "cand": 26,
+   "proper": 16,
+   "unknown_chars": 36
+  },
+  {
+   "date": "12-10",
+   "events": 34,
+   "cand": 27,
+   "proper": 25,
+   "unknown_chars": 35
+  },
+  {
+   "date": "12-11",
+   "events": 31,
+   "cand": 19,
+   "proper": 28,
+   "unknown_chars": 36
+  },
+  {
+   "date": "12-12",
+   "events": 46,
+   "cand": 33,
+   "proper": 40,
+   "unknown_chars": 51
+  },
+  {
+   "date": "12-13",
+   "events": 28,
+   "cand": 27,
+   "proper": 20,
+   "unknown_chars": 39
+  },
+  {
+   "date": "12-14",
+   "events": 39,
+   "cand": 33,
+   "proper": 31,
+   "unknown_chars": 47
+  },
+  {
+   "date": "12-15",
+   "events": 28,
+   "cand": 19,
+   "proper": 12,
+   "unknown_chars": 30
+  },
+  {
+   "date": "12-16",
+   "events": 32,
+   "cand": 26,
+   "proper": 24,
+   "unknown_chars": 46
+  },
+  {
+   "date": "12-17",
+   "events": 35,
+   "cand": 25,
+   "proper": 23,
+   "unknown_chars": 38
+  },
+  {
+   "date": "12-18",
+   "events": 30,
+   "cand": 23,
+   "proper": 16,
+   "unknown_chars": 36
+  },
+  {
+   "date": "12-19",
+   "events": 38,
+   "cand": 30,
+   "proper": 24,
+   "unknown_chars": 43
+  },
+  {
+   "date": "12-20",
+   "events": 32,
+   "cand": 26,
+   "proper": 15,
+   "unknown_chars": 33
+  },
+  {
+   "date": "12-21",
+   "events": 24,
+   "cand": 21,
+   "proper": 18,
+   "unknown_chars": 37
+  },
+  {
+   "date": "12-22",
+   "events": 63,
+   "cand": 80,
+   "proper": 64,
+   "unknown_chars": 90
+  },
+  {
+   "date": "12-23",
+   "events": 28,
+   "cand": 24,
+   "proper": 24,
+   "unknown_chars": 45
+  },
+  {
+   "date": "12-24",
+   "events": 53,
+   "cand": 47,
+   "proper": 62,
+   "unknown_chars": 73
+  },
+  {
+   "date": "12-25",
+   "events": 36,
+   "cand": 27,
+   "proper": 41,
+   "unknown_chars": 55
+  },
+  {
+   "date": "12-26",
+   "events": 25,
+   "cand": 14,
+   "proper": 13,
+   "unknown_chars": 24
+  },
+  {
+   "date": "12-27",
+   "events": 35,
+   "cand": 29,
+   "proper": 30,
+   "unknown_chars": 48
+  },
+  {
+   "date": "12-28",
+   "events": 30,
+   "cand": 24,
+   "proper": 28,
+   "unknown_chars": 40
+  },
+  {
+   "date": "12-29",
+   "events": 37,
+   "cand": 32,
+   "proper": 29,
+   "unknown_chars": 45
+  },
+  {
+   "date": "12-30",
+   "events": 43,
+   "cand": 25,
+   "proper": 21,
+   "unknown_chars": 37
+  },
+  {
+   "date": "12-31",
+   "events": 44,
+   "cand": 30,
+   "proper": 27,
+   "unknown_chars": 44
+  }
+ ],
+ "candidates": [
+  [
+   "并",
+   301
+  ],
+  [
+   "签署",
+   212
+  ],
+  [
+   "受伤",
+   211
+  ],
+  [
+   "成功",
+   203
+  ],
+  [
+   "其",
+   190
+  ],
+  [
+   "坠毁",
+   146
+  ],
+  [
+   "宪法",
+   111
+  ],
+  [
+   "罹难",
+   99
+  ],
+  [
+   "完成",
+   94
+  ],
+  [
+   "推翻",
+   84
+  ],
+  [
+   "加冕",
+   77
+  ],
+  [
+   "使用",
+   77
+  ],
+  [
+   "届",
+   77
+  ],
+  [
+   "实施",
+   73
+  ],
+  [
+   "拿破仑",
+   72
+  ],
+  [
+   "杀害",
+   71
+  ],
+  [
+   "颁布",
+   70
+  ],
+  [
+   "针对",
+   69
+  ],
+  [
+   "刺杀",
+   60
+  ],
+  [
+   "其后",
+   60
+  ],
+  [
+   "影响",
+   60
+  ],
+  [
+   "合并",
+   59
+  ],
+  [
+   "实行",
+   54
+  ],
+  [
+   "第一届",
+   54
+  ],
+  [
+   "屠杀",
+   52
+  ],
+  [
+   "遇难",
+   49
+  ],
+  [
+   "暗杀",
+   48
+  ],
+  [
+   "舰队",
+   47
+  ],
+  [
+   "并且",
+   47
+  ],
+  [
+   "总署",
+   46
+  ],
+  [
+   "遭遇",
+   46
+  ],
+  [
+   "示威",
+   46
+  ],
+  [
+   "轨道",
+   46
+  ],
+  [
+   "及其",
+   44
+  ],
+  [
+   "其中",
+   44
+  ],
+  [
+   "使",
+   43
+  ],
+  [
+   "首届",
+   43
+  ],
+  [
+   "伤",
+   41
+  ],
+  [
+   "继任",
+   41
+  ],
+  [
+   "境内",
+   40
+  ],
+  [
+   "持续",
+   38
+  ],
+  [
+   "迫使",
+   38
+  ],
+  [
+   "叛乱",
+   36
+  ],
+  [
+   "航空暨太",
+   35
+  ],
+  [
+   "完全",
+   34
+  ],
+  [
+   "摧毁",
+   34
+  ],
+  [
+   "继承",
+   33
+  ],
+  [
+   "诞生",
+   33
+  ],
+  [
+   "限制",
+   32
+  ],
+  [
+   "俄",
+   32
+  ],
+  [
+   "大使馆",
+   31
+  ],
+  [
+   "另",
+   31
+  ],
+  [
+   "一艘",
+   31
+  ],
+  [
+   "君主",
+   31
+  ],
+  [
+   "重伤",
+   31
+  ],
+  [
+   "边境",
+   30
+  ],
+  [
+   "修正案",
+   30
+  ],
+  [
+   "飓风",
+   30
+  ],
+  [
+   "婚姻",
+   29
+  ],
+  [
+   "死伤",
+   29
+  ],
+  [
+   "实现",
+   29
+  ],
+  [
+   "完工",
+   29
+  ],
+  [
+   "伤亡",
+   29
+  ],
+  [
+   "自杀",
+   28
+  ],
+  [
+   "吞并",
+   28
+  ],
+  [
+   "继",
+   28
+  ],
+  [
+   "俘虏",
+   28
+  ],
+  [
+   "航空母舰",
+   28
+  ],
+  [
+   "一辆",
+   28
+  ],
+  [
+   "撤离",
+   27
+  ],
+  [
+   "示威者",
+   26
+  ],
+  [
+   "表示",
+   26
+  ],
+  [
+   "有限公司",
+   26
+  ],
+  [
+   "其他",
+   26
+  ],
+  [
+   "撤出",
+   26
+  ],
+  [
+   "搭乘",
+   26
+  ],
+  [
+   "断交",
+   25
+  ],
+  [
+   "亚",
+   25
+  ],
+  [
+   "撤退",
+   25
+  ],
+  [
+   "废黜",
+   25
+  ],
+  [
+   "战舰",
+   25
+  ],
+  [
+   "并入",
+   24
+  ],
+  [
+   "报告",
+   24
+  ],
+  [
+   "杀",
+   24
+  ],
+  [
+   "枪杀",
+   23
+  ],
+  [
+   "贵族",
+   23
+  ],
+  [
+   "基础",
+   23
+  ],
+  [
+   "烧毁",
+   22
+  ],
+  [
+   "连续",
+   22
+  ],
+  [
+   "逾",
+   22
+  ],
+  [
+   "疫情",
+   22
+  ],
+  [
+   "斐",
+   21
+  ],
+  [
+   "诏书",
+   21
+  ],
+  [
+   "非裔",
+   21
+  ],
+  [
+   "仍",
+   21
+  ],
+  [
+   "匈",
+   21
+  ],
+  [
+   "实验",
+   21
+  ],
+  [
+   "继位",
+   20
+  ],
+  [
+   "负责",
+   20
+  ],
+  [
+   "杀死",
+   20
+  ],
+  [
+   "军舰",
+   20
+  ],
+  [
+   "实验室",
+   20
+  ],
+  [
+   "炸毁",
+   19
+  ],
+  [
+   "遇刺",
+   19
+  ],
+  [
+   "指示",
+   19
+  ],
+  [
+   "发售",
+   19
+  ],
+  [
+   "自杀式",
+   18
+  ],
+  [
+   "促使",
+   18
+  ],
+  [
+   "舰",
+   18
+  ],
+  [
+   "撤军",
+   18
+  ],
+  [
+   "竣工",
+   18
+  ],
+  [
+   "另外",
+   18
+  ],
+  [
+   "奴隶",
+   17
+  ],
+  [
+   "彗星",
+   17
+  ],
+  [
+   "报纸",
+   17
+  ],
+  [
+   "弹劾",
+   17
+  ],
+  [
+   "勒",
+   17
+  ],
+  [
+   "继续",
+   17
+  ],
+  [
+   "北伐",
+   17
+  ],
+  [
+   "翌日",
+   17
+  ],
+  [
+   "君主制",
+   17
+  ],
+  [
+   "甘迺迪",
+   17
+  ],
+  [
+   "搭载",
+   17
+  ],
+  [
+   "第一艘",
+   17
+  ],
+  [
+   "自杀身亡",
+   17
+  ],
+  [
+   "其子",
+   16
+  ],
+  [
+   "焚毁",
+   16
+  ],
+  [
+   "报",
+   16
+  ],
+  [
+   "阿",
+   16
+  ],
+  [
+   "肺炎",
+   16
+  ],
+  [
+   "郡",
+   16
+  ],
+  [
+   "汗",
+   16
+  ],
+  [
+   "最佳",
+   16
+  ],
+  [
+   "基辅",
+   15
+  ],
+  [
+   "日俄战争",
+   15
+  ],
+  [
+   "展示",
+   15
+  ],
+  [
+   "额",
+   15
+  ],
+  [
+   "公使",
+   15
+  ],
+  [
+   "首艘",
+   15
+  ],
+  [
+   "撤销",
+   15
+  ],
+  [
+   "违反",
+   15
+  ],
+  [
+   "氢弹",
+   15
+  ],
+  [
+   "奖",
+   15
+  ],
+  [
+   "歼灭",
+   15
+  ],
+  [
+   "报复",
+   15
+  ],
+  [
+   "证实",
+   15
+  ],
+  [
+   "互联网",
+   14
+  ],
+  [
+   "甘地",
+   14
+  ],
+  [
+   "尝试",
+   14
+  ],
+  [
+   "玫瑰",
+   14
+  ],
+  [
+   "与其",
+   14
+  ],
+  [
+   "宪章",
+   14
+  ],
+  [
+   "缔约方",
+   14
+  ],
+  [
+   "会晤",
+   14
+  ],
+  [
+   "紧急",
+   13
+  ],
+  [
+   "逐渐",
+   13
+  ],
+  [
+   "健康",
+   13
+  ],
+  [
+   "奴隶制",
+   13
+  ],
+  [
+   "谴责",
+   13
+  ],
+  [
+   "使得",
+   13
+  ],
+  [
+   "叛国罪",
+   13
+  ],
+  [
+   "儒略历",
+   12
+  ],
+  [
+   "署",
+   12
+  ],
+  [
+   "坍塌",
+   12
+  ],
+  [
+   "发射成功",
+   12
+  ],
+  [
+   "专辑",
+   12
+  ],
+  [
+   "勋章",
+   12
+  ],
+  [
+   "指责",
+   12
+  ],
+  [
+   "颁发",
+   12
+  ],
+  [
+   "叛军",
+   12
+  ],
+  [
+   "遇害",
+   12
+  ],
+  [
+   "毁",
+   12
+  ],
+  [
+   "出轨",
+   12
+  ],
+  [
+   "缔结",
+   12
+  ],
+  [
+   "兹",
+   12
+  ],
+  [
+   "大使",
+   12
+  ],
+  [
+   "谋杀",
+   12
+  ],
+  [
+   "报导",
+   12
+  ],
+  [
+   "杀手",
+   11
+  ],
+  [
+   "第七届",
+   11
+  ],
+  [
+   "第五届",
+   11
+  ],
+  [
+   "间谍",
+   11
+  ],
+  [
+   "第二届",
+   11
+  ],
+  [
+   "并于",
+   11
+  ],
+  [
+   "修改",
+   11
+  ],
+  [
+   "寺",
+   11
+  ],
+  [
+   "撰写",
+   11
+  ],
+  [
+   "状态",
+   11
+  ],
+  [
+   "水坝",
+   10
+  ],
+  [
+   "实际",
+   10
+  ],
+  [
+   "军阀",
+   10
+  ],
+  [
+   "电报",
+   10
+  ],
+  [
+   "俄军",
+   10
+  ],
+  [
+   "修订",
+   10
+  ],
+  [
+   "挟持",
+   10
+  ],
+  [
+   "遇袭",
+   10
+  ],
+  [
+   "隋朝",
+   10
+  ],
+  [
+   "交响曲",
+   10
+  ],
+  [
+   "琉球",
+   10
+  ],
+  [
+   "第四届",
+   10
+  ],
+  [
+   "大奖赛",
+   10
+  ],
+  [
+   "辐射",
+   9
+  ],
+  [
+   "旗帜",
+   9
+  ],
+  [
+   "刚果",
+   9
+  ],
+  [
+   "部署",
+   9
+  ],
+  [
+   "打响",
+   9
+  ],
+  [
+   "环境",
+   9
+  ],
+  [
+   "宣示",
+   9
+  ],
+  [
+   "砲",
+   9
+  ],
+  [
+   "引擎",
+   9
+  ],
+  [
+   "叛变",
+   9
+  ],
+  [
+   "驱逐舰",
+   9
+  ],
+  [
+   "短暂",
+   9
+  ],
+  [
+   "一届",
+   9
+  ],
+  [
+   "对峙",
+   9
+  ],
+  [
+   "第六届",
+   9
+  ],
+  [
+   "游行示威",
+   9
+  ],
+  [
+   "赐",
+   9
+  ],
+  [
+   "殴打",
+   9
+  ],
+  [
+   "撤回",
+   9
+  ],
+  [
+   "傀儡政权",
+   9
+  ],
+  [
+   "拆除",
+   9
+  ],
+  [
+   "第三届",
+   9
+  ],
+  [
+   "出售",
+   9
+  ],
+  [
+   "舞弊",
+   9
+  ],
+  [
+   "投入使用",
+   9
+  ],
+  [
+   "全境",
+   8
+  ],
+  [
+   "奴隶制度",
+   8
+  ],
+  [
+   "使馆",
+   8
+  ],
+  [
+   "讯号",
+   8
+  ],
+  [
+   "最后通牒",
+   8
+  ],
+  [
+   "煽动",
+   8
+  ],
+  [
+   "第十三届",
+   8
+  ],
+  [
+   "销毁",
+   8
+  ],
+  [
+   "继承人",
+   8
+  ],
+  [
+   "由其",
+   8
+  ],
+  [
+   "紧张",
+   8
+  ],
+  [
+   "冥王星",
+   8
+  ],
+  [
+   "乔",
+   8
+  ],
+  [
+   "暂停",
+   8
+  ],
+  [
+   "殉职",
+   8
+  ],
+  [
+   "陆续",
+   8
+  ],
+  [
+   "党魁",
+   8
+  ],
+  [
+   "跌幅",
+   8
+  ],
+  [
+   "滞留",
+   8
+  ],
+  [
+   "证券",
+   8
+  ],
+  [
+   "庇护",
+   8
+  ],
+  [
+   "翻覆",
+   8
+  ],
+  [
+   "磡",
+   8
+  ],
+  [
+   "艘",
+   8
+  ],
+  [
+   "巡洋舰",
+   8
+  ],
+  [
+   "邨",
+   8
+  ],
+  [
+   "刚",
+   8
+  ],
+  [
+   "日报",
+   8
+  ],
+  [
+   "直辖市",
+   8
+  ],
+  [
+   "修复",
+   8
+  ],
+  [
+   "辆",
+   8
+  ],
+  [
+   "官邸",
+   8
+  ],
+  [
+   "情报局",
+   8
+  ],
+  [
+   "浪潮",
+   7
+  ],
+  [
+   "钦差大臣",
+   7
+  ],
+  [
+   "枢机",
+   7
+  ],
+  [
+   "卸任",
+   7
+  ],
+  [
+   "直辖",
+   7
+  ],
+  [
+   "其余",
+   7
+  ],
+  [
+   "奠定",
+   7
+  ],
+  [
+   "诏",
+   7
+  ],
+  [
+   "血腥",
+   7
+  ],
+  [
+   "威胁",
+   7
+  ],
+  [
+   "笃",
+   7
+  ],
+  [
+   "贩售",
+   7
+  ],
+  [
+   "鼠疫",
+   7
+  ],
+  [
+   "紧急状态",
+   7
+  ],
+  [
+   "平壤",
+   7
+  ],
+  [
+   "后续",
+   7
+  ],
+  [
+   "仍然",
+   7
+  ],
+  [
+   "涵盖",
+   7
+  ],
+  [
+   "报道",
+   7
+  ],
+  [
+   "获得成功",
+   7
+  ],
+  [
+   "围剿",
+   7
+  ],
+  [
+   "砂",
+   7
+  ],
+  [
+   "制宪会议",
+   7
+  ],
+  [
+   "入境",
+   7
+  ],
+  [
+   "实际上",
+   7
+  ],
+  [
+   "第一辆",
+   7
+  ],
+  [
+   "新一届",
+   7
+  ],
+  [
+   "制宪",
+   7
+  ],
+  [
+   "残疾人",
+   7
+  ],
+  [
+   "酋长国",
+   6
+  ],
+  [
+   "完结",
+   6
+  ],
+  [
+   "弹劾案",
+   6
+  ],
+  [
+   "叛逃",
+   6
+  ],
+  [
+   "篡位",
+   6
+  ],
+  [
+   "硖",
+   6
+  ],
+  [
+   "谋杀案",
+   6
+  ],
+  [
+   "拆",
+   6
+  ],
+  [
+   "宪政",
+   6
+  ],
+  [
+   "研制成功",
+   6
+  ],
+  [
+   "其父",
+   6
+  ],
+  [
+   "提倡",
+   6
+  ],
+  [
+   "取缔",
+   6
+  ],
+  [
+   "疫苗",
+   6
+  ],
+  [
+   "战争状态",
+   6
+  ],
+  [
+   "耶稣会",
+   6
+  ],
+  [
+   "大幅",
+   6
+  ],
+  [
+   "完",
+   6
+  ],
+  [
+   "宪兵",
+   6
+  ],
+  [
+   "机关报",
+   6
+  ],
+  [
+   "互相",
+   6
+  ],
+  [
+   "并使",
+   6
+  ],
+  [
+   "损毁",
+   6
+  ],
+  [
+   "影响力",
+   6
+  ],
+  [
+   "影片奖",
+   6
+  ],
+  [
+   "敦促",
+   6
+  ],
+  [
+   "致使",
+   6
+  ],
+  [
+   "英镑",
+   6
+  ],
+  [
+   "情报",
+   6
+  ],
+  [
+   "肯",
+   6
+  ],
+  [
+   "无限期",
+   6
+  ],
+  [
+   "实质",
+   6
+  ],
+  [
+   "残疾",
+   6
+  ],
+  [
+   "断绝",
+   6
+  ],
+  [
+   "警报",
+   6
+  ],
+  [
+   "瘫痪",
+   6
+  ],
+  [
+   "待遇",
+   6
+  ],
+  [
+   "并吞",
+   6
+  ],
+  [
+   "接纳",
+   6
+  ],
+  [
+   "性伴侣",
+   6
+  ],
+  [
+   "落实",
+   6
+  ],
+  [
+   "悼念",
+   6
+  ],
+  [
+   "提亚",
+   6
+  ],
+  [
+   "修筑",
+   6
+  ],
+  [
+   "伤重",
+   6
+  ],
+  [
+   "轨道交通",
+   6
+  ],
+  [
+   "奕",
+   6
+  ],
+  [
+   "立宪",
+   6
+  ],
+  [
+   "汗国",
+   6
+  ],
+  [
+   "宦官",
+   6
+  ],
+  [
+   "拆卸",
+   6
+  ],
+  [
+   "黑奴",
+   5
+  ],
+  [
+   "暂时",
+   5
+  ],
+  [
+   "叛国",
+   5
+  ],
+  [
+   "特赦",
+   5
+  ],
+  [
+   "第八届",
+   5
+  ],
+  [
+   "负责人",
+   5
+  ],
+  [
+   "修",
+   5
+  ],
+  [
+   "迄今",
+   5
+  ],
+  [
+   "捐赠",
+   5
+  ],
+  [
+   "互不侵犯条约",
+   5
+  ],
+  [
+   "菲",
+   5
+  ],
+  [
+   "舰艇",
+   5
+  ],
+  [
+   "第九届",
+   5
+  ],
+  [
+   "辖区",
+   5
+  ],
+  [
+   "伤亡人数",
+   5
+  ],
+  [
+   "伪造",
+   5
+  ],
+  [
+   "丸",
+   5
+  ],
+  [
+   "本届",
+   5
+  ],
+  [
+   "改善",
+   5
+  ],
+  [
+   "互助",
+   5
+  ],
+  [
+   "示威游行",
+   5
+  ],
+  [
+   "最佳影片",
+   5
+  ],
+  [
+   "纳",
+   5
+  ],
+  [
+   "僧侣",
+   5
+  ],
+  [
+   "奖项",
+   5
+  ],
+  [
+   "编辑",
+   5
+  ],
+  [
+   "颁奖典礼",
+   5
+  ],
+  [
+   "互不侵犯",
+   5
+  ],
+  [
+   "编纂",
+   5
+  ],
+  [
+   "隶属",
+   5
+  ],
+  [
+   "船舰",
+   5
+  ],
+  [
+   "功能",
+   5
+  ],
+  [
+   "衙门",
+   5
+  ],
+  [
+   "十届",
+   5
+  ],
+  [
+   "杀人",
+   5
+  ],
+  [
+   "颁行",
+   5
+  ],
+  [
+   "耶稣基督",
+   5
+  ],
+  [
+   "公报",
+   5
+  ],
+  [
+   "战列舰",
+   5
+  ],
+  [
+   "其妻",
+   5
+  ],
+  [
+   "缔约国",
+   5
+  ],
+  [
+   "断头台",
+   5
+  ],
+  [
+   "虐待",
+   5
+  ],
+  [
+   "垄断",
+   5
+  ],
+  [
+   "脱轨",
+   5
+  ],
+  [
+   "趁",
+   5
+  ],
+  [
+   "响应",
+   5
+  ],
+  [
+   "射杀",
+   5
+  ],
+  [
+   "车辆",
+   5
+  ],
+  [
+   "巩固",
+   5
+  ],
+  [
+   "君主立宪",
+   5
+  ],
+  [
+   "迄今为止",
+   5
+  ],
+  [
+   "敕令",
+   5
+  ],
+  [
+   "惟",
+   5
+  ],
+  [
+   "奠基石",
+   5
+  ],
+  [
+   "畅销",
+   5
+  ],
+  [
+   "洗钱",
+   5
+  ],
+  [
+   "完整",
+   5
+  ],
+  [
+   "行使",
+   4
+  ],
+  [
+   "相互",
+   4
+  ],
+  [
+   "儒略",
+   4
+  ],
+  [
+   "佐",
+   4
+  ],
+  [
+   "圣诞节",
+   4
+  ],
+  [
+   "工潮",
+   4
+  ],
+  [
+   "犹太裔",
+   4
+  ],
+  [
+   "猎鹰",
+   4
+  ],
+  [
+   "歼",
+   4
+  ],
+  [
+   "胰岛素",
+   4
+  ],
+  [
+   "斡旋",
+   4
+  ],
+  [
+   "获颁",
+   4
+  ],
+  [
+   "加纳",
+   4
+  ],
+  [
+   "酋长",
+   4
+  ],
+  [
+   "全歼",
+   4
+  ],
+  [
+   "第十四届",
+   4
+  ],
+  [
+   "报废",
+   4
+  ],
+  [
+   "报刊",
+   4
+  ],
+  [
+   "使用者",
+   4
+  ],
+  [
+   "防疫",
+   4
+  ],
+  [
+   "法轮功",
+   4
+  ],
+  [
+   "潮",
+   4
+  ],
+  [
+   "寒潮",
+   4
+  ],
+  [
+   "免疫",
+   4
+  ],
+  [
+   "三叉戟",
+   4
+  ],
+  [
+   "残骸",
+   4
+  ],
+  [
+   "橄榄球",
+   4
+  ],
+  [
+   "遇到",
+   4
+  ],
+  [
+   "奖励",
+   4
+  ],
+  [
+   "第十届",
+   4
+  ],
+  [
+   "佳",
+   4
+  ],
+  [
+   "债务",
+   4
+  ],
+  [
+   "藩",
+   4
+  ],
+  [
+   "修士",
+   4
+  ],
+  [
+   "切断",
+   4
+  ],
+  [
+   "潜舰",
+   4
+  ],
+  [
+   "评选",
+   4
+  ],
+  [
+   "巡防舰",
+   4
+  ],
+  [
+   "兀",
+   4
+  ],
+  [
+   "有限",
+   4
+  ],
+  [
+   "杀人犯",
+   4
+  ],
+  [
+   "使者",
+   4
+  ],
+  [
+   "撞毁",
+   4
+  ],
+  [
+   "特使",
+   4
+  ],
+  [
+   "间谍活动",
+   4
+  ],
+  [
+   "隶属于",
+   4
+  ],
+  [
+   "偏离",
+   4
+  ],
+  [
+   "示威运动",
+   4
+  ],
+  [
+   "讯息",
+   4
+  ],
+  [
+   "纳粹主义",
+   4
+  ],
+  [
+   "违宪",
+   4
+  ],
+  [
+   "洞",
+   4
+  ],
+  [
+   "明报",
+   4
+  ],
+  [
+   "埕",
+   4
+  ],
+  [
+   "可汗",
+   4
+  ],
+  [
+   "舰载机",
+   4
+  ],
+  [
+   "铀",
+   4
+  ],
+  [
+   "粒子",
+   4
+  ],
+  [
+   "驱逐出境",
+   4
+  ],
+  [
+   "札",
+   4
+  ],
+  [
+   "皈依",
+   4
+  ],
+  [
+   "两艘",
+   4
+  ],
+  [
+   "北纬",
+   4
+  ],
+  [
+   "埗",
+   4
+  ],
+  [
+   "尤",
+   4
+  ],
+  [
+   "撤往",
+   4
+  ],
+  [
+   "奠基",
+   4
+  ],
+  [
+   "伤者",
+   4
+  ],
+  [
+   "十一届",
+   4
+  ],
+  [
+   "实",
+   4
+  ],
+  [
+   "违法",
+   4
+  ],
+  [
+   "中尉",
+   4
+  ],
+  [
+   "哀悼",
+   4
+  ],
+  [
+   "卫奕",
+   4
+  ],
+  [
+   "通讯卫星",
+   4
+  ],
+  [
+   "延续",
+   4
+  ],
+  [
+   "捕杀",
+   4
+  ],
+  [
+   "邮报",
+   4
+  ],
+  [
+   "骗局",
+   4
+  ],
+  [
+   "增修",
+   4
+  ],
+  [
+   "雇佣兵",
+   4
+  ],
+  [
+   "舰船",
+   4
+  ],
+  [
+   "审讯",
+   4
+  ],
+  [
+   "资讯",
+   4
+  ],
+  [
+   "帖",
+   4
+  ],
+  [
+   "动态",
+   4
+  ],
+  [
+   "批评",
+   4
+  ],
+  [
+   "娅",
+   4
+  ],
+  [
+   "绝迹",
+   4
+  ],
+  [
+   "犬",
+   4
+  ],
+  [
+   "上尉",
+   4
+  ],
+  [
+   "通缉令",
+   4
+  ],
+  [
+   "翌年",
+   4
+  ],
+  [
+   "资料",
+   4
+  ],
+  [
+   "拆毁",
+   4
+  ],
+  [
+   "撤走",
+   4
+  ],
+  [
+   "猎犬",
+   4
+  ],
+  [
+   "节度使",
+   4
+  ],
+  [
+   "大字报",
+   4
+  ],
+  [
+   "金额",
+   4
+  ],
+  [
+   "剿共",
+   4
+  ],
+  [
+   "淹没",
+   4
+  ],
+  [
+   "并未",
+   4
+  ],
+  [
+   "挑衅",
+   4
+  ],
+  [
+   "第十七届",
+   4
+  ],
+  [
+   "娱乐",
+   4
+  ],
+  [
+   "第十六届",
+   4
+  ],
+  [
+   "遗骸",
+   4
+  ],
+  [
+   "轻轨",
+   4
+  ],
+  [
+   "人伤",
+   4
+  ],
+  [
+   "亚运会",
+   4
+  ],
+  [
+   "倡导",
+   4
+  ],
+  [
+   "宪兵队",
+   4
+  ],
+  [
+   "寮",
+   4
+  ],
+  [
+   "采纳",
+   3
+  ],
+  [
+   "确实",
+   3
+  ],
+  [
+   "撤职",
+   3
+  ],
+  [
+   "日裔",
+   3
+  ],
+  [
+   "水利枢纽",
+   3
+  ],
+  [
+   "下辖",
+   3
+  ],
+  [
+   "债券",
+   3
+  ],
+  [
+   "猥亵",
+   3
+  ],
+  [
+   "分析",
+   3
+  ],
+  [
+   "魔鬼",
+   3
+  ],
+  [
+   "纳入",
+   3
+  ],
+  [
+   "剌",
+   3
+  ],
+  [
+   "法裔",
+   3
+  ],
+  [
+   "门槛",
+   3
+  ],
+  [
+   "入境者",
+   3
+  ],
+  [
+   "搬",
+   3
+  ],
+  [
+   "旗舰",
+   3
+  ],
+  [
+   "疆域",
+   3
+  ],
+  [
+   "显著",
+   3
+  ],
+  [
+   "误报",
+   3
+  ],
+  [
+   "胁持",
+   3
+  ],
+  [
+   "陈炯明",
+   3
+  ],
+  [
+   "诽谤罪",
+   3
+  ],
+  [
+   "实权",
+   3
+  ],
+  [
+   "赐予",
+   3
+  ],
+  [
+   "钱",
+   3
+  ],
+  [
+   "奠基仪式",
+   3
+  ],
+  [
+   "北洋军阀",
+   3
+  ],
+  [
+   "夷",
+   3
+  ],
+  [
+   "诰",
+   3
+  ],
+  [
+   "仍未",
+   3
+  ],
+  [
+   "伐",
+   3
+  ],
+  [
+   "赦免",
+   3
+  ],
+  [
+   "第十一届",
+   3
+  ],
+  [
+   "管辖",
+   3
+  ],
+  [
+   "隼",
+   3
+  ],
+  [
+   "商埠",
+   3
+  ],
+  [
+   "轮奸",
+   3
+  ],
+  [
+   "轻伤",
+   3
+  ],
+  [
+   "修女",
+   3
+  ],
+  [
+   "蒂",
+   3
+  ],
+  [
+   "相继",
+   3
+  ],
+  [
+   "调查报告",
+   3
+  ],
+  [
+   "真实",
+   3
+  ],
+  [
+   "壹",
+   3
+  ],
+  [
+   "获得最佳",
+   3
+  ],
+  [
+   "两辆",
+   3
+  ],
+  [
+   "叛乱者",
+   3
+  ],
+  [
+   "无畏",
+   3
+  ],
+  [
+   "坂",
+   3
+  ],
+  [
+   "不断",
+   3
+  ],
+  [
+   "湘军",
+   3
+  ],
+  [
+   "橿",
+   3
+  ],
+  [
+   "出境",
+   3
+  ],
+  [
+   "农奴",
+   3
+  ],
+  [
+   "枢密院",
+   3
+  ],
+  [
+   "耗资",
+   3
+  ],
+  [
+   "打伤",
+   3
+  ],
+  [
+   "删除",
+   3
+  ],
+  [
+   "两届",
+   3
+  ],
+  [
+   "示警",
+   3
+  ],
+  [
+   "淳",
+   3
+  ],
+  [
+   "电讯",
+   3
+  ],
+  [
+   "指使",
+   3
+  ],
+  [
+   "翻沉",
+   3
+  ],
+  [
+   "舆论",
+   3
+  ],
+  [
+   "基本粒子",
+   3
+  ],
+  [
+   "修撰",
+   3
+  ],
+  [
+   "铁甲舰",
+   3
+  ],
+  [
+   "废奴",
+   3
+  ],
+  [
+   "第十二届",
+   3
+  ],
+  [
+   "修建",
+   3
+  ],
+  [
+   "职责",
+   3
+  ],
+  [
+   "以示",
+   3
+  ],
+  [
+   "署理",
+   3
+  ],
+  [
+   "函馆",
+   3
+  ],
+  [
+   "奠",
+   3
+  ],
+  [
+   "遇",
+   3
+  ],
+  [
+   "贬值",
+   3
+  ],
+  [
+   "默",
+   3
+  ],
+  [
+   "遇难者",
+   3
+  ],
+  [
+   "宪案",
+   3
+  ],
+  [
+   "谋杀罪",
+   3
+  ],
+  [
+   "砍伐",
+   3
+  ],
+  [
+   "病疫情",
+   3
+  ],
+  [
+   "木栅",
+   3
+  ],
+  [
+   "坎",
+   3
+  ],
+  [
+   "搬迁",
+   3
+  ],
+  [
+   "潟",
+   3
+  ],
+  [
+   "销售",
+   3
+  ],
+  [
+   "管辖区",
+   3
+  ],
+  [
+   "啤酒馆",
+   3
+  ],
+  [
+   "肺部",
+   3
+  ],
+  [
+   "炭疽",
+   3
+  ],
+  [
+   "鳕鱼",
+   3
+  ],
+  [
+   "通谕",
+   3
+  ],
+  [
+   "舰长",
+   3
+  ],
+  [
+   "击杀",
+   3
+  ],
+  [
+   "澋",
+   3
+  ],
+  [
+   "翻",
+   3
+  ],
+  [
+   "首脑会晤",
+   3
+  ],
+  [
+   "傀儡",
+   3
+  ],
+  [
+   "实践",
+   3
+  ],
+  [
+   "夷为平地",
+   3
+  ],
+  [
+   "追悼会",
+   3
+  ],
+  [
+   "啤酒",
+   3
+  ],
+  [
+   "抨击",
+   3
+  ],
+  [
+   "坦噶尼喀",
+   3
+  ],
+  [
+   "善后",
+   3
+  ],
+  [
+   "万英镑",
+   3
+  ],
+  [
+   "无轨电车",
+   3
+  ],
+  [
+   "动员戡乱",
+   3
+  ],
+  [
+   "钦定",
+   3
+  ],
+  [
+   "上届",
+   3
+  ],
+  [
+   "捍卫",
+   3
+  ],
+  [
+   "伤人",
+   3
+  ],
+  [
+   "觐见",
+   3
+  ],
+  [
+   "紧急会议",
+   3
+  ],
+  [
+   "徙",
+   3
+  ],
+  [
+   "接轨",
+   3
+  ],
+  [
+   "罢黜",
+   3
+  ],
+  [
+   "募股",
+   3
+  ],
+  [
+   "妓女",
+   3
+  ],
+  [
+   "通缉",
+   3
+  ],
+  [
+   "毁灭",
+   3
+  ],
+  [
+   "修好",
+   3
+  ],
+  [
+   "健",
+   3
+  ],
+  [
+   "沪",
+   3
+  ],
+  [
+   "崧",
+   3
+  ],
+  [
+   "豫",
+   3
+  ],
+  [
+   "敦刻尔克",
+   3
+  ],
+  [
+   "倡议",
+   3
+  ],
+  [
+   "时报",
+   3
+  ],
+  [
+   "芭蕾舞剧",
+   3
+  ],
+  [
+   "贿赂",
+   3
+  ],
+  [
+   "伴侣",
+   3
+  ],
+  [
+   "砸毁",
+   3
+  ],
+  [
+   "劫杀",
+   3
+  ],
+  [
+   "特赦令",
+   3
+  ],
+  [
+   "衞",
+   3
+  ],
+  [
+   "雕塑家",
+   3
+  ],
+  [
+   "缅",
+   3
+  ],
+  [
+   "遗迹",
+   3
+  ],
+  [
+   "堕下",
+   3
+  ],
+  [
+   "完毕",
+   3
+  ],
+  [
+   "受挫",
+   3
+  ],
+  [
+   "反修",
+   3
+  ],
+  [
+   "奇迹",
+   3
+  ],
+  [
+   "边疆区",
+   3
+  ],
+  [
+   "奉系军阀",
+   3
+  ],
+  [
+   "掳获",
+   3
+  ],
+  [
+   "转捩点",
+   3
+  ],
+  [
+   "第十五届",
+   3
+  ],
+  [
+   "风暴潮",
+   3
+  ],
+  [
+   "麾下",
+   3
+  ],
+  [
+   "持续时间",
+   3
+  ],
+  [
+   "三艘",
+   3
+  ],
+  [
+   "探勘者",
+   3
+  ],
+  [
+   "讽刺",
+   3
+  ],
+  [
+   "八届",
+   3
+  ],
+  [
+   "毒枭",
+   3
+  ],
+  [
+   "兑换",
+   3
+  ],
+  [
+   "第一套",
+   3
+  ],
+  [
+   "辖下",
+   3
+  ],
+  [
+   "銮",
+   3
+  ],
+  [
+   "瑈",
+   3
+  ],
+  [
+   "继而",
+   3
+  ],
+  [
+   "博弈",
+   3
+  ],
+  [
+   "东突厥",
+   3
+  ],
+  [
+   "出使",
+   3
+  ],
+  [
+   "赎罪",
+   3
+  ],
+  [
+   "国君",
+   3
+  ],
+  [
+   "庇",
+   3
+  ],
+  [
+   "勒令",
+   3
+  ],
+  [
+   "魔咒",
+   3
+  ],
+  [
+   "禁锢",
+   3
+  ],
+  [
+   "圣诞",
+   3
+  ],
+  [
+   "塑胶",
+   2
+  ],
+  [
+   "违背",
+   2
+  ],
+  [
+   "匿名",
+   2
+  ],
+  [
+   "塑造",
+   2
+  ],
+  [
+   "告示牌",
+   2
+  ],
+  [
+   "评比",
+   2
+  ],
+  [
+   "阋",
+   2
+  ],
+  [
+   "阐述",
+   2
+  ],
+  [
+   "弑",
+   2
+  ],
+  [
+   "掳走",
+   2
+  ],
+  [
+   "重复使用",
+   2
+  ],
+  [
+   "昂贵",
+   2
+  ],
+  [
+   "勒芒",
+   2
+  ],
+  [
+   "糖尿病",
+   2
+  ],
+  [
+   "斗殴",
+   2
+  ],
+  [
+   "辖",
+   2
+  ],
+  [
+   "明显",
+   2
+  ],
+  [
+   "真理报",
+   2
+  ],
+  [
+   "毒杀",
+   2
+  ],
+  [
+   "暂代",
+   2
+  ],
+  [
+   "其它",
+   2
+  ],
+  [
+   "核糖核酸",
+   2
+  ],
+  [
+   "六届",
+   2
+  ],
+  [
+   "讨伐",
+   2
+  ],
+  [
+   "批示",
+   2
+  ],
+  [
+   "赦令",
+   2
+  ],
+  [
+   "户栗",
+   2
+  ],
+  [
+   "盎",
+   2
+  ],
+  [
+   "殉教",
+   2
+  ],
+  [
+   "背叛",
+   2
+  ],
+  [
+   "堕胎",
+   2
+  ],
+  [
+   "史料",
+   2
+  ],
+  [
+   "撤",
+   2
+  ],
+  [
+   "大使级",
+   2
+  ],
+  [
+   "轨",
+   2
+  ],
+  [
+   "液氮",
+   2
+  ],
+  [
+   "旻",
+   2
+  ],
+  [
+   "虔诚",
+   2
+  ],
+  [
+   "涅",
+   2
+  ],
+  [
+   "疆界",
+   2
+  ],
+  [
+   "晚报",
+   2
+  ],
+  [
+   "揆",
+   2
+  ],
+  [
+   "该届",
+   2
+  ],
+  [
+   "堃",
+   2
+  ],
+  [
+   "朝觐者",
+   2
+  ],
+  [
+   "胸部",
+   2
+  ],
+  [
+   "其间",
+   2
+  ],
+  [
+   "残部",
+   2
+  ],
+  [
+   "孝",
+   2
+  ],
+  [
+   "析出",
+   2
+  ],
+  [
+   "槟城",
+   2
+  ],
+  [
+   "纳米技术",
+   2
+  ],
+  [
+   "报业",
+   2
+  ],
+  [
+   "蓄奴",
+   2
+  ],
+  [
+   "禅",
+   2
+  ],
+  [
+   "有轨电车",
+   2
+  ],
+  [
+   "挫",
+   2
+  ],
+  [
+   "实习",
+   2
+  ],
+  [
+   "榉",
+   2
+  ],
+  [
+   "蠕虫",
+   2
+  ],
+  [
+   "惹",
+   2
+  ],
+  [
+   "氦气",
+   2
+  ],
+  [
+   "继承者",
+   2
+  ],
+  [
+   "防空洞",
+   2
+  ],
+  [
+   "通奸罪",
+   2
+  ],
+  [
+   "屯",
+   2
+  ],
+  [
+   "乙",
+   2
+  ],
+  [
+   "取得成功",
+   2
+  ],
+  [
+   "报告书",
+   2
+  ],
+  [
+   "评价",
+   2
+  ],
+  [
+   "检署",
+   2
+  ],
+  [
+   "获奖",
+   2
+  ],
+  [
+   "硫磺岛",
+   2
+  ],
+  [
+   "首幅",
+   2
+  ],
+  [
+   "翡翠台",
+   2
+  ],
+  [
+   "峇",
+   2
+  ],
+  [
+   "总编辑",
+   2
+  ],
+  [
+   "多功能",
+   2
+  ],
+  [
+   "胁迫",
+   2
+  ],
+  [
+   "击伤",
+   2
+  ],
+  [
+   "乱世佳人",
+   2
+  ],
+  [
+   "立其",
+   2
+  ],
+  [
+   "服毒自杀",
+   2
+  ],
+  [
+   "不间断",
+   2
+  ],
+  [
+   "四届",
+   2
+  ],
+  [
+   "堵塞",
+   2
+  ],
+  [
+   "液态水",
+   2
+  ],
+  [
+   "毁灭性",
+   2
+  ],
+  [
+   "青函",
+   2
+  ],
+  [
+   "默许",
+   2
+  ],
+  [
+   "诽谤",
+   2
+  ],
+  [
+   "冒",
+   2
+  ],
+  [
+   "十二届",
+   2
+  ],
+  [
+   "示威抗议",
+   2
+  ],
+  [
+   "匈牙利人",
+   2
+  ],
+  [
+   "犹大",
+   2
+  ],
+  [
+   "寺院",
+   2
+  ],
+  [
+   "阡",
+   2
+  ],
+  [
+   "巿",
+   2
+  ],
+  [
+   "磅",
+   2
+  ],
+  [
+   "成文宪法",
+   2
+  ],
+  [
+   "大赦",
+   2
+  ],
+  [
+   "负伤",
+   2
+  ],
+  [
+   "消耗",
+   2
+  ],
+  [
+   "禅位",
+   2
+  ],
+  [
+   "其管辖",
+   2
+  ],
+  [
+   "试制成功",
+   2
+  ],
+  [
+   "征夷",
+   2
+  ],
+  [
+   "护卫舰",
+   2
+  ],
+  [
+   "相互之间",
+   2
+  ],
+  [
+   "催生",
+   2
+  ],
+  [
+   "一幅",
+   2
+  ],
+  [
+   "音响",
+   2
+  ],
+  [
+   "醍醐",
+   2
+  ],
+  [
+   "巨额",
+   2
+  ],
+  [
+   "添马舰",
+   2
+  ],
+  [
+   "乙醚",
+   2
+  ],
+  [
+   "渝",
+   2
+  ],
+  [
+   "荔园",
+   2
+  ],
+  [
+   "获续",
+   2
+  ],
+  [
+   "兑换券",
+   2
+  ],
+  [
+   "驿马",
+   2
+  ],
+  [
+   "细川护熙",
+   2
+  ],
+  [
+   "反舰",
+   2
+  ],
+  [
+   "奸杀",
+   2
+  ],
+  [
+   "梦想",
+   2
+  ],
+  [
+   "残缺",
+   2
+  ],
+  [
+   "情侣",
+   2
+  ],
+  [
+   "聆听",
+   2
+  ],
+  [
+   "辅助",
+   2
+  ],
+  [
+   "汐止",
+   2
+  ],
+  [
+   "自缢",
+   2
+  ],
+  [
+   "边境地区",
+   2
+  ],
+  [
+   "陨石",
+   2
+  ],
+  [
+   "干净",
+   2
+  ],
+  [
+   "奖金",
+   2
+  ],
+  [
+   "耗尽",
+   2
+  ],
+  [
+   "首辆",
+   2
+  ],
+  [
+   "豺狼",
+   2
+  ],
+  [
+   "配套",
+   2
+  ],
+  [
+   "人员伤亡",
+   2
+  ],
+  [
+   "方针",
+   2
+  ],
+  [
+   "冒险家",
+   2
+  ],
+  [
+   "肯定",
+   2
+  ],
+  [
+   "翻译",
+   2
+  ],
+  [
+   "糯",
+   2
+  ],
+  [
+   "凶杀",
+   2
+  ],
+  [
+   "郡府",
+   2
+  ],
+  [
+   "启示",
+   2
+  ],
+  [
+   "醮",
+   2
+  ],
+  [
+   "避孕药",
+   2
+  ],
+  [
+   "诏令",
+   2
+  ],
+  [
+   "努",
+   2
+  ],
+  [
+   "薪资",
+   2
+  ],
+  [
+   "曼",
+   2
+  ],
+  [
+   "善",
+   2
+  ],
+  [
+   "阻断",
+   2
+  ],
+  [
+   "梦露",
+   2
+  ],
+  [
+   "行宪",
+   2
+  ],
+  [
+   "砍",
+   2
+  ],
+  [
+   "伤势",
+   2
+  ],
+  [
+   "废墟",
+   2
+  ],
+  [
+   "催泪弹",
+   2
+  ],
+  [
+   "钸",
+   2
+  ],
+  [
+   "完美",
+   2
+  ],
+  [
+   "蚩",
+   2
+  ],
+  [
+   "孛",
+   2
+  ],
+  [
+   "戡乱时期",
+   2
+  ],
+  [
+   "搭配",
+   2
+  ],
+  [
+   "限",
+   2
+  ],
+  [
+   "擎天",
+   2
+  ],
+  [
+   "洞窟",
+   2
+  ],
+  [
+   "吸血鬼",
+   2
+  ],
+  [
+   "拉雪兹神父公墓",
+   2
+  ],
+  [
+   "羁留",
+   2
+  ],
+  [
+   "捣毁",
+   2
+  ],
+  [
+   "受贿",
+   2
+  ],
+  [
+   "提供情报",
+   2
+  ],
+  [
+   "粤",
+   2
+  ],
+  [
+   "省辖市",
+   2
+  ],
+  [
+   "死讯",
+   2
+  ],
+  [
+   "停滞",
+   2
+  ],
+  [
+   "坝",
+   2
+  ],
+  [
+   "第十八届",
+   2
+  ],
+  [
+   "行贿",
+   2
+  ],
+  [
+   "舆",
+   2
+  ],
+  [
+   "第十九届",
+   2
+  ],
+  [
+   "骸骨",
+   2
+  ],
+  [
+   "戊戌变法",
+   2
+  ],
+  [
+   "拆分",
+   2
+  ],
+  [
+   "大公报",
+   2
+  ],
+  [
+   "勘测",
+   2
+  ],
+  [
+   "诊断",
+   2
+  ],
+  [
+   "兼并",
+   2
+  ],
+  [
+   "使馆区",
+   2
+  ],
+  [
+   "匈人",
+   2
+  ],
+  [
+   "冥卫",
+   2
+  ],
+  [
+   "疫区",
+   2
+  ],
+  [
+   "刚刚",
+   2
+  ],
+  [
+   "亚种",
+   2
+  ],
+  [
+   "十三届",
+   2
+  ],
+  [
+   "君主专制",
+   2
+  ],
+  [
+   "骄傲",
+   2
+  ],
+  [
+   "突厥",
+   2
+  ],
+  [
+   "诉讼",
+   2
+  ],
+  [
+   "勘分",
+   2
+  ],
+  [
+   "闰秒",
+   2
+  ],
+  [
+   "闽",
+   2
+  ],
+  [
+   "致命伤",
+   2
+  ],
+  [
+   "刺伤",
+   2
+  ],
+  [
+   "接续",
+   2
+  ],
+  [
+   "裁撤",
+   2
+  ],
+  [
+   "将砂",
+   2
+  ],
+  [
+   "木筏",
+   2
+  ],
+  [
+   "怪兽",
+   2
+  ],
+  [
+   "梦游",
+   2
+  ],
+  [
+   "仙境",
+   2
+  ],
+  [
+   "镰",
+   2
+  ],
+  [
+   "尤多",
+   2
+  ],
+  [
+   "橄榄枝",
+   2
+  ],
+  [
+   "庵",
+   2
+  ],
+  [
+   "画报",
+   2
+  ],
+  [
+   "卑",
+   2
+  ],
+  [
+   "越境",
+   2
+  ],
+  [
+   "叟",
+   2
+  ],
+  [
+   "互射",
+   2
+  ],
+  [
+   "风潮",
+   2
+  ],
+  [
+   "堕坡",
+   2
+  ],
+  [
+   "继任者",
+   2
+  ],
+  [
+   "诛杀",
+   2
+  ],
+  [
+   "僧",
+   2
+  ],
+  [
+   "断裂",
+   2
+  ],
+  [
+   "清君侧",
+   2
+  ],
+  [
+   "音讯",
+   2
+  ],
+  [
+   "评论",
+   2
+  ],
+  [
+   "戈",
+   2
+  ],
+  [
+   "肾脏",
+   2
+  ],
+  [
+   "谅解",
+   2
+  ],
+  [
+   "受贿罪",
+   2
+  ],
+  [
+   "收市报",
+   2
+  ],
+  [
+   "翻车",
+   2
+  ],
+  [
+   "显示",
+   2
+  ],
+  [
+   "窒息",
+   2
+  ],
+  [
+   "一千万镑",
+   2
+  ],
+  [
+   "燃料",
+   2
+  ],
+  [
+   "售出",
+   2
+  ],
+  [
+   "藏匿",
+   2
+  ],
+  [
+   "趋于",
+   2
+  ],
+  [
+   "秃头",
+   2
+  ],
+  [
+   "实战",
+   2
+  ],
+  [
+   "官报",
+   2
+  ],
+  [
+   "肯纳",
+   2
+  ],
+  [
+   "撤换",
+   2
+  ],
+  [
+   "谕令",
+   2
+  ],
+  [
+   "撤兵",
+   2
+  ],
+  [
+   "限度",
+   2
+  ],
+  [
+   "交付使用",
+   2
+  ],
+  [
+   "祀",
+   2
+  ],
+  [
+   "君子",
+   2
+  ],
+  [
+   "肆虐",
+   2
+  ],
+  [
+   "心肌梗塞",
+   2
+  ],
+  [
+   "毁掉",
+   2
+  ],
+  [
+   "配额",
+   2
+  ],
+  [
+   "别墅",
+   2
+  ],
+  [
+   "第二十九届",
+   2
+  ],
+  [
+   "反叛",
+   2
+  ],
+  [
+   "暨",
+   2
+  ],
+  [
+   "奠基典礼",
+   2
+  ],
+  [
+   "圣老楞",
+   2
+  ],
+  [
+   "啤酒厂",
+   2
+  ],
+  [
+   "啤酒节",
+   2
+  ],
+  [
+   "脊椎动物",
+   2
+  ],
+  [
+   "存续",
+   2
+  ],
+  [
+   "塽",
+   2
+  ],
+  [
+   "根纳季",
+   2
+  ],
+  [
+   "汶",
+   2
+  ],
+  [
+   "剿灭",
+   2
+  ],
+  [
+   "断电",
+   2
+  ],
+  [
+   "金帐",
+   2
+  ],
+  [
+   "奴",
+   2
+  ],
+  [
+   "斥责",
+   2
+  ],
+  [
+   "大赦天下",
+   2
+  ],
+  [
+   "宪法大纲",
+   2
+  ],
+  [
+   "哥伦比亚革命武装力量",
+   2
+  ],
+  [
+   "孕妇",
+   2
+  ],
+  [
+   "冒充",
+   2
+  ],
+  [
+   "强奸",
+   2
+  ],
+  [
+   "日耳曼人",
+   2
+  ],
+  [
+   "挫败",
+   2
+  ],
+  [
+   "使用权",
+   2
+  ],
+  [
+   "肖像",
+   2
+  ],
+  [
+   "个人专辑",
+   2
+  ],
+  [
+   "奴隶起义",
+   2
+  ],
+  [
+   "洞穴",
+   2
+  ],
+  [
+   "重修",
+   2
+  ],
+  [
+   "地质勘探",
+   2
+  ],
+  [
+   "陕甘",
+   2
+  ],
+  [
+   "瘟疫",
+   2
+  ],
+  [
+   "密善",
+   2
+  ],
+  [
+   "断代",
+   2
+  ],
+  [
+   "伪装成",
+   2
+  ],
+  [
+   "事迹",
+   2
+  ],
+  [
+   "周报",
+   2
+  ],
+  [
+   "实体",
+   2
+  ],
+  [
+   "署长",
+   2
+  ],
+  [
+   "骇客",
+   2
+  ],
+  [
+   "遗孀",
+   2
+  ],
+  [
+   "赤柱",
+   2
+  ],
+  [
+   "公署",
+   2
+  ],
+  [
+   "环境保护局",
+   2
+  ],
+  [
+   "并网发电",
+   2
+  ],
+  [
+   "珂",
+   2
+  ],
+  [
+   "环境保护",
+   2
+  ],
+  [
+   "橄榄球队",
+   2
+  ],
+  [
+   "肺结核",
+   2
+  ],
+  [
+   "国境",
+   2
+  ],
+  [
+   "肇事",
+   2
+  ],
+  [
+   "清剿",
+   2
+  ],
+  [
+   "牌匾",
+   2
+  ],
+  [
+   "寡妇",
+   2
+  ],
+  [
+   "侠盗",
+   2
+  ],
+  [
+   "猎",
+   2
+  ],
+  [
+   "实力",
+   2
+  ],
+  [
+   "濒临",
+   2
+  ],
+  [
+   "禅让",
+   2
+  ],
+  [
+   "鸸鹋",
+   2
+  ],
+  [
+   "剿匪",
+   2
+  ],
+  [
+   "原料",
+   2
+  ],
+  [
+   "维修",
+   2
+  ],
+  [
+   "出示",
+   2
+  ],
+  [
+   "民报",
+   2
+  ],
+  [
+   "折断",
+   2
+  ],
+  [
+   "沙漠之狐",
+   2
+  ],
+  [
+   "屯马线",
+   2
+  ],
+  [
+   "届期",
+   1
+  ],
+  [
+   "远境",
+   1
+  ],
+  [
+   "套组",
+   1
+  ],
+  [
+   "刍议",
+   1
+  ],
+  [
+   "嗣后",
+   1
+  ],
+  [
+   "祠",
+   1
+  ],
+  [
+   "不在此限",
+   1
+  ],
+  [
+   "兵不血刃",
+   1
+  ],
+  [
+   "彗发",
+   1
+  ],
+  [
+   "以其",
+   1
+  ],
+  [
+   "菠萝",
+   1
+  ],
+  [
+   "采伐",
+   1
+  ],
+  [
+   "诉讼法",
+   1
+  ],
+  [
+   "悬宕",
+   1
+  ],
+  [
+   "情境",
+   1
+  ],
+  [
+   "渐进",
+   1
+  ],
+  [
+   "缉私警察",
+   1
+  ],
+  [
+   "燎原",
+   1
+  ],
+  [
+   "互设",
+   1
+  ],
+  [
+   "电报机",
+   1
+  ],
+  [
+   "匝",
+   1
+  ],
+  [
+   "廉政公署",
+   1
+  ],
+  [
+   "钫",
+   1
+  ],
+  [
+   "有奖",
+   1
+  ],
+  [
+   "顺时针",
+   1
+  ],
+  [
+   "探针",
+   1
+  ],
+  [
+   "丙",
+   1
+  ],
+  [
+   "缺额",
+   1
+  ],
+  [
+   "婚姻生活",
+   1
+  ],
+  [
+   "尊贵",
+   1
+  ],
+  [
+   "孺子婴",
+   1
+  ],
+  [
+   "文娱",
+   1
+  ],
+  [
+   "互相承认",
+   1
+  ],
+  [
+   "苦行僧",
+   1
+  ],
+  [
+   "肾癌",
+   1
+  ],
+  [
+   "功勋",
+   1
+  ],
+  [
+   "曩",
+   1
+  ],
+  [
+   "其位",
+   1
+  ],
+  [
+   "伕",
+   1
+  ],
+  [
+   "逻辑学家",
+   1
+  ],
+  [
+   "烘培",
+   1
+  ],
+  [
+   "烘制",
+   1
+  ],
+  [
+   "敫",
+   1
+  ],
+  [
+   "砷",
+   1
+  ],
+  [
+   "幕僚",
+   1
+  ],
+  [
+   "砂石车",
+   1
+  ],
+  [
+   "分针",
+   1
+  ],
+  [
+   "求实",
+   1
+  ],
+  [
+   "售予",
+   1
+  ],
+  [
+   "其市",
+   1
+  ],
+  [
+   "麒麟座",
+   1
+  ],
+  [
+   "跋涉",
+   1
+  ],
+  [
+   "遇真",
+   1
+  ],
+  [
+   "暱",
+   1
+  ],
+  [
+   "白炽灯",
+   1
+  ],
+  [
+   "煽动性",
+   1
+  ],
+  [
+   "夏茸尕布",
+   1
+  ],
+  [
+   "过境",
+   1
+  ],
+  [
+   "公示",
+   1
+  ],
+  [
+   "斧头",
+   1
+  ],
+  [
+   "亚裔",
+   1
+  ],
+  [
+   "自立早报",
+   1
+  ],
+  [
+   "报禁",
+   1
+  ],
+  [
+   "情报搜集",
+   1
+  ],
+  [
+   "杀妻案",
+   1
+  ],
+  [
+   "胸口",
+   1
+  ],
+  [
+   "麒麟",
+   1
+  ],
+  [
+   "锯木厂",
+   1
+  ],
+  [
+   "砂金",
+   1
+  ],
+  [
+   "毁坏",
+   1
+  ],
+  [
+   "机遇",
+   1
+  ],
+  [
+   "公娼",
+   1
+  ],
+  [
+   "驻华大使",
+   1
+  ],
+  [
+   "尽毁",
+   1
+  ],
+  [
+   "收报",
+   1
+  ],
+  [
+   "榎",
+   1
+  ],
+  [
+   "赎罪券",
+   1
+  ],
+  [
+   "诬陷",
+   1
+  ],
+  [
+   "赐死",
+   1
+  ],
+  [
+   "甲寅",
+   1
+  ],
+  [
+   "傲慢",
+   1
+  ],
+  [
+   "偏见",
+   1
+  ],
+  [
+   "邪恶轴心",
+   1
+  ],
+  [
+   "叙事诗",
+   1
+  ],
+  [
+   "方舆",
+   1
+  ],
+  [
+   "修定",
+   1
+  ],
+  [
+   "镰状",
+   1
+  ],
+  [
+   "猎宫",
+   1
+  ],
+  [
+   "徇情",
+   1
+  ],
+  [
+   "出入境",
+   1
+  ],
+  [
+   "第三十八届",
+   1
+  ],
+  [
+   "货币贬值",
+   1
+  ],
+  [
+   "殴斗",
+   1
+  ],
+  [
+   "实受",
+   1
+  ],
+  [
+   "汉奸",
+   1
+  ],
+  [
+   "官僚资本家",
+   1
+  ],
+  [
+   "宪制",
+   1
+  ],
+  [
+   "急挫",
+   1
+  ],
+  [
+   "捡拾",
+   1
+  ],
+  [
+   "鸟蛤",
+   1
+  ],
+  [
+   "报时",
+   1
+  ],
+  [
+   "珣",
+   1
+  ],
+  [
+   "接壤",
+   1
+  ],
+  [
+   "沪深股市",
+   1
+  ],
+  [
+   "贿款",
+   1
+  ],
+  [
+   "足迹",
+   1
+  ],
+  [
+   "奇遇记",
+   1
+  ],
+  [
+   "燊",
+   1
+  ],
+  [
+   "斋月",
+   1
+  ],
+  [
+   "丛报",
+   1
+  ],
+  [
+   "媛",
+   1
+  ],
+  [
+   "鿔",
+   1
+  ],
+  [
+   "冻伤",
+   1
+  ],
+  [
+   "单舰",
+   1
+  ],
+  [
+   "铱",
+   1
+  ],
+  [
+   "遇上",
+   1
+  ],
+  [
+   "伤兵",
+   1
+  ],
+  [
+   "指示精神",
+   1
+  ],
+  [
+   "冒险主义",
+   1
+  ],
+  [
+   "勘定",
+   1
+  ],
+  [
+   "甘榜",
+   1
+  ],
+  [
+   "石棺",
+   1
+  ],
+  [
+   "并立",
+   1
+  ],
+  [
+   "吊销其",
+   1
+  ],
+  [
+   "勘探者",
+   1
+  ],
+  [
+   "阑尾",
+   1
+  ],
+  [
+   "霍乱弧菌",
+   1
+  ],
+  [
+   "追杀令",
+   1
+  ],
+  [
+   "铹",
+   1
+  ],
+  [
+   "镑",
+   1
+  ],
+  [
+   "补给舰",
+   1
+  ],
+  [
+   "分道扬镳",
+   1
+  ],
+  [
+   "募款",
+   1
+  ],
+  [
+   "敌舰",
+   1
+  ],
+  [
+   "评估",
+   1
+  ],
+  [
+   "责负",
+   1
+  ],
+  [
+   "外债",
+   1
+  ],
+  [
+   "农奴制度",
+   1
+  ],
+  [
+   "寺庙",
+   1
+  ],
+  [
+   "晚邮报",
+   1
+  ],
+  [
+   "下旬",
+   1
+  ],
+  [
+   "上轨",
+   1
+  ],
+  [
+   "缙绅",
+   1
+  ],
+  [
+   "傻",
+   1
+  ],
+  [
+   "和珅",
+   1
+  ],
+  [
+   "璮",
+   1
+  ],
+  [
+   "钚",
+   1
+  ],
+  [
+   "制铝",
+   1
+  ],
+  [
+   "辗转",
+   1
+  ],
+  [
+   "表彰大会",
+   1
+  ],
+  [
+   "偏弱",
+   1
+  ],
+  [
+   "咀",
+   1
+  ],
+  [
+   "尤为",
+   1
+  ],
+  [
+   "违规",
+   1
+  ],
+  [
+   "编辑器",
+   1
+  ],
+  [
+   "互派大使",
+   1
+  ],
+  [
+   "全面实施",
+   1
+  ],
+  [
+   "第三艘",
+   1
+  ],
+  [
+   "鱿鱼",
+   1
+  ],
+  [
+   "查缉",
+   1
+  ],
+  [
+   "迭",
+   1
+  ],
+  [
+   "惨遭杀害",
+   1
+  ],
+  [
+   "仁",
+   1
+  ],
+  [
+   "亚欧会议",
+   1
+  ],
+  [
+   "焊割",
+   1
+  ],
+  [
+   "实用型",
+   1
+  ],
+  [
+   "仍为",
+   1
+  ],
+  [
+   "芭",
+   1
+  ],
+  [
+   "纪淑",
+   1
+  ],
+  [
+   "淑",
+   1
+  ],
+  [
+   "评核",
+   1
+  ],
+  [
+   "农奴制",
+   1
+  ],
+  [
+   "菩提",
+   1
+  ],
+  [
+   "断背山",
+   1
+  ],
+  [
+   "陨石坑",
+   1
+  ],
+  [
+   "考察报告",
+   1
+  ],
+  [
+   "龢",
+   1
+  ],
+  [
+   "互联网服务",
+   1
+  ],
+  [
+   "毁证",
+   1
+  ],
+  [
+   "灭迹",
+   1
+  ],
+  [
+   "引咎辞职",
+   1
+  ],
+  [
+   "邪恶",
+   1
+  ],
+  [
+   "陨石雨",
+   1
+  ],
+  [
+   "奵",
+   1
+  ],
+  [
+   "氮",
+   1
+  ],
+  [
+   "兽医学",
+   1
+  ],
+  [
+   "要胁",
+   1
+  ],
+  [
+   "芭比娃娃",
+   1
+  ],
+  [
+   "示好",
+   1
+  ],
+  [
+   "矽谷",
+   1
+  ],
+  [
+   "实科",
+   1
+  ],
+  [
+   "缅共",
+   1
+  ],
+  [
+   "紧急召开",
+   1
+  ],
+  [
+   "特异功能",
+   1
+  ],
+  [
+   "特等功",
+   1
+  ],
+  [
+   "收贿",
+   1
+  ],
+  [
+   "堕海",
+   1
+  ],
+  [
+   "围堵",
+   1
+  ],
+  [
+   "依纳",
+   1
+  ],
+  [
+   "声响",
+   1
+  ],
+  [
+   "遇害身亡",
+   1
+  ],
+  [
+   "伪钞",
+   1
+  ],
+  [
+   "万磅",
+   1
+  ],
+  [
+   "卸货",
+   1
+  ],
+  [
+   "谎报",
+   1
+  ],
+  [
+   "喹啉",
+   1
+  ],
+  [
+   "酰氯",
+   1
+  ],
+  [
+   "装卸工",
+   1
+  ],
+  [
+   "窈窕淑女",
+   1
+  ],
+  [
+   "熔断",
+   1
+  ],
+  [
+   "蜀",
+   1
+  ],
+  [
+   "婚姻制度",
+   1
+  ],
+  [
+   "女佣",
+   1
+  ],
+  [
+   "鉲",
+   1
+  ],
+  [
+   "显示器",
+   1
+  ],
+  [
+   "一大笔钱",
+   1
+  ],
+  [
+   "零售",
+   1
+  ],
+  [
+   "示范作用",
+   1
+  ],
+  [
+   "猪只",
+   1
+  ],
+  [
+   "口蹄疫",
+   1
+  ],
+  [
+   "骡",
+   1
+  ],
+  [
+   "不计其数",
+   1
+  ],
+  [
+   "昺",
+   1
+  ],
+  [
+   "枪杀案",
+   1
+  ],
+  [
+   "实物税",
+   1
+  ],
+  [
+   "喆",
+   1
+  ],
+  [
+   "探勘",
+   1
+  ],
+  [
+   "牦",
+   1
+  ],
+  [
+   "旉",
+   1
+  ],
+  [
+   "修学",
+   1
+  ],
+  [
+   "教谕",
+   1
+  ],
+  [
+   "肮脏",
+   1
+  ],
+  [
+   "舰雪",
+   1
+  ],
+  [
+   "修宪案",
+   1
+  ],
+  [
+   "谍影",
+   1
+  ],
+  [
+   "撞断",
+   1
+  ],
+  [
+   "实践者",
+   1
+  ],
+  [
+   "蝾螈",
+   1
+  ],
+  [
+   "卧轨自杀",
+   1
+  ],
+  [
+   "伐木者",
+   1
+  ],
+  [
+   "小儿麻痹症",
+   1
+  ],
+  [
+   "娱乐场所",
+   1
+  ],
+  [
+   "吋",
+   1
+  ],
+  [
+   "乡境",
+   1
+  ],
+  [
+   "实习医生",
+   1
+  ],
+  [
+   "实验机",
+   1
+  ],
+  [
+   "功能障碍",
+   1
+  ],
+  [
+   "金钱",
+   1
+  ],
+  [
+   "精选辑",
+   1
+  ],
+  [
+   "新专辑",
+   1
+  ],
+  [
+   "熔毁",
+   1
+  ],
+  [
+   "潟湖",
+   1
+  ],
+  [
+   "剪辑",
+   1
+  ],
+  [
+   "行宪国民",
+   1
+  ],
+  [
+   "恫吓",
+   1
+  ],
+  [
+   "研讯",
+   1
+  ],
+  [
+   "鲀",
+   1
+  ],
+  [
+   "要挟",
+   1
+  ],
+  [
+   "赎金",
+   1
+  ],
+  [
+   "评为",
+   1
+  ],
+  [
+   "学潮",
+   1
+  ],
+  [
+   "铊",
+   1
+  ],
+  [
+   "售罄",
+   1
+  ],
+  [
+   "湘",
+   1
+  ],
+  [
+   "压毁",
+   1
+  ],
+  [
+   "气淑风",
+   1
+  ],
+  [
+   "届满",
+   1
+  ],
+  [
+   "续期",
+   1
+  ],
+  [
+   "续牌",
+   1
+  ],
+  [
+   "健全",
+   1
+  ],
+  [
+   "跳楼自杀",
+   1
+  ],
+  [
+   "鹞式",
+   1
+  ],
+  [
+   "萤光灯",
+   1
+  ],
+  [
+   "逃遁",
+   1
+  ],
+  [
+   "孢子",
+   1
+  ],
+  [
+   "尸迹",
+   1
+  ],
+  [
+   "详细资料",
+   1
+  ],
+  [
+   "轮轨",
+   1
+  ],
+  [
+   "忏悔者",
+   1
+  ],
+  [
+   "狄",
+   1
+  ],
+  [
+   "滥觞",
+   1
+  ],
+  [
+   "首趟",
+   1
+  ],
+  [
+   "利润",
+   1
+  ],
+  [
+   "撤除",
+   1
+  ],
+  [
+   "岬",
+   1
+  ],
+  [
+   "液氦",
+   1
+  ],
+  [
+   "汞",
+   1
+  ],
+  [
+   "断臂",
+   1
+  ],
+  [
+   "萝黛",
+   1
+  ],
+  [
+   "主力舰",
+   1
+  ],
+  [
+   "杀人案",
+   1
+  ],
+  [
+   "诞被",
+   1
+  ],
+  [
+   "叛将",
+   1
+  ],
+  [
+   "冢",
+   1
+  ],
+  [
+   "诞辰",
+   1
+  ],
+  [
+   "佣兵",
+   1
+  ],
+  [
+   "功德",
+   1
+  ],
+  [
+   "颁奖礼",
+   1
+  ],
+  [
+   "得奖者",
+   1
+  ],
+  [
+   "编撰",
+   1
+  ],
+  [
+   "贵妇",
+   1
+  ],
+  [
+   "并祝",
+   1
+  ],
+  [
+   "猪",
+   1
+  ],
+  [
+   "猡",
+   1
+  ],
+  [
+   "修补",
+   1
+  ],
+  [
+   "这幅",
+   1
+  ],
+  [
+   "翻查",
+   1
+  ],
+  [
+   "尅",
+   1
+  ],
+  [
+   "并称",
+   1
+  ],
+  [
+   "多幢",
+   1
+  ],
+  [
+   "氯气",
+   1
+  ],
+  [
+   "届间",
+   1
+  ],
+  [
+   "诞下",
+   1
+  ],
+  [
+   "砍头",
+   1
+  ],
+  [
+   "有功",
+   1
+  ],
+  [
+   "修炼",
+   1
+  ],
+  [
+   "核酸",
+   1
+  ],
+  [
+   "崇祯帝",
+   1
+  ],
+  [
+   "旗帜鲜明",
+   1
+  ],
+  [
+   "秃鹰",
+   1
+  ],
+  [
+   "报酬",
+   1
+  ],
+  [
+   "篡夺",
+   1
+  ],
+  [
+   "弥额",
+   1
+  ],
+  [
+   "刊宪",
+   1
+  ],
+  [
+   "兑",
+   1
+  ],
+  [
+   "单轨铁路",
+   1
+  ],
+  [
+   "虐",
+   1
+  ],
+  [
+   "欺骗",
+   1
+  ],
+  [
+   "馥",
+   1
+  ],
+  [
+   "翻倍",
+   1
+  ],
+  [
+   "申肯",
+   1
+  ],
+  [
+   "觊觎",
+   1
+  ],
+  [
+   "教唆",
+   1
+  ],
+  [
+   "敌对状态",
+   1
+  ],
+  [
+   "中枢神经",
+   1
+  ],
+  [
+   "水俣病",
+   1
+  ],
+  [
+   "碑铭",
+   1
+  ],
+  [
+   "濬",
+   1
+  ],
+  [
+   "皓出降",
+   1
+  ],
+  [
+   "通奸",
+   1
+  ],
+  [
+   "经纬度",
+   1
+  ],
+  [
+   "赤报队",
+   1
+  ],
+  [
+   "尻",
+   1
+  ],
+  [
+   "残杀",
+   1
+  ],
+  [
+   "姊妹",
+   1
+  ],
+  [
+   "纾",
+   1
+  ],
+  [
+   "并肩作战",
+   1
+  ],
+  [
+   "宪草",
+   1
+  ],
+  [
+   "翻新",
+   1
+  ],
+  [
+   "璎的",
+   1
+  ],
+  [
+   "关系紧张",
+   1
+  ],
+  [
+   "碳酸",
+   1
+  ],
+  [
+   "饮料",
+   1
+  ],
+  [
+   "瑯",
+   1
+  ],
+  [
+   "峤",
+   1
+  ],
+  [
+   "多艘",
+   1
+  ],
+  [
+   "另一说",
+   1
+  ],
+  [
+   "悲剧",
+   1
+  ],
+  [
+   "紧急处分",
+   1
+  ],
+  [
+   "四辆",
+   1
+  ],
+  [
+   "报仇",
+   1
+  ],
+  [
+   "砍倒",
+   1
+  ],
+  [
+   "康熙字典",
+   1
+  ],
+  [
+   "医伤",
+   1
+  ],
+  [
+   "特殊使命",
+   1
+  ],
+  [
+   "翻印",
+   1
+  ],
+  [
+   "刹蒂",
+   1
+  ],
+  [
+   "响",
+   1
+  ],
+  [
+   "寘",
+   1
+  ],
+  [
+   "显灵",
+   1
+  ],
+  [
+   "司署",
+   1
+  ],
+  [
+   "牛痘",
+   1
+  ],
+  [
+   "售价",
+   1
+  ],
+  [
+   "报信",
+   1
+  ],
+  [
+   "特区报",
+   1
+  ],
+  [
+   "濒于",
+   1
+  ],
+  [
+   "处境",
+   1
+  ],
+  [
+   "崎岖",
+   1
+  ],
+  [
+   "佛诞",
+   1
+  ],
+  [
+   "并非",
+   1
+  ],
+  [
+   "归咎于",
+   1
+  ],
+  [
+   "泅泳",
+   1
+  ],
+  [
+   "潽",
+   1
+  ],
+  [
+   "深远影响",
+   1
+  ],
+  [
+   "销售额",
+   1
+  ],
+  [
+   "魂断蓝桥",
+   1
+  ],
+  [
+   "桢",
+   1
+  ],
+  [
+   "防堵",
+   1
+  ],
+  [
+   "残疾儿童",
+   1
+  ],
+  [
+   "募集",
+   1
+  ],
+  [
+   "搬往",
+   1
+  ],
+  [
+   "搬运",
+   1
+  ],
+  [
+   "阿部",
+   1
+  ],
+  [
+   "绞杀",
+   1
+  ],
+  [
+   "字诀",
+   1
+  ],
+  [
+   "五旬",
+   1
+  ],
+  [
+   "锈蚀",
+   1
+  ],
+  [
+   "招募",
+   1
+  ],
+  [
+   "表彰",
+   1
+  ],
+  [
+   "汀在",
+   1
+  ],
+  [
+   "春光乍泄",
+   1
+  ],
+  [
+   "导演奖",
+   1
+  ],
+  [
+   "冒著",
+   1
+  ],
+  [
+   "香槟",
+   1
+  ],
+  [
+   "垦殖",
+   1
+  ],
+  [
+   "无套裤汉",
+   1
+  ],
+  [
+   "寰宇",
+   1
+  ],
+  [
+   "凶杀案",
+   1
+  ],
+  [
+   "胸",
+   1
+  ],
+  [
+   "滞港",
+   1
+  ],
+  [
+   "伪装",
+   1
+  ],
+  [
+   "峪",
+   1
+  ],
+  [
+   "下挫",
+   1
+  ],
+  [
+   "一辆车",
+   1
+  ],
+  [
+   "土壤",
+   1
+  ],
+  [
+   "淑明",
+   1
+  ],
+  [
+   "缔",
+   1
+  ],
+  [
+   "颁布实施",
+   1
+  ],
+  [
+   "匪谍",
+   1
+  ],
+  [
+   "密报",
+   1
+  ],
+  [
+   "反叛军",
+   1
+  ],
+  [
+   "侗",
+   1
+  ],
+  [
+   "婚姻自由",
+   1
+  ],
+  [
+   "修法",
+   1
+  ],
+  [
+   "评审",
+   1
+  ],
+  [
+   "评分",
+   1
+  ],
+  [
+   "娱乐圈",
+   1
+  ],
+  [
+   "昵称",
+   1
+  ],
+  [
+   "德舰",
+   1
+  ],
+  [
+   "全舰",
+   1
+  ],
+  [
+   "杀戮",
+   1
+  ],
+  [
+   "绝杀",
+   1
+  ],
+  [
+   "强奸案",
+   1
+  ],
+  [
+   "刑事诉讼法",
+   1
+  ],
+  [
+   "褓",
+   1
+  ],
+  [
+   "蒜薹",
+   1
+  ],
+  [
+   "滞销",
+   1
+  ],
+  [
+   "互换",
+   1
+  ],
+  [
+   "疃",
+   1
+  ],
+  [
+   "完善",
+   1
+  ],
+  [
+   "商榷",
+   1
+  ],
+  [
+   "廿七",
+   1
+  ],
+  [
+   "隶",
+   1
+  ],
+  [
+   "朝聘",
+   1
+  ],
+  [
+   "国际特赦",
+   1
+  ],
+  [
+   "安然无恙",
+   1
+  ],
+  [
+   "逻辑",
+   1
+  ],
+  [
+   "瑷",
+   1
+  ],
+  [
+   "珲",
+   1
+  ],
+  [
+   "一死九伤",
+   1
+  ],
+  [
+   "警署",
+   1
+  ],
+  [
+   "使司",
+   1
+  ],
+  [
+   "惟己于",
+   1
+  ],
+  [
+   "五卅惨案",
+   1
+  ],
+  [
+   "预示",
+   1
+  ],
+  [
+   "隅",
+   1
+  ],
+  [
+   "渐进式",
+   1
+  ],
+  [
+   "毁损",
+   1
+  ],
+  [
+   "帐号",
+   1
+  ],
+  [
+   "贿选",
+   1
+  ],
+  [
+   "搭",
+   1
+  ],
+  [
+   "篡唐",
+   1
+  ],
+  [
+   "评议委员",
+   1
+  ],
+  [
+   "院辖市",
+   1
+  ],
+  [
+   "髦",
+   1
+  ],
+  [
+   "射伤",
+   1
+  ],
+  [
+   "先驱报",
+   1
+  ],
+  [
+   "廿五",
+   1
+  ],
+  [
+   "己卯",
+   1
+  ],
+  [
+   "回响",
+   1
+  ],
+  [
+   "拓垦",
+   1
+  ],
+  [
+   "台塑",
+   1
+  ],
+  [
+   "铷",
+   1
+  ],
+  [
+   "凝态",
+   1
+  ],
+  [
+   "通报",
+   1
+  ],
+  [
+   "肺",
+   1
+  ],
+  [
+   "毗邻",
+   1
+  ],
+  [
+   "嗣",
+   1
+  ],
+  [
+   "宪",
+   1
+  ],
+  [
+   "晤谈",
+   1
+  ],
+  [
+   "受贿案",
+   1
+  ],
+  [
+   "避孕措施",
+   1
+  ],
+  [
+   "反犹",
+   1
+  ],
+  [
+   "并用",
+   1
+  ],
+  [
+   "卫戍司令",
+   1
+  ],
+  [
+   "低洼地区",
+   1
+  ],
+  [
+   "悍匪",
+   1
+  ],
+  [
+   "舖",
+   1
+  ],
+  [
+   "赌债",
+   1
+  ],
+  [
+   "展拓",
+   1
+  ],
+  [
+   "篡",
+   1
+  ],
+  [
+   "继志",
+   1
+  ],
+  [
+   "日偏食",
+   1
+  ],
+  [
+   "百年一遇",
+   1
+  ],
+  [
+   "醋酸",
+   1
+  ],
+  [
+   "提炼出",
+   1
+  ],
+  [
+   "紧张局势",
+   1
+  ],
+  [
+   "伤亡惨重",
+   1
+  ],
+  [
+   "并处",
+   1
+  ],
+  [
+   "亚型",
+   1
+  ],
+  [
+   "利曼",
+   1
+  ],
+  [
+   "伉俪",
+   1
+  ],
+  [
+   "产歼",
+   1
+  ],
+  [
+   "殉道者",
+   1
+  ],
+  [
+   "碾",
+   1
+  ],
+  [
+   "平壤市",
+   1
+  ],
+  [
+   "缉捕",
+   1
+  ],
+  [
+   "倡导者",
+   1
+  ],
+  [
+   "昰",
+   1
+  ],
+  [
+   "砂石",
+   1
+  ],
+  [
+   "微粒",
+   1
+  ],
+  [
+   "甄别",
+   1
+  ],
+  [
+   "墟",
+   1
+  ],
+  [
+   "惊悚",
+   1
+  ],
+  [
+   "烙",
+   1
+  ],
+  [
+   "镠",
+   1
+  ],
+  [
+   "俟",
+   1
+  ],
+  [
+   "轨天",
+   1
+  ],
+  [
+   "敛",
+   1
+  ],
+  [
+   "嘉靖",
+   1
+  ],
+  [
+   "修成",
+   1
+  ],
+  [
+   "表示歉意",
+   1
+  ],
+  [
+   "匿踪",
+   1
+  ],
+  [
+   "秧歌",
+   1
+  ],
+  [
+   "暂居",
+   1
+  ],
+  [
+   "夤夜",
+   1
+  ],
+  [
+   "卅",
+   1
+  ],
+  [
+   "肇始",
+   1
+  ],
+  [
+   "钦察",
+   1
+  ],
+  [
+   "问责制",
+   1
+  ],
+  [
+   "每盎司",
+   1
+  ],
+  [
+   "等毁",
+   1
+  ],
+  [
+   "贮至",
+   1
+  ],
+  [
+   "湳",
+   1
+  ],
+  [
+   "妮从",
+   1
+  ],
+  [
+   "讷",
+   1
+  ],
+  [
+   "掳",
+   1
+  ],
+  [
+   "匹",
+   1
+  ],
+  [
+   "员额",
+   1
+  ],
+  [
+   "野猪",
+   1
+  ],
+  [
+   "残片",
+   1
+  ],
+  [
+   "载勋",
+   1
+  ],
+  [
+   "遭遇战",
+   1
+  ],
+  [
+   "刚性",
+   1
+  ],
+  [
+   "暂缓实行",
+   1
+  ],
+  [
+   "并令",
+   1
+  ],
+  [
+   "缉拿",
+   1
+  ],
+  [
+   "书斋",
+   1
+  ],
+  [
+   "续议",
+   1
+  ],
+  [
+   "敛钱",
+   1
+  ],
+  [
+   "捐作",
+   1
+  ],
+  [
+   "战斧",
+   1
+  ],
+  [
+   "巡弋",
+   1
+  ],
+  [
+   "外交使节",
+   1
+  ],
+  [
+   "互不干涉",
+   1
+  ],
+  [
+   "平等互利",
+   1
+  ],
+  [
+   "遣戍",
+   1
+  ],
+  [
+   "傕",
+   1
+  ],
+  [
+   "紧密",
+   1
+  ],
+  [
+   "经互会",
+   1
+  ],
+  [
+   "侦缉",
+   1
+  ],
+  [
+   "侦辑",
+   1
+  ],
+  [
+   "索贿",
+   1
+  ],
+  [
+   "实验性",
+   1
+  ],
+  [
+   "报案",
+   1
+  ],
+  [
+   "康熙帝",
+   1
+  ],
+  [
+   "编修",
+   1
+  ],
+  [
+   "炆",
+   1
+  ],
+  [
+   "小康社会",
+   1
+  ],
+  [
+   "病残",
+   1
+  ],
+  [
+   "实施办法",
+   1
+  ],
+  [
+   "实案",
+   1
+  ],
+  [
+   "暂行规定",
+   1
+  ],
+  [
+   "炮舰",
+   1
+  ],
+  [
+   "砂岩",
+   1
+  ],
+  [
+   "铁券",
+   1
+  ],
+  [
+   "翡翠",
+   1
+  ],
+  [
+   "绿色生态",
+   1
+  ],
+  [
+   "拆放",
+   1
+  ],
+  [
+   "朝觐",
+   1
+  ],
+  [
+   "具体实施",
+   1
+  ],
+  [
+   "筏",
+   1
+  ],
+  [
+   "犀牛",
+   1
+  ],
+  [
+   "优渥",
+   1
+  ],
+  [
+   "聘用",
+   1
+  ],
+  [
+   "佣金",
+   1
+  ],
+  [
+   "八辆",
+   1
+  ],
+  [
+   "矗立",
+   1
+  ],
+  [
+   "彗核",
+   1
+  ],
+  [
+   "极其",
+   1
+  ],
+  [
+   "匈牙利队",
+   1
+  ],
+  [
+   "戡乱",
+   1
+  ],
+  [
+   "澂",
+   1
+  ],
+  [
+   "姊",
+   1
+  ],
+  [
+   "完工后",
+   1
+  ],
+  [
+   "槽",
+   1
+  ],
+  [
+   "登陆舰",
+   1
+  ],
+  [
+   "开拓者",
+   1
+  ],
+  [
+   "驿",
+   1
+  ],
+  [
+   "县境",
+   1
+  ],
+  [
+   "贬逐",
+   1
+  ],
+  [
+   "驿之祸",
+   1
+  ],
+  [
+   "鞍部",
+   1
+  ],
+  [
+   "趁其",
+   1
+  ],
+  [
+   "滇",
+   1
+  ],
+  [
+   "藏匿于",
+   1
+  ],
+  [
+   "慈悲",
+   1
+  ],
+  [
+   "咬伤",
+   1
+  ],
+  [
+   "狂犬病",
+   1
+  ],
+  [
+   "身负重伤",
+   1
+  ],
+  [
+   "狙击",
+   1
+  ],
+  [
+   "资讯网",
+   1
+  ],
+  [
+   "标示",
+   1
+  ],
+  [
+   "轩辕",
+   1
+  ],
+  [
+   "妮",
+   1
+  ],
+  [
+   "烧伤",
+   1
+  ],
+  [
+   "遇见",
+   1
+  ],
+  [
+   "烘焙",
+   1
+  ],
+  [
+   "生态",
+   1
+  ],
+  [
+   "周学熙",
+   1
+  ],
+  [
+   "姊妹会",
+   1
+  ],
+  [
+   "保禄",
+   1
+  ],
+  [
+   "避孕",
+   1
+  ],
+  [
+   "厄利",
+   1
+  ],
+  [
+   "冒犯",
+   1
+  ],
+  [
+   "困境",
+   1
+  ],
+  [
+   "四艘",
+   1
+  ],
+  [
+   "违令",
+   1
+  ],
+  [
+   "互无",
+   1
+  ],
+  [
+   "民柬",
+   1
+  ],
+  [
+   "秘密会晤",
+   1
+  ],
+  [
+   "铸钱",
+   1
+  ],
+  [
+   "残割",
+   1
+  ],
+  [
+   "评述",
+   1
+  ],
+  [
+   "环境污染",
+   1
+  ],
+  [
+   "祐",
+   1
+  ],
+  [
+   "党锢",
+   1
+  ],
+  [
+   "通缉犯",
+   1
+  ],
+  [
+   "纮",
+   1
+  ],
+  [
+   "脷",
+   1
+  ],
+  [
+   "踞",
+   1
+  ],
+  [
+   "热潮",
+   1
+  ],
+  [
+   "叡",
+   1
+  ],
+  [
+   "堦",
+   1
+  ],
+  [
+   "储妃",
+   1
+  ],
+  [
+   "驿之变",
+   1
+  ],
+  [
+   "刈",
+   1
+  ],
+  [
+   "睦邻友好",
+   1
+  ],
+  [
+   "续会",
+   1
+  ],
+  [
+   "畅游",
+   1
+  ],
+  [
+   "撤消",
+   1
+  ],
+  [
+   "轶事",
+   1
+  ],
+  [
+   "纳区",
+   1
+  ],
+  [
+   "殉",
+   1
+  ],
+  [
+   "六死一伤",
+   1
+  ],
+  [
+   "梦见",
+   1
+  ],
+  [
+   "宪报",
+   1
+  ],
+  [
+   "钋",
+   1
+  ],
+  [
+   "谬误",
+   1
+  ],
+  [
+   "获得好评",
+   1
+  ],
+  [
+   "撤资",
+   1
+  ],
+  [
+   "断层",
+   1
+  ],
+  [
+   "坧",
+   1
+  ],
+  [
+   "蝙蝠侠",
+   1
+  ],
+  [
+   "利萨",
+   1
+  ],
+  [
+   "濒危",
+   1
+  ],
+  [
+   "白鲟",
+   1
+  ],
+  [
+   "洪涝灾害",
+   1
+  ],
+  [
+   "未遇",
+   1
+  ],
+  [
+   "土裔",
+   1
+  ],
+  [
+   "颈椎",
+   1
+  ],
+  [
+   "截瘫",
+   1
+  ],
+  [
+   "勷",
+   1
+  ],
+  [
+   "纳布",
+   1
+  ],
+  [
+   "罹难者",
+   1
+  ],
+  [
+   "柬",
+   1
+  ],
+  [
+   "堕",
+   1
+  ],
+  [
+   "五辆",
+   1
+  ],
+  [
+   "山麓",
+   1
+  ],
+  [
+   "湘鄂赣",
+   1
+  ],
+  [
+   "完胜",
+   1
+  ],
+  [
+   "甬台温",
+   1
+  ],
+  [
+   "蜡笔小新",
+   1
+  ],
+  [
+   "叙",
+   1
+  ],
+  [
+   "拓荒",
+   1
+  ],
+  [
+   "带薪休假",
+   1
+  ],
+  [
+   "殉难",
+   1
+  ],
+  [
+   "第二十五届",
+   1
+  ],
+  [
+   "孕育",
+   1
+  ],
+  [
+   "薏丝",
+   1
+  ],
+  [
+   "报界",
+   1
+  ],
+  [
+   "伤害",
+   1
+  ],
+  [
+   "被删",
+   1
+  ],
+  [
+   "弊案",
+   1
+  ],
+  [
+   "莎车",
+   1
+  ],
+  [
+   "恤金",
+   1
+  ],
+  [
+   "飙到",
+   1
+  ],
+  [
+   "苑",
+   1
+  ],
+  [
+   "拆解",
+   1
+  ],
+  [
+   "轨迹",
+   1
+  ],
+  [
+   "疫",
+   1
+  ],
+  [
+   "婚姻登记",
+   1
+  ],
+  [
+   "奖牌",
+   1
+  ],
+  [
+   "颁给",
+   1
+  ],
+  [
+   "枷刑",
+   1
+  ],
+  [
+   "丙烯",
+   1
+  ],
+  [
+   "狂潮",
+   1
+  ],
+  [
+   "氧化汞",
+   1
+  ],
+  [
+   "辅政",
+   1
+  ],
+  [
+   "遣使",
+   1
+  ],
+  [
+   "无恙",
+   1
+  ],
+  [
+   "紧急状态法",
+   1
+  ],
+  [
+   "致函",
+   1
+  ],
+  [
+   "打猎",
+   1
+  ],
+  [
+   "努力",
+   1
+  ],
+  [
+   "舰身",
+   1
+  ],
+  [
+   "镇守使",
+   1
+  ],
+  [
+   "后裔",
+   1
+  ],
+  [
+   "响起",
+   1
+  ],
+  [
+   "残忍",
+   1
+  ],
+  [
+   "楠格",
+   1
+  ],
+  [
+   "资料馆",
+   1
+  ],
+  [
+   "勋爵",
+   1
+  ],
+  [
+   "路轨",
+   1
+  ],
+  [
+   "推断出",
+   1
+  ],
+  [
+   "殉道",
+   1
+  ],
+  [
+   "槟岛",
+   1
+  ],
+  [
+   "生态危机",
+   1
+  ],
+  [
+   "出殡",
+   1
+  ],
+  [
+   "畑",
+   1
+  ],
+  [
+   "侦报",
+   1
+  ],
+  [
+   "笕",
+   1
+  ],
+  [
+   "嬉皮",
+   1
+  ],
+  [
+   "公使馆",
+   1
+  ],
+  [
+   "单届",
+   1
+  ],
+  [
+   "幅度",
+   1
+  ],
+  [
+   "科学奖",
+   1
+  ],
+  [
+   "实习生",
+   1
+  ],
+  [
+   "翻一番",
+   1
+  ],
+  [
+   "可畏",
+   1
+  ],
+  [
+   "迩",
+   1
+  ],
+  [
+   "淫秽",
+   1
+  ],
+  [
+   "嬉皮士",
+   1
+  ],
+  [
+   "氦",
+   1
+  ],
+  [
+   "悬红缉凶",
+   1
+  ],
+  [
+   "乃讪",
+   1
+  ],
+  [
+   "情报机构",
+   1
+  ],
+  [
+   "金圆券",
+   1
+  ],
+  [
+   "槌",
+   1
+  ],
+  [
+   "炼奶",
+   1
+  ],
+  [
+   "姊弟",
+   1
+  ],
+  [
+   "冶金学家",
+   1
+  ],
+  [
+   "竹堑",
+   1
+  ],
+  [
+   "蛤御门",
+   1
+  ],
+  [
+   "沽",
+   1
+  ],
+  [
+   "好评",
+   1
+  ],
+  [
+   "魅力",
+   1
+  ],
+  [
+   "第二十三届",
+   1
+  ],
+  [
+   "砍除",
+   1
+  ],
+  [
+   "继上",
+   1
+  ],
+  [
+   "翻滚",
+   1
+  ],
+  [
+   "亚运",
+   1
+  ],
+  [
+   "完用",
+   1
+  ],
+  [
+   "右肩",
+   1
+  ],
+  [
+   "庇护所",
+   1
+  ],
+  [
+   "向毗",
+   1
+  ],
+  [
+   "戈任",
+   1
+  ],
+  [
+   "大潮",
+   1
+  ],
+  [
+   "断水",
+   1
+  ],
+  [
+   "预报",
+   1
+  ],
+  [
+   "问责",
+   1
+  ],
+  [
+   "骨骸",
+   1
+  ],
+  [
+   "倒戈",
+   1
+  ],
+  [
+   "庶民",
+   1
+  ],
+  [
+   "揖",
+   1
+  ],
+  [
+   "贵",
+   1
+  ],
+  [
+   "麻痺",
+   1
+  ],
+  [
+   "史匹",
+   1
+  ],
+  [
+   "枭龙",
+   1
+  ],
+  [
+   "整修",
+   1
+  ],
+  [
+   "负责制",
+   1
+  ],
+  [
+   "冒出",
+   1
+  ],
+  [
+   "康熙皇帝",
+   1
+  ],
+  [
+   "另有",
+   1
+  ],
+  [
+   "跆拳道",
+   1
+  ],
+  [
+   "荔枝",
+   1
+  ],
+  [
+   "捐",
+   1
+  ],
+  [
+   "佳绩",
+   1
+  ],
+  [
+   "反健",
+   1
+  ],
+  [
+   "冲毁",
+   1
+  ],
+  [
+   "珍贵",
+   1
+  ],
+  [
+   "涡轮",
+   1
+  ],
+  [
+   "液态",
+   1
+  ],
+  [
+   "萌芽",
+   1
+  ],
+  [
+   "签署国",
+   1
+  ],
+  [
+   "北境",
+   1
+  ],
+  [
+   "东境",
+   1
+  ],
+  [
+   "鿏",
+   1
+  ],
+  [
+   "欧裔",
+   1
+  ],
+  [
+   "五艘",
+   1
+  ],
+  [
+   "使团",
+   1
+  ],
+  [
+   "特遣舰队",
+   1
+  ],
+  [
+   "禄",
+   1
+  ],
+  [
+   "畸胎",
+   1
+  ],
+  [
+   "第五套",
+   1
+  ],
+  [
+   "斑疹伤寒",
+   1
+  ],
+  [
+   "绝嗣",
+   1
+  ],
+  [
+   "讽刺画",
+   1
+  ],
+  [
+   "责令",
+   1
+  ],
+  [
+   "责任人",
+   1
+  ],
+  [
+   "并行",
+   1
+  ],
+  [
+   "遇事",
+   1
+  ],
+  [
+   "遏止",
+   1
+  ],
+  [
+   "日冕",
+   1
+  ],
+  [
+   "中纬度",
+   1
+  ],
+  [
+   "使用率",
+   1
+  ],
+  [
+   "阉鸡",
+   1
+  ],
+  [
+   "迦",
+   1
+  ],
+  [
+   "颕",
+   1
+  ],
+  [
+   "狙击手",
+   1
+  ],
+  [
+   "风靡一时",
+   1
+  ],
+  [
+   "商报",
+   1
+  ],
+  [
+   "骷髅",
+   1
+  ],
+  [
+   "引滦入津",
+   1
+  ],
+  [
+   "一死八伤",
+   1
+  ],
+  [
+   "小猪",
+   1
+  ],
+  [
+   "同僚",
+   1
+  ],
+  [
+   "五届",
+   1
+  ],
+  [
+   "红烛",
+   1
+  ],
+  [
+   "残存",
+   1
+  ],
+  [
+   "崁",
+   1
+  ],
+  [
+   "钦",
+   1
+  ],
+  [
+   "受冕",
+   1
+  ],
+  [
+   "缔造者",
+   1
+  ],
+  [
+   "其新",
+   1
+  ],
+  [
+   "逻禄",
+   1
+  ],
+  [
+   "可拆卸",
+   1
+  ],
+  [
+   "锗",
+   1
+  ],
+  [
+   "烯",
+   1
+  ],
+  [
+   "材料",
+   1
+  ],
+  [
+   "奠基人",
+   1
+  ],
+  [
+   "霍乱",
+   1
+  ],
+  [
+   "偏袒",
+   1
+  ],
+  [
+   "窒息而死",
+   1
+  ],
+  [
+   "开健",
+   1
+  ],
+  [
+   "褫夺公权",
+   1
+  ],
+  [
+   "肾结石",
+   1
+  ],
+  [
+   "刚好",
+   1
+  ],
+  [
+   "武侠小说",
+   1
+  ],
+  [
+   "持续性",
+   1
+  ],
+  [
+   "开国元勋",
+   1
+  ],
+  [
+   "以寡击众",
+   1
+  ],
+  [
+   "菈",
+   1
+  ],
+  [
+   "手纳",
+   1
+  ],
+  [
+   "传讯",
+   1
+  ],
+  [
+   "截断",
+   1
+  ],
+  [
+   "事实上",
+   1
+  ],
+  [
+   "俄界",
+   1
+  ],
+  [
+   "迭部县",
+   1
+  ],
+  [
+   "偏左",
+   1
+  ],
+  [
+   "魔兽",
+   1
+  ],
+  [
+   "互动",
+   1
+  ],
+  [
+   "壹本",
+   1
+  ],
+  [
+   "盗拆",
+   1
+  ],
+  [
+   "煽起",
+   1
+  ],
+  [
+   "直隶省",
+   1
+  ],
+  [
+   "并以",
+   1
+  ],
+  [
+   "窝阔台",
+   1
+  ],
+  [
+   "披肩",
+   1
+  ],
+  [
+   "藩主",
+   1
+  ],
+  [
+   "仪仗队",
+   1
+  ],
+  [
+   "砍致",
+   1
+  ],
+  [
+   "诟病",
+   1
+  ],
+  [
+   "第二十七届",
+   1
+  ],
+  [
+   "第一幅",
+   1
+  ],
+  [
+   "三届",
+   1
+  ],
+  [
+   "卐",
+   1
+  ],
+  [
+   "健康状况",
+   1
+  ],
+  [
+   "暂缓",
+   1
+  ],
+  [
+   "满目疮痍",
+   1
+  ],
+  [
+   "实验鼠",
+   1
+  ],
+  [
+   "总额",
+   1
+  ],
+  [
+   "棕榈",
+   1
+  ],
+  [
+   "紧跟",
+   1
+  ],
+  [
+   "函数",
+   1
+  ],
+  [
+   "解析数论",
+   1
+  ],
+  [
+   "涉疫",
+   1
+  ],
+  [
+   "侧翻",
+   1
+  ],
+  [
+   "环保署",
+   1
+  ],
+  [
+   "氮氧化物",
+   1
+  ],
+  [
+   "不懈努力",
+   1
+  ],
+  [
+   "炭疽病",
+   1
+  ],
+  [
+   "功臣",
+   1
+  ],
+  [
+   "授勋",
+   1
+  ],
+  [
+   "透纳",
+   1
+  ],
+  [
+   "捐款",
+   1
+  ],
+  [
+   "追悼",
+   1
+  ],
+  [
+   "悼词",
+   1
+  ],
+  [
+   "丙午",
+   1
+  ],
+  [
+   "忠实",
+   1
+  ],
+  [
+   "追缉",
+   1
+  ],
+  [
+   "提庇",
+   1
+  ],
+  [
+   "掳为",
+   1
+  ],
+  [
+   "结果显示",
+   1
+  ],
+  [
+   "延宕",
+   1
+  ],
+  [
+   "坎城影展",
+   1
+  ],
+  [
+   "战略部署",
+   1
+  ],
+  [
+   "整并",
+   1
+  ],
+  [
+   "伤口",
+   1
+  ],
+  [
+   "摒弃",
+   1
+  ],
+  [
+   "互访",
+   1
+  ],
+  [
+   "贱民",
+   1
+  ],
+  [
+   "伫立",
+   1
+  ],
+  [
+   "君臣",
+   1
+  ],
+  [
+   "追杀",
+   1
+  ],
+  [
+   "圣诞老人",
+   1
+  ],
+  [
+   "废料",
+   1
+  ],
+  [
+   "遇险",
+   1
+  ],
+  [
+   "甲戌",
+   1
+  ],
+  [
+   "诛何",
+   1
+  ],
+  [
+   "坝体",
+   1
+  ],
+  [
+   "溃坝",
+   1
+  ],
+  [
+   "火狐",
+   1
+  ],
+  [
+   "玫瑰花",
+   1
+  ],
+  [
+   "精神分析学家",
+   1
+  ],
+  [
+   "罹患",
+   1
+  ],
+  [
+   "下颚",
+   1
+  ],
+  [
+   "花札",
+   1
+  ],
+  [
+   "冒险",
+   1
+  ],
+  [
+   "通讯站",
+   1
+  ],
+  [
+   "响尾蛇",
+   1
+  ],
+  [
+   "汗率",
+   1
+  ],
+  [
+   "鞑靼",
+   1
+  ],
+  [
+   "掳掠",
+   1
+  ],
+  [
+   "庚戌",
+   1
+  ],
+  [
+   "渐趋",
+   1
+  ],
+  [
+   "佳艺",
+   1
+  ],
+  [
+   "倒坍",
+   1
+  ],
+  [
+   "佗",
+   1
+  ],
+  [
+   "怀孕",
+   1
+  ],
+  [
+   "乙肝",
+   1
+  ],
+  [
+   "善幸",
+   1
+  ],
+  [
+   "帽子",
+   1
+  ],
+  [
+   "辖域",
+   1
+  ],
+  [
+   "梦断",
+   1
+  ],
+  [
+   "统辖",
+   1
+  ],
+  [
+   "鄂",
+   1
+  ],
+  [
+   "鲇鱼",
+   1
+  ],
+  [
+   "亚视",
+   1
+  ],
+  [
+   "僧团",
+   1
+  ],
+  [
+   "鉨",
+   1
+  ],
+  [
+   "杀菌作用",
+   1
+  ],
+  [
+   "提炼",
+   1
+  ],
+  [
+   "野兽",
+   1
+  ],
+  [
+   "实弹",
+   1
+  ],
+  [
+   "核废料",
+   1
+  ],
+  [
+   "出乎意料",
+   1
+  ],
+  [
+   "菱",
+   1
+  ],
+  [
+   "核燃料",
+   1
+  ],
+  [
+   "核辐射",
+   1
+  ],
+  [
+   "大榄",
+   1
+  ],
+  [
+   "十多辆",
+   1
+  ],
+  [
+   "皖",
+   1
+  ],
+  [
+   "玛琅",
+   1
+  ],
+  [
+   "其步",
+   1
+  ],
+  [
+   "危殆",
+   1
+  ],
+  [
+   "一艘船",
+   1
+  ],
+  [
+   "支柱",
+   1
+  ],
+  [
+   "门萨",
+   1
+  ],
+  [
+   "鲈鱼",
+   1
+  ],
+  [
+   "超现实主义",
+   1
+  ],
+  [
+   "戊戌政变",
+   1
+  ],
+  [
+   "较完整",
+   1
+  ],
+  [
+   "圩田",
+   1
+  ],
+  [
+   "但其",
+   1
+  ],
+  [
+   "两幢",
+   1
+  ],
+  [
+   "医学奖",
+   1
+  ],
+  [
+   "创伤",
+   1
+  ],
+  [
+   "糯康",
+   1
+  ],
+  [
+   "实况转播",
+   1
+  ],
+  [
+   "不断扩大",
+   1
+  ],
+  [
+   "筈",
+   1
+  ],
+  [
+   "悲惨世界",
+   1
+  ],
+  [
+   "餽赠",
+   1
+  ],
+  [
+   "婉谢",
+   1
+  ],
+  [
+   "继于",
+   1
+  ],
+  [
+   "颁",
+   1
+  ],
+  [
+   "保粹",
+   1
+  ],
+  [
+   "抒忠",
+   1
+  ],
+  [
+   "匾额",
+   1
+  ],
+  [
+   "炼油",
+   1
+  ],
+  [
+   "修配",
+   1
+  ],
+  [
+   "全套",
+   1
+  ],
+  [
+   "舰信",
+   1
+  ],
+  [
+   "玛",
+   1
+  ],
+  [
+   "授奖",
+   1
+  ],
+  [
+   "魅影",
+   1
+  ],
+  [
+   "徭役",
+   1
+  ],
+  [
+   "炸伤",
+   1
+  ],
+  [
+   "拷问",
+   1
+  ],
+  [
+   "泓",
+   1
+  ],
+  [
+   "施政报告",
+   1
+  ],
+  [
+   "撰",
+   1
+  ],
+  [
+   "十一艘",
+   1
+  ],
+  [
+   "完赛",
+   1
+  ],
+  [
+   "评定",
+   1
+  ],
+  [
+   "脇",
+   1
+  ],
+  [
+   "铁肺",
+   1
+  ],
+  [
+   "麻痺症",
+   1
+  ],
+  [
+   "常态",
+   1
+  ],
+  [
+   "蝎虎",
+   1
+  ],
+  [
+   "计算机芯片",
+   1
+  ],
+  [
+   "殷墟",
+   1
+  ],
+  [
+   "芯",
+   1
+  ],
+  [
+   "嫙",
+   1
+  ],
+  [
+   "盐埕区",
+   1
+  ],
+  [
+   "兵马俑",
+   1
+  ],
+  [
+   "大丸",
+   1
+  ],
+  [
+   "粤军",
+   1
+  ],
+  [
+   "出其不意",
+   1
+  ],
+  [
+   "聘请",
+   1
+  ],
+  [
+   "迳自",
+   1
+  ],
+  [
+   "土耳其人",
+   1
+  ],
+  [
+   "顺利完成",
+   1
+  ],
+  [
+   "颁奖仪式",
+   1
+  ],
+  [
+   "手套",
+   1
+  ],
+  [
+   "革命实践",
+   1
+  ],
+  [
+   "山额",
+   1
+  ],
+  [
+   "帐目",
+   1
+  ],
+  [
+   "存贮",
+   1
+  ],
+  [
+   "自刃而死",
+   1
+  ],
+  [
+   "缢",
+   1
+  ],
+  [
+   "诱杀",
+   1
+  ],
+  [
+   "咲",
+   1
+  ],
+  [
+   "刚丈",
+   1
+  ],
+  [
+   "资料库",
+   1
+  ],
+  [
+   "谟",
+   1
+  ],
+  [
+   "缔造",
+   1
+  ],
+  [
+   "航舰",
+   1
+  ],
+  [
+   "八幡",
+   1
+  ],
+  [
+   "偏僻",
+   1
+  ],
+  [
+   "毁尸灭迹",
+   1
+  ],
+  [
+   "签署日",
+   1
+  ],
+  [
+   "诈骗",
+   1
+  ],
+  [
+   "警示",
+   1
+  ],
+  [
+   "肯雅",
+   1
+  ],
+  [
+   "郡主",
+   1
+  ],
+  [
+   "并为",
+   1
+  ],
+  [
+   "煅烧",
+   1
+  ],
+  [
+   "恪尽",
+   1
+  ],
+  [
+   "责",
+   1
+  ],
+  [
+   "君权",
+   1
+  ],
+  [
+   "第二十届",
+   1
+  ],
+  [
+   "民粹主义",
+   1
+  ],
+  [
+   "挤兑",
+   1
+  ],
+  [
+   "唾液腺",
+   1
+  ],
+  [
+   "禁售",
+   1
+  ],
+  [
+   "耆",
+   1
+  ],
+  [
+   "萼尼",
+   1
+  ],
+  [
+   "秃",
+   1
+  ],
+  [
+   "垄口",
+   1
+  ],
+  [
+   "命途多舛",
+   1
+  ],
+  [
+   "阿金",
+   1
+  ],
+  [
+   "闻报",
+   1
+  ],
+  [
+   "余艘",
+   1
+  ],
+  [
+   "入禀",
+   1
+  ],
+  [
+   "良实",
+   1
+  ],
+  [
+   "诽谤案",
+   1
+  ],
+  [
+   "族裔",
+   1
+  ],
+  [
+   "蛤",
+   1
+  ],
+  [
+   "并定",
+   1
+  ],
+  [
+   "天堑",
+   1
+  ],
+  [
+   "悲怆",
+   1
+  ],
+  [
+   "基韦",
+   1
+  ],
+  [
+   "欠佳",
+   1
+  ],
+  [
+   "互联",
+   1
+  ],
+  [
+   "舫",
+   1
+  ],
+  [
+   "姪",
+   1
+  ],
+  [
+   "煚",
+   1
+  ],
+  [
+   "突遇",
+   1
+  ],
+  [
+   "嘉",
+   1
+  ],
+  [
+   "保镖",
+   1
+  ],
+  [
+   "检察署",
+   1
+  ],
+  [
+   "睽违",
+   1
+  ],
+  [
+   "竹篙",
+   1
+  ],
+  [
+   "油料",
+   1
+  ],
+  [
+   "泥厥",
+   1
+  ],
+  [
+   "使臣",
+   1
+  ],
+  [
+   "大诰",
+   1
+  ],
+  [
+   "续任",
+   1
+  ],
+  [
+   "少年报",
+   1
+  ],
+  [
+   "艏",
+   1
+  ],
+  [
+   "署名",
+   1
+  ],
+  [
+   "寡聚",
+   1
+  ],
+  [
+   "核苷酸",
+   1
+  ],
+  [
+   "斩首示众",
+   1
+  ],
+  [
+   "趋势",
+   1
+  ],
+  [
+   "两匹",
+   1
+  ],
+  [
+   "铁轨",
+   1
+  ],
+  [
+   "崒",
+   1
+  ],
+  [
+   "评奖",
+   1
+  ],
+  [
+   "风洞",
+   1
+  ],
+  [
+   "使命",
+   1
+  ],
+  [
+   "锰",
+   1
+  ],
+  [
+   "溶解",
+   1
+  ],
+  [
+   "恶名昭彰",
+   1
+  ],
+  [
+   "讨债人",
+   1
+  ],
+  [
+   "舰只",
+   1
+  ],
+  [
+   "打断",
+   1
+  ],
+  [
+   "邪教",
+   1
+  ],
+  [
+   "璎",
+   1
+  ],
+  [
+   "粲",
+   1
+  ],
+  [
+   "评",
+   1
+  ],
+  [
+   "捐献",
+   1
+  ],
+  [
+   "湘桂",
+   1
+  ],
+  [
+   "自刎",
+   1
+  ],
+  [
+   "继自",
+   1
+  ],
+  [
+   "实弹射击",
+   1
+  ],
+  [
+   "阿曲",
+   1
+  ],
+  [
+   "奖于",
+   1
+  ],
+  [
+   "颁奖",
+   1
+  ],
+  [
+   "壤土",
+   1
+  ],
+  [
+   "仗",
+   1
+  ],
+  [
+   "镰刀",
+   1
+  ],
+  [
+   "匕首",
+   1
+  ],
+  [
+   "野坂",
+   1
+  ],
+  [
+   "开垦",
+   1
+  ],
+  [
+   "十四届",
+   1
+  ],
+  [
+   "相遇",
+   1
+  ],
+  [
+   "朔方",
+   1
+  ],
+  [
+   "黜杀",
+   1
+  ],
+  [
+   "俄属",
+   1
+  ],
+  [
+   "十六届",
+   1
+  ],
+  [
+   "催泪瓦斯",
+   1
+  ],
+  [
+   "窖藏",
+   1
+  ],
+  [
+   "帷幕",
+   1
+  ],
+  [
+   "反氢",
+   1
+  ],
+  [
+   "乙巳",
+   1
+  ],
+  [
+   "搭建",
+   1
+  ],
+  [
+   "首幢",
+   1
+  ],
+  [
+   "回佣",
+   1
+  ],
+  [
+   "使节",
+   1
+  ],
+  [
+   "原讼",
+   1
+  ],
+  [
+   "东捻军",
+   1
+  ],
+  [
+   "雪橇",
+   1
+  ],
+  [
+   "赫里",
+   1
+  ],
+  [
+   "凶残",
+   1
+  ],
+  [
+   "反垄断",
+   1
+  ],
+  [
+   "枢",
+   1
+  ],
+  [
+   "队报",
+   1
+  ],
+  [
+   "销售量",
+   1
+  ],
+  [
+   "了庇",
+   1
+  ],
+  [
+   "耶诞",
+   1
+  ],
+  [
+   "云柱",
+   1
+  ],
+  [
+   "橙色",
+   1
+  ],
+  [
+   "针灸",
+   1
+  ],
+  [
+   "事实",
+   1
+  ],
+  [
+   "市辖区",
+   1
+  ],
+  [
+   "大舜",
+   1
+  ],
+  [
+   "阿法",
+   1
+  ],
+  [
+   "赎款",
+   1
+  ],
+  [
+   "朔",
+   1
+  ],
+  [
+   "脱氧核糖核酸",
+   1
+  ],
+  [
+   "切腹自杀",
+   1
+  ],
+  [
+   "洞察",
+   1
+  ],
+  [
+   "潮汐发电",
+   1
+  ],
+  [
+   "卫报",
+   1
+  ],
+  [
+   "殴辱",
+   1
+  ],
+  [
+   "后藤",
+   1
+  ],
+  [
+   "鞍袋",
+   1
+  ],
+  [
+   "有轨",
+   1
+  ],
+  [
+   "矶",
+   1
+  ],
+  [
+   "髑",
+   1
+  ],
+  [
+   "钠",
+   1
+  ],
+  [
+   "时讯",
+   1
+  ],
+  [
+   "领奖",
+   1
+  ],
+  [
+   "显要人物",
+   1
+  ],
+  [
+   "讷依",
+   1
+  ],
+  [
+   "搬走",
+   1
+  ],
+  [
+   "狐狸",
+   1
+  ],
+  [
+   "椰林",
+   1
+  ],
+  [
+   "博讷",
+   1
+  ],
+  [
+   "历史使命",
+   1
+  ],
+  [
+   "奴役",
+   1
+  ],
+  [
+   "雍正年间",
+   1
+  ],
+  [
+   "使亲",
+   1
+  ],
+  [
+   "颤栗",
+   1
+  ],
+  [
+   "完婚",
+   1
+  ],
+  [
+   "刑事责任",
+   1
+  ],
+  [
+   "腊玛古猿",
+   1
+  ],
+  [
+   "报名",
+   1
+  ],
+  [
+   "氢气球",
+   1
+  ],
+  [
+   "谳",
+   1
+  ],
+  [
+   "芥子毒气",
+   1
+  ],
+  [
+   "实业",
+   1
+  ],
+  [
+   "京沪",
+   1
+  ],
+  [
+   "楠",
+   1
+  ],
+  [
+   "肾",
+   1
+  ],
+  [
+   "氰化物",
+   1
+  ],
+  [
+   "霓虹灯",
+   1
+  ],
+  [
+   "嵩",
+   1
+  ],
+  [
+   "浏醴",
+   1
+  ],
+  [
+   "娑提",
+   1
+  ],
+  [
+   "净",
+   1
+  ],
+  [
+   "沈",
+   1
+  ],
+  [
+   "续约",
+   1
+  ],
+  [
+   "庚寅",
+   1
+  ],
+  [
+   "萝莉塔",
+   1
+  ],
+  [
+   "苦味酸",
+   1
+  ],
+  [
+   "胸像",
+   1
+  ],
+  [
+   "预备立宪",
+   1
+  ],
+  [
+   "杀伤性",
+   1
+  ],
+  [
+   "默哀",
+   1
+  ],
+  [
+   "实数",
+   1
+  ],
+  [
+   "实用性",
+   1
+  ],
+  [
+   "名存实亡",
+   1
+  ],
+  [
+   "陂",
+   1
+  ],
+  [
+   "聘雇",
+   1
+  ],
+  [
+   "演示",
+   1
+  ],
+  [
+   "耀眼",
+   1
+  ],
+  [
+   "人体实验",
+   1
+  ],
+  [
+   "攘外必先安内",
+   1
+  ],
+  [
+   "淘汰",
+   1
+  ],
+  [
+   "杀入",
+   1
+  ],
+  [
+   "搭机",
+   1
+  ],
+  [
+   "叻",
+   1
+  ],
+  [
+   "匈奴",
+   1
+  ],
+  [
+   "态度",
+   1
+  ],
+  [
+   "暂定",
+   1
+  ],
+  [
+   "勋伯格",
+   1
+  ],
+  [
+   "功能性",
+   1
+  ],
+  [
+   "改恶从善",
+   1
+  ],
+  [
+   "违反者",
+   1
+  ],
+  [
+   "旷日持久",
+   1
+  ],
+  [
+   "互动式",
+   1
+  ],
+  [
+   "第四艘",
+   1
+  ],
+  [
+   "榛",
+   1
+  ],
+  [
+   "纳妾",
+   1
+  ],
+  [
+   "电磁辐射",
+   1
+  ],
+  [
+   "才刚",
+   1
+  ],
+  [
+   "梦幻",
+   1
+  ],
+  [
+   "报告会",
+   1
+  ],
+  [
+   "授奖仪式",
+   1
+  ],
+  [
+   "大帽",
+   1
+  ],
+  [
+   "癫痫",
+   1
+  ],
+  [
+   "离境",
+   1
+  ],
+  [
+   "奖章",
+   1
+  ],
+  [
+   "璘",
+   1
+  ],
+  [
+   "亚向",
+   1
+  ],
+  [
+   "损伤",
+   1
+  ],
+  [
+   "树仁",
+   1
+  ],
+  [
+   "伪证",
+   1
+  ],
+  [
+   "报章",
+   1
+  ],
+  [
+   "奴州",
+   1
+  ],
+  [
+   "一幢",
+   1
+  ],
+  [
+   "壬辰",
+   1
+  ],
+  [
+   "讹传",
+   1
+  ],
+  [
+   "猝逝",
+   1
+  ],
+  [
+   "基萨",
+   1
+  ],
+  [
+   "奄美",
+   1
+  ],
+  [
+   "另一端",
+   1
+  ],
+  [
+   "脖子",
+   1
+  ],
+  [
+   "脑损伤",
+   1
+  ],
+  [
+   "躺著",
+   1
+  ],
+  [
+   "老弱病残",
+   1
+  ],
+  [
+   "奕劻",
+   1
+  ],
+  [
+   "禨",
+   1
+  ],
+  [
+   "善后事宜",
+   1
+  ],
+  [
+   "向奕",
+   1
+  ],
+  [
+   "劻",
+   1
+  ],
+  [
+   "遭渎",
+   1
+  ],
+  [
+   "酌定",
+   1
+  ],
+  [
+   "谕旨",
+   1
+  ],
+  [
+   "总理衙门",
+   1
+  ],
+  [
+   "手迹",
+   1
+  ],
+  [
+   "断定",
+   1
+  ],
+  [
+   "屯垦",
+   1
+  ],
+  [
+   "违者",
+   1
+  ],
+  [
+   "君主政体",
+   1
+  ],
+  [
+   "浓缩铀",
+   1
+  ],
+  [
+   "硫化氢",
+   1
+  ],
+  [
+   "孪生兄弟",
+   1
+  ],
+  [
+   "板垣",
+   1
+  ],
+  [
+   "事态",
+   1
+  ],
+  [
+   "无间断",
+   1
+  ],
+  [
+   "逃之夭夭",
+   1
+  ],
+  [
+   "圣诞岛",
+   1
+  ],
+  [
+   "套",
+   1
+  ],
+  [
+   "按钮",
+   1
+  ],
+  [
+   "实作",
+   1
+  ],
+  [
+   "上报",
+   1
+  ],
+  [
+   "伪",
+   1
+  ],
+  [
+   "画眉",
+   1
+  ],
+  [
+   "镭",
+   1
+  ],
+  [
+   "继承权",
+   1
+  ],
+  [
+   "悳",
+   1
+  ],
+  [
+   "洙",
+   1
+  ],
+  [
+   "售卖",
+   1
+  ],
+  [
+   "坚实",
+   1
+  ],
+  [
+   "境外",
+   1
+  ],
+  [
+   "古迹",
+   1
+  ],
+  [
+   "禅寺",
+   1
+  ],
+  [
+   "治伤",
+   1
+  ],
+  [
+   "艳",
+   1
+  ],
+  [
+   "膝河",
+   1
+  ],
+  [
+   "贬抑",
+   1
+  ],
+  [
+   "资讯月",
+   1
+  ],
+  [
+   "卸下",
+   1
+  ],
+  [
+   "赈灾",
+   1
+  ],
+  [
+   "褫夺",
+   1
+  ],
+  [
+   "伐木",
+   1
+  ],
+  [
+   "颁授",
+   1
+  ],
+  [
+   "垄断权",
+   1
+  ]
+ ],
+ "propers_skipped": [
+  [
+   "俄罗斯",
+   193
+  ],
+  [
+   "伦敦",
+   117
+  ],
+  [
+   "纳粹德国",
+   117
+  ],
+  [
+   "约翰",
+   105
+  ],
+  [
+   "马来西亚",
+   96
+  ],
+  [
+   "乔治",
+   80
+  ],
+  [
+   "菲律宾",
+   74
+  ],
+  [
+   "俄国",
+   73
+  ],
+  [
+   "亨利",
+   68
+  ],
+  [
+   "土耳其",
+   67
+  ],
+  [
+   "匈牙利",
+   65
+  ],
+  [
+   "缅甸",
+   58
+  ],
+  [
+   "穆罕默德",
+   54
+  ],
+  [
+   "亚历山大",
+   53
+  ],
+  [
+   "亚洲",
+   51
+  ],
+  [
+   "阿拉伯",
+   50
+  ],
+  [
+   "阿富汗",
+   50
+  ],
+  [
+   "阿根廷",
+   49
+  ],
+  [
+   "加利福尼亚州",
+   48
+  ],
+  [
+   "奥林匹克运动会",
+   48
+  ],
+  [
+   "詹姆斯",
+   44
+  ],
+  [
+   "澳大利亚",
+   44
+  ],
+  [
+   "犹太人",
+   41
+  ],
+  [
+   "保加利亚",
+   41
+  ],
+  [
+   "维也纳",
+   41
+  ],
+  [
+   "英国伦敦",
+   40
+  ],
+  [
+   "叙利亚",
+   40
+  ],
+  [
+   "奥斯曼帝国",
+   40
+  ],
+  [
+   "鄂图曼",
+   39
+  ],
+  [
+   "大屠杀",
+   39
+  ],
+  [
+   "巴勒斯坦",
+   38
+  ],
+  [
+   "尼亚",
+   38
+  ],
+  [
+   "罗马尼亚",
+   37
+  ],
+  [
+   "亨",
+   37
+  ],
+  [
+   "希特勒",
+   37
+  ],
+  [
+   "袁世凯",
+   36
+  ],
+  [
+   "蒋介石",
+   35
+  ],
+  [
+   "塞尔维亚",
+   35
+  ],
+  [
+   "阿道夫",
+   34
+  ],
+  [
+   "印度尼西亚",
+   32
+  ],
+  [
+   "柬埔寨",
+   31
+  ],
+  [
+   "洛杉矶",
+   31
+  ],
+  [
+   "哥伦比亚",
+   29
+  ],
+  [
+   "蒋中正",
+   29
+  ],
+  [
+   "玛丽",
+   28
+  ],
+  [
+   "冯",
+   27
+  ],
+  [
+   "捷克斯洛伐克",
+   27
+  ],
+  [
+   "新疆",
+   27
+  ],
+  [
+   "阿波罗",
+   27
+  ],
+  [
+   "夏威夷",
+   26
+  ],
+  [
+   "阿里",
+   26
+  ],
+  [
+   "詹姆士",
+   26
+  ],
+  [
+   "拉萨",
+   26
+  ],
+  [
+   "利比亚",
+   26
+  ],
+  [
+   "阿尔及利亚",
+   25
+  ],
+  [
+   "纳",
+   25
+  ],
+  [
+   "穆斯林",
+   24
+  ],
+  [
+   "君士坦丁堡",
+   24
+  ],
+  [
+   "菲利普",
+   23
+  ],
+  [
+   "维多利亚",
+   23
+  ],
+  [
+   "萨",
+   23
+  ],
+  [
+   "维吉尼亚",
+   23
+  ],
+  [
+   "马来亚",
+   22
+  ],
+  [
+   "西敏寺",
+   21
+  ],
+  [
+   "纳粹",
+   21
+  ],
+  [
+   "伊丽莎白",
+   21
+  ],
+  [
+   "克里米亚",
+   21
+  ],
+  [
+   "肯尼迪",
+   21
+  ],
+  [
+   "林肯",
+   20
+  ],
+  [
+   "暨",
+   20
+  ],
+  [
+   "裔",
+   20
+  ],
+  [
+   "爱沙尼亚",
+   20
+  ],
+  [
+   "芮氏",
+   20
+  ],
+  [
+   "曼哈顿",
+   20
+  ],
+  [
+   "西亚",
+   19
+  ],
+  [
+   "阿尔巴尼亚",
+   19
+  ],
+  [
+   "巴伐利亚",
+   19
+  ],
+  [
+   "犹太",
+   19
+  ],
+  [
+   "保禄",
+   19
+  ],
+  [
+   "梵蒂冈",
+   18
+  ],
+  [
+   "君士坦丁",
+   18
+  ],
+  [
+   "奈及利亚",
+   18
+  ],
+  [
+   "戈尔巴乔夫",
+   18
+  ],
+  [
+   "曼谷",
+   17
+  ],
+  [
+   "安妮",
+   17
+  ],
+  [
+   "纳粹党",
+   17
+  ],
+  [
+   "曼",
+   17
+  ],
+  [
+   "伊莉莎白",
+   17
+  ],
+  [
+   "玻利维亚",
+   17
+  ],
+  [
+   "白俄罗斯",
+   17
+  ],
+  [
+   "亚美尼亚",
+   17
+  ],
+  [
+   "哥伦比亚特区",
+   17
+  ],
+  [
+   "亚伯拉罕",
+   16
+  ],
+  [
+   "阿拉斯加",
+   16
+  ],
+  [
+   "约翰逊",
+   16
+  ],
+  [
+   "魁北克",
+   16
+  ],
+  [
+   "德克萨斯州",
+   16
+  ],
+  [
+   "俄亥俄州",
+   16
+  ],
+  [
+   "宾夕法尼亚州",
+   16
+  ],
+  [
+   "溥仪",
+   16
+  ],
+  [
+   "王位继承",
+   16
+  ],
+  [
+   "拉脱维亚",
+   15
+  ],
+  [
+   "卢森堡",
+   15
+  ],
+  [
+   "萨尔瓦多",
+   15
+  ],
+  [
+   "朱元璋",
+   15
+  ],
+  [
+   "乔治亚",
+   15
+  ],
+  [
+   "斯洛伐克",
+   14
+  ],
+  [
+   "人民日报",
+   14
+  ],
+  [
+   "唐纳",
+   14
+  ],
+  [
+   "克里斯蒂安",
+   14
+  ],
+  [
+   "汤玛斯",
+   14
+  ],
+  [
+   "沙特阿拉伯",
+   14
+  ],
+  [
+   "阿都",
+   14
+  ],
+  [
+   "麻萨诸塞",
+   14
+  ],
+  [
+   "奥林匹克",
+   14
+  ],
+  [
+   "埃塞俄比亚",
+   14
+  ],
+  [
+   "罗纳德",
+   14
+  ],
+  [
+   "通讯",
+   13
+  ],
+  [
+   "厄瓜多尔",
+   13
+  ],
+  [
+   "叶利钦",
+   13
+  ],
+  [
+   "中断",
+   13
+  ],
+  [
+   "玛格丽特",
+   13
+  ],
+  [
+   "腓特烈",
+   13
+  ],
+  [
+   "狄奥多",
+   13
+  ],
+  [
+   "衣索比亚",
+   13
+  ],
+  [
+   "马其顿",
+   13
+  ],
+  [
+   "萨达姆",
+   13
+  ],
+  [
+   "纳吉",
+   13
+  ],
+  [
+   "尤利西斯",
+   13
+  ],
+  [
+   "霍华德",
+   13
+  ],
+  [
+   "东亚",
+   13
+  ],
+  [
+   "佩德罗",
+   13
+  ],
+  [
+   "深圳",
+   13
+  ],
+  [
+   "屯门",
+   12
+  ],
+  [
+   "巴勒斯坦解放组织",
+   12
+  ],
+  [
+   "列宁格勒",
+   12
+  ],
+  [
+   "亚塞拜",
+   12
+  ],
+  [
+   "亨利四世",
+   12
+  ],
+  [
+   "阿布",
+   12
+  ],
+  [
+   "阿卜杜勒",
+   12
+  ],
+  [
+   "苏俄",
+   12
+  ],
+  [
+   "德克萨斯",
+   12
+  ],
+  [
+   "大阪",
+   12
+  ],
+  [
+   "西哈努克",
+   12
+  ],
+  [
+   "吴廷琰",
+   12
+  ],
+  [
+   "沙乌地阿",
+   11
+  ],
+  [
+   "刚果民主共和国",
+   11
+  ],
+  [
+   "阿方索",
+   11
+  ],
+  [
+   "伽利略",
+   11
+  ],
+  [
+   "几内亚",
+   11
+  ],
+  [
+   "巴拉圭",
+   11
+  ],
+  [
+   "曼彻斯特",
+   11
+  ],
+  [
+   "利亚",
+   11
+  ],
+  [
+   "纳尔逊",
+   11
+  ],
+  [
+   "俾斯麦",
+   11
+  ],
+  [
+   "萨珊",
+   11
+  ],
+  [
+   "阿拉巴马州",
+   11
+  ],
+  [
+   "乌拉圭",
+   11
+  ],
+  [
+   "克罗地亚",
+   11
+  ],
+  [
+   "蒙特娄",
+   11
+  ],
+  [
+   "甘肃",
+   11
+  ],
+  [
+   "帕",
+   11
+  ],
+  [
+   "加勒比海",
+   10
+  ],
+  [
+   "格鲁吉亚",
+   10
+  ],
+  [
+   "敦",
+   10
+  ],
+  [
+   "卡纳维拉尔角",
+   10
+  ],
+  [
+   "比亚",
+   10
+  ],
+  [
+   "蒙兀儿",
+   10
+  ],
+  [
+   "阿卜杜拉",
+   10
+  ],
+  [
+   "萨达特",
+   10
+  ],
+  [
+   "林彪",
+   10
+  ],
+  [
+   "亚瑟",
+   10
+  ],
+  [
+   "东帝汶",
+   10
+  ],
+  [
+   "波希米亚",
+   10
+  ],
+  [
+   "亚当斯",
+   10
+  ],
+  [
+   "老挝",
+   10
+  ],
+  [
+   "突尼西亚",
+   10
+  ],
+  [
+   "俄罗斯联邦",
+   10
+  ],
+  [
+   "里约热内卢",
+   10
+  ],
+  [
+   "田纳西州",
+   10
+  ],
+  [
+   "赫鲁晓夫",
+   10
+  ],
+  [
+   "珠穆朗玛峰",
+   10
+  ],
+  [
+   "亚特兰大",
+   10
+  ],
+  [
+   "甘肃省",
+   10
+  ],
+  [
+   "阿姆斯特丹",
+   10
+  ],
+  [
+   "阿拉法特",
+   9
+  ],
+  [
+   "西伯利亚",
+   9
+  ],
+  [
+   "亚拉",
+   9
+  ],
+  [
+   "隆纳",
+   9
+  ],
+  [
+   "苏莱曼",
+   9
+  ],
+  [
+   "鲍里斯",
+   9
+  ],
+  [
+   "哈萨克斯坦",
+   9
+  ],
+  [
+   "犹他州",
+   9
+  ],
+  [
+   "蒋经国",
+   9
+  ],
+  [
+   "阿卜杜",
+   9
+  ],
+  [
+   "康拉德",
+   9
+  ],
+  [
+   "华裔",
+   9
+  ],
+  [
+   "阿尔伯特",
+   9
+  ],
+  [
+   "奥斯卡金像奖",
+   9
+  ],
+  [
+   "荃湾",
+   9
+  ]
+ ]
+}

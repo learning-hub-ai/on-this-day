@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.swp
+*.swo
+.DS_Store
+
+# 本地虚拟环境（预生成脚本用 opencc）
+.venv/
+
+# 抓取缓存 —— 132 MB，重跑可重建。预生成的成品在 data/otd/，那个要进仓库
+.cache/
+*.raw.json
