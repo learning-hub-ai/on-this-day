@@ -33,7 +33,7 @@ python3 serve.py          # → http://127.0.0.1:8000
 | 来源 | [Wikimedia On This Day API](https://api.wikimedia.org)（中文版）|
 | 规模 | 366 天，精选 1,830 条 ＋ 全部事件 15,106 条 = **16,936 条，3.0 MB** |
 | 处理 | `opencc` 繁→简（全量强制）、瘦身、提取关联条目、补回被截断的人名 |
-| 词表 | `data/glossary.json`，按全年词频降序编写 |
+| 词表 | `data/glossary.json`，93 词，覆盖 23.4% 事件、366/366 天 |
 
 重新生成：
 
@@ -69,11 +69,35 @@ docs/
 serve.py                本地预览服务器
 ```
 
+## 扩充词表
+
+难词注释是一份**全局共享词表**，不挂在每条事件上 ——
+全年候选词去重后仅 2,335 个、重复率 78%，所以写一次就全年复用。
+
+```bash
+python3 scripts/check_glossary.py            # 校验 ＋ 覆盖率
+python3 scripts/check_glossary.py --next 30  # 列出下 30 个待写候选
+```
+
+编写规则（`docs/spec.md` §4.1）：
+
+1. **注词不注字** —— 给「徭役」而不是单给「徭」
+2. **释义 ≤12 字** —— 这是提示，不是词典
+3. **一条事件最多标 3 个** —— 渲染期约束，超出只标最靠前的
+
+哪些词**不该收**见 `data/glossary-exclude.json`，分四类并各自写明原因：
+教材未收但不难的（成功、使用）、分词碎片（斐、郡）、音译专名（拿破仑）、
+已收词的复合（示威者）。校验脚本会拦住误收。
+
+⚠ 可注释上限是 **71.9%** —— 排除名单里的词占全年出现次数的 28.1%，
+它们永远不该被注释。所以「500 词覆盖 50%」已是接近天花板的成绩。
+
 ## 测试
 
 ```bash
 node js/glossary.test.mjs                 # 词表匹配，14 条断言
 python3 scripts/glossary_algo_check.py    # 同一批断言的 Python 复刻
+python3 scripts/check_glossary.py         # 词表规则校验
 ```
 
 第二个脚本存在是因为部分环境没有 Node。它验证**算法**，
