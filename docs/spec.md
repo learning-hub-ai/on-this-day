@@ -844,7 +844,7 @@ scripts/glossary_algo_check.py ← 算法验证（Python 复刻），14/14 通�
 data/otd/*.json × 366          ← selected ＋ events 全量，已验收
 ```
 
-⚠ **项目尚未纳入 git**。366 个产物文件与两份设计文档只存在于本地磁盘。
+✅ **已纳入 git**（本地，branch `main`，尚无 remote）。⚠ **LICENSE 与 README 仍缺** —— 公开发布前必须按 §9.2 写 LICENSE（维基文本受 CC BY-SA，不可照抄 hanzi-go 的「保留所有权利」）。
 
 ---
 
