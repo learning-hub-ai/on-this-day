@@ -839,12 +839,12 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 
 ```
 docs/spec.md  docs/layout.md  docs/survey.json  docs/survey.log
-index.html  README.md  LICENSE  serve.py
 index.html                     ← 骨架（静态样例已删，由 render.js 生成）
 css/style.css                  ← 方案 A 令牌 ＋ 9 节样式
 js/api.js  js/render.js  js/app.js   ← 取数／渲染／入口
 data/glossary.json             ← 种子词表 15 词（覆盖 9.1% 事件）
 serve.py                       ← 本地 HTTP（file:// 下 fetch 被拦）
+README.md  LICENSE             ← 部署前置（LICENSE 为三层授权，§9.2）
 js/glossary.js                 ← 最长优先匹配，已实现
 js/glossary.test.mjs           ← 14 条断言，⚠ 未执行（本机无 node）
 scripts/gen_otd.py             ← 预生成，已跑通
