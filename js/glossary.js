@@ -60,20 +60,34 @@ export function findMarks(text, words, opts = {}) {
   return marks.slice(0, max);
 }
 
+/** escapeHtml 会改变长度的字符 —— 含这些字符的文本不做注音标记 */
+const LENGTH_CHANGING = /[&<>"']/;
+
+/**
+ * HTML 转义。与 render.js 的 escapeHtml 等价 ——
+ * 这里重复一份是为了让本模块保持**零依赖**，可被单独测试与复用。
+ */
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 /**
  * 把标记应用到**已转义**的 HTML 片段上。
  *
- * ⚠ 调用顺序（spec.md §8.4）：escapeHtml → 实体内链 → 本函数
- *   若先插标记再转义，插入的标签会被转义成可见文本。
+ * ⚠ 调用顺序（spec.md §8.4）：escapeHtml → 本函数。
+ *   两者之间**不能**插入任何标签，否则下标错位 —— 见 render.js 的注释。
  *
  * @param {string} escapedText 已经过 escapeHtml 的文本
  * @param {Array}  marks       findMarks 的返回值（基于**原始**文本的下标）
  * @returns {string} 含 <span class="gloss"> 的 HTML
  *
- * ⚠ 已知限制：marks 的下标基于原始文本，而 escapeHtml 会改变字符串长度
- *   （& → &amp;）。因此本函数要求 escapedText 与原文长度一致 ——
- *   即原文不含 & < > " ' 这五个字符。维基事件文本里这些字符极少，
- *   但不是零：含「&」的条目须跳过注音（见 applyMarksSafe）。
+ * ⚠ 本函数要求 escapedText 与原文等长，即原文不含 & < > " ' ——
+ *   由 applyMarksSafe 负责把关。
  */
 export function applyMarks(escapedText, marks) {
   if (!marks.length) return escapedText;
@@ -81,19 +95,18 @@ export function applyMarks(escapedText, marks) {
   let prev = 0;
   for (const m of marks) {
     out += escapedText.slice(prev, m.start);
+    // 气泡内容来自 glossary.json（人工维护），但仍然转义 ——
+    // 任何进入 innerHTML 的数据都当不可信处理，不因「自己写的」而豁免
     out +=
-      `<span class="gloss" tabindex="0" aria-expanded="false">` +
+      '<span class="gloss" tabindex="0" aria-expanded="false">' +
       escapedText.slice(m.start, m.end) +
-      `<span class="gloss-pop" role="tooltip">${m.word}` +
-      `<em>${m.p}</em><br>${m.d}</span></span>`;
+      `<span class="gloss-pop" role="tooltip">${esc(m.word)}` +
+      `<em>${esc(m.p)}</em><br>${esc(m.d)}</span></span>`;
     prev = m.end;
   }
   out += escapedText.slice(prev);
   return out;
 }
-
-/** escapeHtml 会改变长度的字符 —— 含这些字符的文本不做注音标记 */
-const LENGTH_CHANGING = /[&<>"']/;
 
 /**
  * 安全封装：文本含 HTML 特殊字符时跳过注音，避免下标错位。

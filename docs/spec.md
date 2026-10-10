@@ -830,7 +830,7 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 | 步 | 状态 | 说明 |
 |---|---|---|
 | **1** `gen_otd.py` | ✅ **完成** | 366 天全量：`selected` 1,830 条 ＋ `events` 15,106 条 = **16,936 条，3.02 MB**，0 繁体残留，人名截断自动补回 13/24 |
-| **2** 单页 | 🟡 **2a–2c 完成** | 骨架、样式、取数、渲染均已完成并验收。**2d 注音交互待做**（气泡边缘翻转、移动端点击）|
+| **2** 单页 | ✅ **完成** | 2a 骨架／2b 取数／2c 渲染／2d 注音交互全部完成并验收；另经一轮代码评审（§12.3b）与部署准备（§12.3c）|
 | **3a** 词表 | 🟡 **种子已建** | `data/glossary.json` 15 词，实测命中 **9.1%** 事件、351/366 天。候选表 2,335 词在 `docs/survey.json` |
 | **3b** 人工内容 | ⬜ 未开始 | 幂等合并已验证，可安全开始 |
 | **4** v1.1 打标 | ⬜ 可选 | 未决定是否做 |
@@ -839,6 +839,7 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 
 ```
 docs/spec.md  docs/layout.md  docs/survey.json  docs/survey.log
+index.html  README.md  LICENSE  serve.py
 index.html                     ← 骨架（静态样例已删，由 render.js 生成）
 css/style.css                  ← 方案 A 令牌 ＋ 9 节样式
 js/api.js  js/render.js  js/app.js   ← 取数／渲染／入口
@@ -852,7 +853,7 @@ scripts/glossary_algo_check.py ← 算法验证（Python 复刻），14/14 通�
 data/otd/*.json × 366          ← selected ＋ events 全量，已验收
 ```
 
-✅ **已纳入 git**（本地，branch `main`，尚无 remote）。⚠ **LICENSE 与 README 仍缺** —— 公开发布前必须按 §9.2 写 LICENSE（维基文本受 CC BY-SA，不可照抄 hanzi-go 的「保留所有权利」）。
+✅ **已纳入 git**（本地，branch `main`，尚无 remote）。LICENSE（三层授权）与 README 已就绪，GitHub Pages 适配已核验（§12.3c）。
 
 ---
 
@@ -975,29 +976,70 @@ git add . && git commit -m "初始提交：规格书、布局设计、events 预
 3. **月份切换时日期自动收敛。** 3/31 切到 4 月时落到 4/30，
    而不是报错或留下非法状态。
 
-#### 2d. 注音接入
+#### 2d. 注音接入 ✅ 已完成（2026-10-10）
 
-| 产出 | `css/style.css` 第 6 节 |
+| 产出 | 内容 |
 |---|---|
-| 内容 | 接 `js/glossary.js`；虚下划线、反相气泡、点击/hover |
-| 验收 | 见下 |
+| `js/app.js` 事件处理 | 点击切换气泡、Enter/空格、Esc 收起、边缘翻转 |
+| `css/style.css` | `.gloss-pop--left` / `--right` 贴边对齐 |
 
-**渲染顺序不可错**（§8.4）：
+- [x] 点击切换；同时最多展开一个气泡
+- [x] 桌面 hover（CSS `@media (hover:hover)`）与点击互不干扰
+- [x] Enter／空格触发（`preventDefault` 防空格滚页）、Esc 全部收起
+- [x] 近视口边缘时翻转对齐方向 —— JS 只判断该不该翻，位移值归 CSS
+- [x] 词表未命中静默跳过
+- [x] 含 `& < > " '` 的事件跳过注音（实测 8 条，0.05%）
+- [x] 一条最多 3 个标记
 
-```
-escapeHtml → l 实体内链 → applyMarksSafe
-```
+**气泡内容也要转义。** 初版直接把 `glossary.json` 的 `p`／`d` 插进
+`innerHTML`，理由是「自己写的数据」—— 这是错的。任何进入 `innerHTML`
+的数据都当不可信处理，不因来源而豁免。已加 `esc()`。
 
-- [ ] 含 `& < > " '` 的事件**跳过注音**不报错（实测 8 条，0.05%）
-- [ ] 词表未命中静默跳过
-- [ ] 一条最多 3 个标记
-- [ ] 气泡近视口边缘时翻转方向
-- [ ] 移动端点击触发，桌面 hover ＋ 键盘 focus
+---
 
-⚠ **先在有 node 的机器上跑 `node js/glossary.test.mjs`。**
-本机无 JS runtime，`glossary.js` 从未执行过 ——
-算法已由 `scripts/glossary_algo_check.py` 验证（14/14），
-但 JS 语法错误、`import` 问题查不出来。
+### 12.3b 代码评审修正（2026-10-10）
+
+部署前通读全部代码，修了四处问题：
+
+| # | 问题 | 后果 | 修法 |
+|---|---|---|---|
+| 1 | 气泡内容未转义 | `glossary.json` 若含 `<` 会破坏 DOM | 三个字段全过 `esc()` |
+| 2 | `fetch(url, {cache:'no-cache'})` 写死 | 生产环境每次切日期都回源，白白变慢 | 去掉，交给 HTTP 缓存头；开发时由 `serve.py` 发 `no-store` |
+| 3 | `data/picks/` 不存在却每天都请求 | 控制台刷满 404，掩盖真正的错误 | `picksAvailable` 标志，首次失败后不再试；将来建了目录自动恢复 |
+| 4 | 无竞态保护 | 快速连点日期时，先发后到的请求会渲染**非当前**日期 | `latestKey` 守卫，返回时 key 不符则丢弃结果 |
+
+另外两处清理：
+
+- `await Promise.all([loadGlossary(), Promise.resolve()])` —— 无意义的并行包装，
+  改为直接 `await loadGlossary()`
+- `init()` 增加 DOM 节点存在性检查 —— HTML 与 JS 不同步时早报错，
+  好于后面莫名崩溃
+
+新增功能（顺手补上，都是 1 行事件绑定）：
+
+- **键盘左右箭头翻天**，跨月跨年回绕（`12-31` → `01-01`）。
+  用闰年 2024 做基准保证 2/29 在序列里。纯逻辑已测，8/8
+
+---
+
+### 12.3c 部署准备 ✅（2026-10-10）
+
+| 文件 | 说明 |
+|---|---|
+| `LICENSE` | **三层授权**（§9.2）：维基文本 CC BY-SA 4.0（含 share-alike）／代码与界面版权所有／自编注音与 `why` 版权所有 |
+| `README.md` | 本地预览、数据重生成、目录说明、设计取舍摘要 |
+| `.nojekyll` | 已存在 —— 阻止 GitHub Pages 的 Jekyll 处理 |
+
+**GitHub Pages 适配已核验**：
+
+- [x] 全部资源路径**相对** —— Pages 从 `/<repo-name>/` 子目录提供服务，
+      绝对路径（`/data/...`）会 404
+- [x] 无构建步骤，仓库内容即发布内容
+- [x] 无 workflow 文件 —— 与 hanzi-go 一致，用 branch 部署即可
+
+⚠ **LICENSE 是公开发布的前置条件**，不是可选项。仓库里有 16,936 条
+维基衍生文本，CC BY-SA 要求署名与相同方式共享；没有 LICENSE 文件的公开仓库
+不满足条款。
 
 ---
 

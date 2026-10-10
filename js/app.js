@@ -58,32 +58,44 @@ function fillDays(month, keepDay) {
   return target;
 }
 
+/** 当前下拉框选中的日期 */
+function keyFromSelects() {
+  return toKey(el.selMonth.value, el.selDay.value);
+}
+
+/**
+ * 竞态守卫：记录最近一次请求的 key。
+ * 用户快速连点日期时，先发的请求可能后到 —— 若不检查就渲染，
+ * 画面会停在一个**不是当前选中**的日期上。
+ */
+let latestKey = null;
+
 /**
  * 核心流程：所有入口最终都调这里。
  * @param {string} key 'MM-DD'
- * @param {boolean} [pushHash=true] 是否写入 URL hash
+ * @param {boolean} [syncHash=true] 是否写入 URL hash
  */
-async function show(key, pushHash = true) {
+async function show(key, syncHash = true) {
   const parsed = parseKey(key);
   if (!parsed) return;                  // 非法 key 静默忽略，不破坏当前视图
 
   el.selMonth.value = String(parsed.month);
   fillDays(parsed.month, parsed.day);
 
-  if (pushHash && location.hash.replace(/^#/, '') !== key) {
+  if (syncHash && location.hash.replace(/^#/, '') !== key) {
     // replaceState 而非 pushState —— 翻日期不该堆满浏览器历史
     history.replaceState(null, '', `#${key}`);
   }
 
+  latestKey = key;
   setLoading(true);
   const day = await loadDay(key);
+
+  // 请求返回时用户可能已切到别的日期，此时丢弃这次结果
+  if (latestKey !== key) return;
+
   setLoading(false);
   renderDay(day, glossary);
-}
-
-/** 当前下拉框选中的日期 */
-function keyFromSelects() {
-  return toKey(el.selMonth.value, el.selDay.value);
 }
 
 function bindEvents() {
@@ -109,11 +121,77 @@ function bindEvents() {
     el.eventsList.hidden = open;
   });
 
+  // 注音气泡：点击切换。移动端无 hover，键盘用户也需要可触发的方式
+  // （桌面 hover 由 CSS 的 @media (hover:hover) 负责，与此互不干扰）
+  document.addEventListener('click', (e) => {
+    const gloss = e.target.closest('.gloss');
+    // 先收起其他已展开的，保证同时最多一个气泡
+    for (const open of document.querySelectorAll('.gloss[aria-expanded="true"]')) {
+      if (open !== gloss) open.setAttribute('aria-expanded', 'false');
+    }
+    if (!gloss) return;
+    const willOpen = gloss.getAttribute('aria-expanded') !== 'true';
+    gloss.setAttribute('aria-expanded', String(willOpen));
+    if (willOpen) flipIfClipped(gloss);
+  });
+
+  // 键盘：Enter/空格 切换，Esc 收起
+  document.addEventListener('keydown', (e) => {
+    const gloss = e.target.closest?.('.gloss');
+    if (gloss && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();                    // 空格别滚动页面
+      gloss.click();
+      return;
+    }
+    if (e.key === 'Escape') {
+      for (const open of document.querySelectorAll('.gloss[aria-expanded="true"]')) {
+        open.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
+  // 键盘左右箭头翻天 —— 焦点在下拉框里时不拦，交给原生行为
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (/^(SELECT|INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if (e.target.closest?.('.gloss')) return;
+    if (e.key === 'ArrowLeft') show(shiftDay(keyFromSelects(), -1));
+    else if (e.key === 'ArrowRight') show(shiftDay(keyFromSelects(), 1));
+  });
+
   // 浏览器前进/后退，或手改 hash
   window.addEventListener('hashchange', () => {
     const key = parseKey(location.hash.replace(/^#/, ''));
     if (key) show(toKey(key.month, key.day), false);
   });
+}
+
+/**
+ * 气泡默认居中于词上方，靠近视口左右边缘时会被裁切（layout.md §5.6）。
+ * 这里实测位置后改为贴边对齐。
+ *
+ * 用 class 而非内联 style —— 颜色与位移值仍归 CSS，
+ * JS 只负责判断「该不该翻」。
+ */
+function flipIfClipped(gloss) {
+  const pop = gloss.querySelector('.gloss-pop');
+  if (!pop) return;
+  pop.classList.remove('gloss-pop--left', 'gloss-pop--right');
+  const r = pop.getBoundingClientRect();
+  const margin = 8;
+  if (r.left < margin) pop.classList.add('gloss-pop--left');
+  else if (r.right > window.innerWidth - margin) pop.classList.add('gloss-pop--right');
+}
+
+/**
+ * 日期加减，跨月跨年循环（12-31 → 01-01）。
+ * 用闰年 2024 做基准，保证 2/29 在序列里。
+ */
+function shiftDay(key, delta) {
+  const p = parseKey(key);
+  if (!p) return key;
+  const d = new Date(2024, p.month - 1, p.day + delta);
+  return toKey(d.getMonth() + 1, d.getDate());
 }
 
 async function init() {
@@ -125,15 +203,20 @@ async function init() {
     eventsList: document.getElementById('eventsList'),
   });
 
+  // 任一节点缺失说明 HTML 与 JS 不同步，早报错好于后面莫名崩溃
+  const missing = Object.entries(el).filter(([, node]) => !node).map(([k]) => k);
+  if (missing.length) {
+    console.error('[on-this-day] 缺少 DOM 节点：', missing.join(', '));
+    return;
+  }
+
   fillMonths();
   bindEvents();
 
-  // 词表与首日并行加载。词表失败不阻塞页面 —— 只是不显示注音
-  const key = initialKey();
-  const [words] = await Promise.all([loadGlossary(), Promise.resolve()]);
-  glossary = words;
+  // 词表失败不阻塞页面 —— 只是不显示注音（spec.md §6.2 第 2 条）
+  glossary = await loadGlossary();
 
-  await show(key, false);
+  await show(initialKey(), false);
 }
 
 document.addEventListener('DOMContentLoaded', init);

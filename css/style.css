@@ -353,6 +353,7 @@ header {
 .entity-link:hover { border-bottom-color:var(--accent-deep); }
 
 /* 折叠触发行：整行可点，44px 高（移动端点击目标下限）*/
+/* .selected-section 无样式，仅作 render.js 的 hidden 切换锚点 —— 保留类名 */
 .events-section { margin-top:var(--s8); }
 
 .section-toggle {
@@ -409,10 +410,15 @@ header {
   margin-left:var(--s2);
 }
 .gloss[aria-expanded="true"] .gloss-pop { opacity:1; }
-/* 桌面 hover 也显示；移动端靠 aria-expanded（2d 的 JS 负责）*/
+/* 桌面 hover 也显示；移动端靠 aria-expanded（app.js 的点击处理）*/
 @media (hover: hover) {
   .gloss:hover .gloss-pop, .gloss:focus-visible .gloss-pop { opacity:1; }
 }
+
+/* 近视口边缘时贴边对齐，否则气泡被裁切。
+   由 app.js 的 flipIfClipped() 加 class —— JS 只判断该不该翻，位移归 CSS */
+.gloss-pop--left  { left:0;    transform:none; }
+.gloss-pop--right { left:auto; right:0; transform:none; }
 
 
 /* === 7. 空状态 ＋ footer === */

@@ -13,6 +13,17 @@
 const OTD_PATH = 'data/otd';
 const PICKS_PATH = 'data/picks';
 
+/**
+ * 自建精选库的可用性（spec.md §3.3）。
+ *
+ * `data/picks/` 目前还不存在，若每切一天都去 fetch 一次，
+ * 浏览器控制台会刷满 404 —— 对使用者是噪音，也掩盖真正的错误。
+ * 所以第一次 404 之后就记住「这个来源不存在」，不再请求。
+ *
+ * 将来建了 picks 目录，第一次请求成功即自动恢复，无需改代码。
+ */
+let picksAvailable = true;
+
 /** 已取到的天缓存在内存里 —— 来回切日期不重复请求 */
 const _cache = new Map();
 
@@ -47,10 +58,15 @@ export function daysInMonth(month) {
 /**
  * 读一个 JSON 文件。404 与网络错误都返回 null ——
  * 「这一天没有数据」是正常状态，不是异常（spec.md §3.3）。
+ *
+ * ⚠ 不传 `cache` 选项，交给 HTTP 缓存头决定：
+ *   产物文件带内容哈希式的语义（改了就该重抓），GitHub Pages 会给
+ *   合理的 ETag；开发时由 serve.py 发 `no-store` 覆盖。
+ *   写死 `no-cache` 会让生产环境每次切日期都回源，白白变慢。
  */
 async function readJson(url) {
   try {
-    const res = await fetch(url, { cache: 'no-cache' });
+    const res = await fetch(url);
     return res.ok ? await res.json() : null;
   } catch {
     return null;         // 断网、CORS、JSON 解析失败一并归此
@@ -93,8 +109,11 @@ export async function loadDay(key) {
 
   const [wiki, picks] = await Promise.all([
     readJson(`${OTD_PATH}/${key}.json`),
-    readJson(`${PICKS_PATH}/${key}.json`),   // 目录尚不存在 → null，走回落
+    picksAvailable ? readJson(`${PICKS_PATH}/${key}.json`) : null,
   ]);
+
+  // picks 第一次取不到就不再试 —— 避免每切一天刷一条 404（见 picksAvailable）
+  if (picksAvailable && picks === null) picksAvailable = false;
 
   const selected = mergeGroup(wiki?.selected, picks?.selected).sort(byYear);
   const events = mergeGroup(wiki?.events, picks?.events).sort(byYear);
@@ -112,7 +131,8 @@ export async function loadDay(key) {
   return day;
 }
 
-/** 清空内存缓存。仅供测试与开发时热重载用 */
+/** 清空内存缓存并重置来源探测。仅供测试与开发时热重载用 */
 export function clearCache() {
   _cache.clear();
+  picksAvailable = true;
 }
