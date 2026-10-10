@@ -825,7 +825,7 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 | 步 | 状态 | 说明 |
 |---|---|---|
 | **1** `gen_otd.py` | ✅ **完成** | 366 天全量：`selected` 1,830 条 ＋ `events` 15,106 条 = **16,936 条，3.02 MB**，0 繁体残留，人名截断自动补回 13/24 |
-| **2** 单页 | ⬜ 未开始 | `js/glossary.js` 已完成并验证（见下）|
+| **2** 单页 | 🟡 **2a 完成** | 骨架 ＋ 全部样式已写；2b 取数、2c 渲染、2d 注音交互待做 |
 | **3a** 词表 | ⬜ 未开始 | 候选表已就绪（`docs/survey.json`，2,335 词）|
 | **3b** 人工内容 | ⬜ 未开始 | 幂等合并已验证，可安全开始 |
 | **4** v1.1 打标 | ⬜ 可选 | 未决定是否做 |
@@ -834,6 +834,8 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 
 ```
 docs/spec.md  docs/layout.md  docs/survey.json  docs/survey.log
+index.html                     ← 骨架 ＋ 静态样例（2c 后删样例）
+css/style.css                  ← 方案 A 令牌 ＋ 9 节样式
 js/glossary.js                 ← 最长优先匹配，已实现
 js/glossary.test.mjs           ← 14 条断言，⚠ 未执行（本机无 node）
 scripts/gen_otd.py             ← 预生成，已跑通
@@ -893,12 +895,33 @@ git add . && git commit -m "初始提交：规格书、布局设计、events 预
 
 拆成四个可独立验收的小步，顺序即依赖顺序。
 
-#### 2a. 骨架 ＋ 令牌
+#### 2a. 骨架 ＋ 令牌 ✅ 已完成（2026-10-10）
 
-| 产出 | `index.html`（§9 DOM 骨架）、`css/style.css` 第 1–2 节 |
+| 产出 | `index.html`（119 行）、`css/style.css`（479 行，9 节全写）|
 |---|---|
-| 内容 | `layout.md` §3.1 的方案 A 令牌，reset，基础排版 |
-| 验收 | 静态渲染一天的假数据；米白底、深棕字、720px 居中 |
+| 内容 | 方案 A 令牌、reset、排版，以及 header/hero/timeline/gloss/footer/响应式/打印 |
+| 验收 | 见下 |
+
+实际比计划多做了一些：原定只写第 1–2 节，但第 3–9 节的样式已由
+`layout.md` 完整定义，一次写完可避免 2c/2d 时反复回头改令牌。
+`index.html` 内含 4 条静态样例（精选、需陪读、公元前年份、折叠区各一），
+2c 由 `render.js` 接管后删除。
+
+**验收通过**：
+
+- [x] **字面色值 0 处出现在 `:root` 之外** —— 脚本校验
+- [x] `var(--x)` 全部有定义（141 处引用，0 处未定义）
+- [x] HTML 标签闭合、无嵌套错误
+- [x] 4 个 `<a>` 全带 `rel="noopener noreferrer"`；3 个 `<button>` 全带 `type`
+- [x] `aria-label`／`aria-expanded`／`aria-controls`／`role="tooltip"` 齐备
+- [x] 装饰 emoji 带 `aria-hidden`
+- [x] footer 含维基署名与 CC BY-SA 4.0 链接
+- [x] 本地 HTTP 服务下 `index.html`／`style.css`／`data/otd/*.json` 均 200
+
+**打印色值的处理**：第 9 节打印样式需要纯白底与中灰边框，
+这两个值不属于屏幕配色，但为守住「`:root` 之外无字面色值」的规则，
+仍定义为 `--print-bg` / `--print-border`。**规则零例外**，
+否则 §4.5 的方案切换会在打印样式上破功。
 
 ⚠ **字面色值只允许出现在 `:root`**（`layout.md` §4.5）——
 否则日后切换方案 B 要改遍全文件。
