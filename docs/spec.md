@@ -6,7 +6,7 @@
 | **日期** | 2026-10-10 |
 | **项目路径** | `chinese/on-this-day/`（独立仓库，与 hanzi-go、qinshihuang 并列）|
 | **受众** | 10–18 岁，**基准六年级**；母语中文、读简体 |
-| **形态** | 纯前端单页，无后端，可 `file://` 直开 |
+| **形态** | 纯前端单页，无后端。⚠ **需经 HTTP 打开**（`fetch` 在 `file://` 下被同源策略拦截），本地用 `python3 serve.py` |
 | **数据源** | Wikimedia On This Day API ＋ 自建精选库（新闻只做外链，不入库）|
 
 **v2.0.0 相对 v1.2 的变化**：全部结论改为基于 364 天完整实测（此前多处为单日抽样
@@ -600,8 +600,12 @@ const wikiUrl = t => 'https://zh.wikipedia.org/wiki/' + encodeURIComponent(t);
 ### 8.1 技术约束
 
 - 纯 HTML/CSS/JS，**无构建、无框架、无运行时依赖**
-- 可 `file://` 直开，也可 GitHub Pages 发布
-- 断网可用（读本地 JSON）
+- **需经 HTTP 服务打开**，不能双击 `index.html`
+  ⚠ 这是 v2.0 以前规格书的错误。`fetch()` 与 ES module 的 `import`
+  在 `file://` 下都被浏览器同源策略拦截。hanzi-go 的 `server.py` 同理。
+  本地开发用 `python3 serve.py`（标准库，无依赖）；
+  生产用 GitHub Pages —— 它本身就是 HTTP，无需额外部署步骤
+- 断网可用（读本地 JSON，但仍需本地 HTTP 服务）
 
 ### 8.2 交互
 
@@ -780,8 +784,8 @@ TRUNC_RE = re.compile(r'·(?=（|\(|，|。|、|；|$|遭|于|被|将|率|在)')
 
 ## 11. 项目结构
 
-与 hanzi-go、qinshihuang 一致：纯静态、无构建、可 `file://` 直开，
-独立仓库，GitHub Pages 发布。
+与 hanzi-go、qinshihuang 一致：纯静态、无构建、独立仓库、GitHub Pages 发布。
+⚠ 但**不能 `file://` 直开**，需 HTTP —— 见 §8.1。
 
 ```
 on-this-day/
@@ -796,6 +800,7 @@ on-this-day/
 │   ├── otd/MM-DD.json      预生成 366 天（已转简体）
 │   ├── glossary.json       共享词表（人工维护，脚本只读）
 │   └── picks/MM-DD.json    自建精选库（航天、孩子向改写）
+├── serve.py                本地预览服务器（file:// 下 fetch 被拦，必须经 HTTP）
 ├── scripts/
 │   ├── gen_otd.py          预生成（≥1s 间隔，429 退避，复用 .cache/raw/）
 │   ├── survey_notes.py     词表候选调查（已实现）
@@ -825,8 +830,8 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 | 步 | 状态 | 说明 |
 |---|---|---|
 | **1** `gen_otd.py` | ✅ **完成** | 366 天全量：`selected` 1,830 条 ＋ `events` 15,106 条 = **16,936 条，3.02 MB**，0 繁体残留，人名截断自动补回 13/24 |
-| **2** 单页 | 🟡 **2a 完成** | 骨架 ＋ 全部样式已写；2b 取数、2c 渲染、2d 注音交互待做 |
-| **3a** 词表 | ⬜ 未开始 | 候选表已就绪（`docs/survey.json`，2,335 词）|
+| **2** 单页 | 🟡 **2a–2c 完成** | 骨架、样式、取数、渲染均已完成并验收。**2d 注音交互待做**（气泡边缘翻转、移动端点击）|
+| **3a** 词表 | 🟡 **种子已建** | `data/glossary.json` 15 词，实测命中 **9.1%** 事件、351/366 天。候选表 2,335 词在 `docs/survey.json` |
 | **3b** 人工内容 | ⬜ 未开始 | 幂等合并已验证，可安全开始 |
 | **4** v1.1 打标 | ⬜ 可选 | 未决定是否做 |
 
@@ -834,8 +839,11 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 
 ```
 docs/spec.md  docs/layout.md  docs/survey.json  docs/survey.log
-index.html                     ← 骨架 ＋ 静态样例（2c 后删样例）
+index.html                     ← 骨架（静态样例已删，由 render.js 生成）
 css/style.css                  ← 方案 A 令牌 ＋ 9 节样式
+js/api.js  js/render.js  js/app.js   ← 取数／渲染／入口
+data/glossary.json             ← 种子词表 15 词（覆盖 9.1% 事件）
+serve.py                       ← 本地 HTTP（file:// 下 fetch 被拦）
 js/glossary.js                 ← 最长优先匹配，已实现
 js/glossary.test.mjs           ← 14 条断言，⚠ 未执行（本机无 node）
 scripts/gen_otd.py             ← 预生成，已跑通
@@ -926,30 +934,46 @@ git add . && git commit -m "初始提交：规格书、布局设计、events 预
 ⚠ **字面色值只允许出现在 `:root`**（`layout.md` §4.5）——
 否则日后切换方案 B 要改遍全文件。
 
-#### 2b. 取数 ＋ 日期切换
+#### 2b + 2c. 取数、渲染 ✅ 已完成（2026-10-10）
 
-| 产出 | `js/api.js`、`js/app.js` |
-|---|---|
-| 内容 | 读 `data/otd/MM-DD.json`；月/日下拉；「回到今天」|
-| 验收 | 任意日期可查含 2/29；**本地时区**不是 UTC；断网可用 |
+**2b 与 2c 并作一步交付** —— `app.js` 必须 `import renderDay`，
+拆开交付会留下一个无法运行的中间态。
 
-三级回落（§3.3、§8.5）：本地 JSON → `data/picks/` → 空状态。
-⚠ `data/picks/` 目录还不存在，此步只需实现回落逻辑，缺目录时走第三级。
+| 产出 | 行数 | 职责 |
+|---|---|---|
+| `js/api.js` | 123 | `data/otd` → 可渲染数据；三级回落；内存缓存 |
+| `js/render.js` | 170 | 数据 → HTML；只改 DOM |
+| `js/app.js` | 147 | 下拉／按钮／hash → `show(key)` |
+| `data/glossary.json` | 15 词 | 种子词表，供 2d 验证 |
+| `serve.py` | 50 | 本地 HTTP（见 §8.1 的 `file://` 更正）|
 
-#### 2c. 渲染 ＋ 时间轴
+**验收通过**（纯逻辑移植到 Python 对真实数据跑，18/18）：
 
-| 产出 | `js/render.js`、`css/style.css` 第 3–5 节 |
-|---|---|
-| 内容 | 时间轴竖线、年份、卡片、精选置顶、`why`、`l` 链接行、折叠区 |
-| 验收 | `selected` 可与 `events` 区分；公元前显示「前 622」不显示负号 |
+- [x] 2/29 可查（按闰年算天数，2 月恒 29）
+- [x] 非法日期（02-30、04-31、13 月、乱码）静默忽略，不破坏当前视图
+- [x] 公元前显示「前 622」不显示负号
+- [x] 366 个 `date` 字段全部合法；无空白天
+- [x] 转义正确（`&`、`<script>`）
+- [x] HTML 里 11 个 `getElementById` 与 3 个 `querySelector` 全部有对应节点
+- [x] 本地 HTTP 下全部资源 200
+- [x] `data/glossary.json` 缺失时 `loadGlossary` 返回 `{}`，页面照常工作
 
-**URL 还原**（§6.4）：
+**三处设计决定**：
 
-```js
-const wikiUrl = t => 'https://zh.wikipedia.org/wiki/' + encodeURIComponent(t);
-```
+1. **正文内不做实体内链。** 原计划在正文里把实体名渲染成链接，
+   实现时发现与注音**下标冲突**：`applyMarksSafe` 的标记位置算在原始文本上，
+   要求 escaped 文本与原文等长；一旦先插入 `<a>`，注音就会标到错位置、
+   产出坏 HTML。改为关联条目只在卡片底部成行列出。
+   副作用是更好读 —— 实体名往往很长（「朝鲜民主主义人民共和国」），
+   正文内链与注音虚线挤在一起对六年级读者更乱。
+   若将来要做正文内链，须把 `findMarks` 扩展成统一处理多种标记类型。
 
-⚠ `u` 与 `l` 都为空时（实测 **3.4%**，512 条）不渲染链接行。
+2. **URL hash 作为日期状态。** `#10-09` 让某一天可分享、可收藏、
+   可用浏览器前后退。用 `replaceState` 而非 `pushState` ——
+   翻日期不该堆满浏览历史。
+
+3. **月份切换时日期自动收敛。** 3/31 切到 4 月时落到 4/30，
+   而不是报错或留下非法状态。
 
 #### 2d. 注音接入
 

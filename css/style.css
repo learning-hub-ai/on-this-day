@@ -141,6 +141,14 @@ button { cursor:pointer; background:none; border:none; }
   padding:0 var(--s4) var(--s8);
 }
 
+/* 日期切换：只对内容区淡入 180ms。
+   不做整页淡出 —— 那会让人以为在加载（layout.md §7.1）*/
+.content.is-fading { animation:fade-in 180ms var(--ease); }
+@keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+
+/* 加载态。数据多在本地，通常一闪而过，所以只做轻微变淡 */
+.content.is-loading { opacity:.6; }
+
 /* 屏幕阅读器专用 */
 .sr-only {
   position:absolute; width:1px; height:1px;
