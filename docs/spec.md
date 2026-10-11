@@ -1129,12 +1129,22 @@ git add . && git commit -m "初始提交：规格书、布局设计、events 预
 | `README.md` | 本地预览、数据重生成、目录说明、设计取舍摘要 |
 | `.nojekyll` | 已存在 —— 阻止 GitHub Pages 的 Jekyll 处理 |
 
-**GitHub Pages 适配已核验**：
+**GitHub Pages 适配已实测**（2026-10-11，模拟子目录部署）：
 
 - [x] 全部资源路径**相对** —— Pages 从 `/<repo-name>/` 子目录提供服务，
       绝对路径（`/data/...`）会 404
+- [x] **子目录下实跑验证**：`/on-this-day/index.html` 全部资源 200，
+      渲染 46 条事件、8 个分类标签、18 处注音，与根目录一致
 - [x] 无构建步骤，仓库内容即发布内容
 - [x] 无 workflow 文件 —— 与 hanzi-go 一致，用 branch 部署即可
+- [x] 体积 **4.5 MB** / 393 文件（Pages 上限 1 GB）
+- [x] `.nojekyll` 已就位，关掉 Jekyll 对 `_` 前缀文件的处理
+
+**不需要在 GitHub 上跑服务器。** `serve.py` 只是本地替代品 ——
+`fetch` 在 `file://` 下被同源策略拦截，而 Pages 本身就是 HTTP。
+
+首屏只拉 `index.html` ＋ CSS ＋ 4 个 JS ＋ 当天 JSON（约 8 KB）
+＋ 词表（约 10 KB），不会一次下载全部 3 MB 数据。
 
 ⚠ **LICENSE 是公开发布的前置条件**，不是可选项。仓库里有 16,936 条
 维基衍生文本，CC BY-SA 要求署名与相同方式共享；没有 LICENSE 文件的公开仓库

@@ -105,6 +105,55 @@ python3 scripts/check_glossary.py --next 30  # 列出下 30 个待写候选
 ⚠ 可注释上限是 **71.9%** —— 排除名单里的词占全年出现次数的 28.1%，
 它们永远不该被注释。所以「500 词覆盖 50%」已是接近天花板的成绩。
 
+## 部署到 GitHub Pages
+
+**不需要服务器。** GitHub Pages 本身就是 HTTP 服务 ——
+`serve.py` 只是本地开发用的替代品（因为 `file://` 下 `fetch` 被拦）。
+
+```bash
+git remote add origin https://github.com/<用户名>/on-this-day.git
+git push -u origin main
+```
+
+然后在仓库 **Settings → Pages** 里把 Source 设为 `main` 分支的根目录。
+几分钟后站点在 `https://<用户名>.github.io/on-this-day/` 上线。
+
+### 为什么不需要构建步骤
+
+| | |
+|---|---|
+| 无框架、无打包器 | 仓库里的文件就是发布的文件 |
+| 数据已预生成 | 366 天 JSON 随仓库走，运行时不调 API |
+| 词表、标签已离线算好 | 前端只读 `tag` 与 `glossary.json` |
+| 全部路径**相对** | Pages 从 `/<仓库名>/` 子目录提供服务，绝对路径会 404 |
+
+已实测：模拟子目录部署（`/on-this-day/index.html`）下全部资源 200，
+渲染 46 条事件、8 个分类标签、18 处注音 —— 与根目录部署一致。
+
+### 体积
+
+| | |
+|---|---|
+| 发布体积 | **4.5 MB**（Pages 上限 1 GB）|
+| 文件数 | 393（其中 366 个是按天的 JSON）|
+| 最大单文件 | 112 KB（`docs/survey.json`）|
+
+首屏只加载 `index.html` ＋ CSS ＋ 4 个 JS ＋ 1 天的 JSON（约 8 KB）
+＋ 词表（约 10 KB）。**不会一次下载 3 MB。**
+
+### `.nojekyll`
+
+仓库根目录有空文件 `.nojekyll`，用来关掉 Pages 默认的 Jekyll 处理。
+不加的话 Jekyll 会忽略以 `_` 开头的文件和目录。本项目目前没有这类文件，
+但留着它可以避免日后踩坑。
+
+### 一个注意点
+
+Pages 只支持静态文件，所以**将来若想改成实时调 Wikimedia API**，
+浏览器直连是可行的（该 API 的 `access-control-allow-origin: *`），
+但会遇到 §3.2 实测的限流（`retry-after` 13–41 秒）。
+预生成仍是正确选择。
+
 ## 测试
 
 ```bash
