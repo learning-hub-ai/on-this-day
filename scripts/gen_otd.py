@@ -67,6 +67,13 @@ YEAR_RE = re.compile(r'^-?\d+年$|^\d+年代$|^公元前\d+年$')
 #   不命中：「1·2」火灾、8·10 事件  ← 这是日期型事件名，不是人名
 # 实测 15057 条 events 里 0 命中 —— 截断只在 selected 端点出现过
 TRUNC_RE = re.compile(r'·(?=（|\(|，|。|、|；|$|遭|于|被|将|率|在)')
+
+# 「句首丢主语」的特征：以连词起头，或「，（图）」紧跟逗号 ——
+# 上游 selected 端点把人名/国名整个吞掉后留下的痕迹（§10.1c）
+# 「和」后面紧跟汉字也可能是正常词（和谐式客机、和平公投）——
+# 只有「和」「与」单独作连词、后接的不是常见词头时才算残缺。
+# 用否定前瞻排除实测踩到的几个：和谐/和平/和解/与会
+BROKEN_RE = re.compile(r'^(?:(?:和(?!谐|平|解|约|议))|(?:与(?!会|其))|及|、|，)|，（图）')
 # 关联实体最多留几个 —— 卡片底部一行放得下的数量
 MAX_LINKS = 4
 
@@ -386,6 +393,55 @@ def repair_truncated_names(text, titles):
     return text, fixed
 
 
+def repair_from_events_twin(selected, events):
+    """
+    用 `events` 里的完好孪生条目补回 `selected` 的残缺正文（spec.md §10.1c）。
+
+    上游 `selected` 端点**自己**会丢掉句首主语，而同一天的 `events`
+    端点同一件事却是完整的。实测对照 09-04：
+
+        selected: 「和在美国加利福尼亚州成立开发搜寻引擎的Google（图）公司。」
+        events:   「赖利·佩吉和谢尔盖·布林在美国加利福尼亚州门洛公园成立…」
+                   ↑ 主语在这里
+
+    这不是本项目的加工失误 —— `.cache/selected/` 的原始响应就是残缺的
+    （已逐条核对）。所以能修：拿 events 的全文替换。
+
+    配对条件（三者全中才替换，避免张冠李戴）：
+      1. 年份相同
+      2. events 那条本身不残缺
+      3. 两者有足够长的公共子串（≥8 字），确认说的是同一件事
+
+    实测 23 条残缺里 **15 条可补**，剩 8 条 events 端点里也没有完好版本。
+    """
+    if not selected or not events:
+        return 0
+
+    fixed = 0
+    for item in selected:
+        if not BROKEN_RE.search(item['t']):
+            continue
+        for ev in events:
+            if ev['y'] != item['y'] or BROKEN_RE.search(ev['t']):
+                continue
+            # 公共子串检查：取残缺文本去掉句首连词后的一段去比对
+            probe = item['t'].lstrip('和与及、，')[:12]
+            if len(probe) >= 8 and probe[:8] in ev['t']:
+                item['t'] = ev['t']
+                # 关联条目也一并取用 —— events 那条的 pages 更完整
+                if ev.get('u'):
+                    item['u'] = ev['u']
+                    if ev.get('ud'):
+                        item['ud'] = ev['ud']
+                if ev.get('l'):
+                    item['l'] = ev['l']
+                    if ev.get('ld'):
+                        item['ld'] = ev['ld']
+                fixed += 1
+                break
+    return fixed
+
+
 def merge_idempotent(fresh, existing, force=False):
     """
     幂等合并（spec.md §7.1）：重跑不冲掉人工改写，也不清空派生字段。
@@ -474,6 +530,18 @@ def main():
                 'events': [slim(e) for e in events],
             }
 
+            # 上游 selected 端点丢主语的，用同日 events 的完好孪生补回
+            # 必须在 slim() **之后**：比对的是加工后的简体正文（§10.1c）
+            n_twin = repair_from_events_twin(doc['selected'], doc['events'])
+            stats['twin'] = stats.get('twin', 0) + n_twin
+
+            doc = {
+                'date': day,
+                'generated': today,
+                'selected': doc['selected'],
+                'events': doc['events'],
+            }
+
             # 人名截断：自动补回的计数 ＋ 补不回的留给人工（spec.md §10.1）
             for group in ('selected', 'events'):
                 for it in doc[group]:
@@ -509,6 +577,8 @@ def main():
                   f'{time.time() - t0:.0f}s', flush=True)
 
     print('\n' + '=' * 56)
+    if stats.get('twin'):
+        print(f'selected 残缺正文已用 events 孪生补回 {stats["twin"]} 条（§10.1c）')
     print(f'成功 {stats["ok"]} / {len(days)} 天'
           + ('（dry-run，未写文件）' if args.dry_run else ''))
     print(f'体积 {stats["bytes"] / 1024 / 1024:.2f} MB')
