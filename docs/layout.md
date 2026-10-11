@@ -2,9 +2,12 @@
 
 | | |
 |---|---|
-| **版本** | 2.0.0 |
-| **日期** | 2026-10-10 |
+| **版本** | 3.0.0 |
+| **日期** | 2026-10-11 |
 | **配套** | [`spec.md`](spec.md) v2.0.0 |
+
+**v3.0.0 变化**：header 改两行居中（§5.1）；新增领域筛选标签栏（§5.0）；
+图标全部改用 BMP 符号（§7.3）—— 多数 Linux 环境未装 emoji 字体。
 
 **v2.0.0 变化**：主题由暗色改为**亮色**。主方案「暖白纸感」，
 备选方案「清爽现代」并列记录（§4）。两套配色的对比度均已实测。
@@ -73,7 +76,8 @@
 ```
 ┌──────────────────────────────────────────────────────┐
 │  HEADER（固定，56px）                                 │
-│  📅 历史上的今天      [10月 ▾] [09日 ▾]  [回到今天]    │
+│                 ◷ 历史上的今天                        │
+│             [十月 ▾] [09日 ▾] [回到今天]              │
 ├──────────────────────────────────────────────────────┤
 │                                                      │
 │   DATE-HERO                                          │
@@ -86,8 +90,8 @@
 │   │                                             │    │
 │   │ │  ● 2012                                   │    │
 │   │ │    巴基斯坦社会活动家马拉拉遭到…            │    │
-│   │ │    💡 为什么重要：…                        │    │
-│   │ │    🔗 马拉拉 · 塔利班                      │    │
+│   │ │    ※ 为什么重要：…                        │    │
+│   │ │    · 马拉拉 · 塔利班                      │    │
 │   │ │                                           │    │
 │   │ │  ● 2006                                   │    │
 │   │ │    朝鲜在咸镜北道进行地下核试验…            │    │
@@ -187,7 +191,10 @@ hanzi-go 用固定侧边栏（180px）承载年级/学期导航，那是**多层
   --font-year: 'Songti SC','SimSun',Georgia,serif;
 
   /* ---- 尺寸 ---- */
-  --header-h:56px; --content-max:720px; --timeline-x:28px;
+  --header-h:100px;      /* 两行：站名 ＋ 日期控件（窄屏 86px）*/
+  --content-max:720px;   /* 17px 下约 39 字/行，在 28–40 舒适区内 */
+  --filter-max:860px;    /* 筛选栏单独放宽 —— 9 个标签需 767px */
+  --timeline-x:28px;
 }
 ```
 
@@ -363,33 +370,50 @@ B 是一个无需重新设计的退路 —— 两套令牌结构相同，只换�
 
 ⚠ **窄屏改横向滚动**，不回到换行（§6.1）。
 
-### 5.1 Header
+### 5.1 Header — 两行居中
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│ 📅 历史上的今天        [10月▾][09日▾]      [↻ 回到今天] │
+│                  ◷ 历史上的今天                         │
+│              [一月▾] [18日▾] [回到今天]                 │
 └────────────────────────────────────────────────────────┘
-  ← 1fr →            ← auto（居中）→           ← 1fr →
 ```
 
+**纵向两行，都居中。** 第一行站名 21px 衬线体 ——
+它是网站主题，该是最先被看到的东西。第二行日期选择 ＋「回到今天」。
+
 ```css
-header{
-  position:fixed; top:0; left:0; right:0; height:var(--header-h);
+header {
+  position:fixed; top:0; left:0; right:0;
+  min-height:var(--header-h);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:var(--s2);
+  padding:var(--s3) var(--s4);
   background:var(--bg-sunken);
   border-bottom:1px solid var(--border);
-  display:grid; grid-template-columns:1fr auto 1fr;
-  align-items:center; padding:0 var(--s4); z-index:100;
+  z-index:100;
 }
 ```
 
-三列 grid（而非 `space-between`）：两侧 `1fr` 吸收宽度差，
-保证日期选择器**真正居中**，不会因左右元素宽度变化而漂移。
+用 flex 纵向堆叠而非三列 grid：两行各自居中、对齐同一视觉中轴，
+不会因控件宽度变化而漂移。
 
 | 元素 | 规格 |
 |---|---|
-| 站点标题 | 15px / 700 / `--text`；移动端隐藏文字只留 📅 |
-| 日期选择器 | 两个 `<select>`，36px 高，`--bg-card` 底，`--border` 边 |
-| 回到今天 | 次要按钮，`--accent` 文字 ＋ `--border-accent` 边，hover 填 `--accent-wash` |
+| 站名 | 21px / 700 / `--font-serif` / `letter-spacing .08em`；窄屏 18px |
+| 日期选择器 | 两个 `<select>`，36px 高，`--bg-card` 底 |
+| 回到今天 | 紧凑按钮，紧邻日期控件 —— 改完月/日就在手边 |
+
+⚠ **`--header-h` 必须跟着行数改。** 它既是 header 的 `min-height`，
+也是 `body` 的 `padding-top`（header 是 `position:fixed`）——
+从单行 56px 改成两行后若不同步调整，正文会被压在 header 下面。
+现为 **100px**，窄屏 **86px**。
+
+⚠ **删掉了右上角的「回到今天」。** 两行居中布局里它无处可放，
+而日期控件旁已有同功能按钮，保留两个只是重复。
+相应移除 `js/app.js` 的 `btnToday` 引用 ——
+否则 `init()` 的 DOM 存在性检查会报缺节点并直接中止启动。
 
 ### 5.2 Date-Hero
 
@@ -418,10 +442,10 @@ header{
  │   │ 巴基斯坦社会活动家马拉拉遭到武装分子   │
  │   │ 刺杀未遂。                            │
  │   │                                      │
- │   │ 💡 她为女孩上学说话，被枪击后活下来， │
+ │   │ ※ 她为女孩上学说话，被枪击后活下来， │
  │   │    后来成为最年轻的诺贝尔奖得主。      │
  │   │                                      │
- │   │ 🔗 马拉拉 · 塔利班                    │
+ │   │ · 马拉拉 · 塔利班                    │
  │   └──────────────────────────────────────┘
  │
  ●  2006
@@ -496,7 +520,7 @@ header{
 ```
 
 比正文小 2px、颜色更淡 —— 它是补充，不是主体。
-图标 💡 用 `::before` 注入并 `aria-hidden`。
+图标 ※ 用 `::before` 注入并 `aria-hidden`。
 
 ### 5.6 注音（最关键的组件）
 
@@ -562,7 +586,7 @@ header{
 用**实线**下划线与注音的**虚线**区分开 —— 一个是「跳出去」，
 一个是「看解释」，两种交互必须视觉可辨。
 
-卡片底部另列关联条目：`🔗 马拉拉 · 塔利班`，13px / `--text-muted`。
+卡片底部另列关联条目：`· 马拉拉 · 塔利班`，13px / `--text-muted`。
 `links` 为空时（3.4% 的事件，`spec.md` §6.4）不渲染这一行。
 
 ### 5.8 全部事件折叠区
@@ -594,7 +618,7 @@ header{
 ### 5.10 空状态
 
 ```
-        📭
+        ◌
    这一天还没有整理好的事件
 
    换一天看看，或者
@@ -696,6 +720,26 @@ header{
 
 ---
 
+## 7.3 图标一律用 BMP 符号，不用 emoji
+
+多数 Linux 环境**未装 emoji 字体**，星平面字符（U+1F4C5 📅、U+1F680 🚀 等）
+会渲染成豆腐块 ⊠。实测本机 `fc-list | grep -i emoji` 为 0。
+
+所以全部图标改用 BMP 区符号，CJK 字体自带：
+
+| 用途 | 符号 | 原 emoji |
+|---|---|---|
+| 站名 | ◷ | 📅 |
+| 精选标题 | ★ | — |
+| 为什么重要 | ※ | 💡 |
+| 关联条目 | · | 🔗 |
+| 需陪读 | ※ | ⚑ |
+| 空状态 | ◌ | 📭 |
+| 分类 | ✦ ✧ ◉ ◈ ◇ ◎ ○ · | 🚀🔬🏛️⚔️🎭⚽👤📌 |
+
+⚠ 曾因此踩过一次：窄屏规则把站名文字隐藏、只留 📅，
+结果移动端 header 上只剩一个豆腐块，完全看不出这是什么站。
+
 ## 8. 无障碍
 
 | 项 | 要求 |
@@ -712,7 +756,7 @@ header{
 
 ### 8.1 装饰性 emoji
 
-📅 💡 🔗 ⚑ 📭 ★ 用 CSS `::before` 的 `content` 注入，
+◷ ※ · ◌ ★ 用 CSS `::before` 的 `content` 注入，
 或加 `aria-hidden="true"` —— 不让屏幕阅读器念出「灯泡」。
 
 ### 8.2 亮色主题特有的注意点
@@ -732,12 +776,12 @@ header{
 
 ```html
 <header>
-  <div class="site-title"><span aria-hidden="true">📅</span> <span>历史上的今天</span></div>
+  <div class="site-title"><span class="site-mark" aria-hidden="true">◷</span> <span>历史上的今天</span></div>
   <div class="date-picker">
     <select id="selMonth" aria-label="选择月份"></select>
     <select id="selDay"   aria-label="选择日期"></select>
+    <button id="btnTodayInline" class="btn-today-inline" type="button">回到今天</button>
   </div>
-  <button id="btnToday" class="btn-secondary">回到今天</button>
 </header>
 
 <main class="content">
@@ -760,7 +804,7 @@ header{
   </section>
 
   <div class="empty-state" id="emptyState" hidden>
-    <span aria-hidden="true">📭</span>
+    <span class="empty-icon" aria-hidden="true">◌</span>
     <p>这一天还没有整理好的事件</p>
   </div>
 </main>
@@ -786,7 +830,7 @@ header{
     </p>
     <p class="event-why">她为女孩上学说话，被枪击后活下来，后来成为最年轻的诺贝尔奖得主。</p>
     <p class="event-links">
-      <span aria-hidden="true">🔗</span>
+      <span class="links-mark" aria-hidden="true">·</span>
       <a class="entity-link" href="…" rel="noopener noreferrer">马拉拉</a> ·
       <a class="entity-link" href="…" rel="noopener noreferrer">塔利班</a>
     </p>

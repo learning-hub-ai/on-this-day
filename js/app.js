@@ -110,7 +110,6 @@ function bindEvents() {
 
   el.selDay.addEventListener('change', () => show(keyFromSelects()));
 
-  el.btnToday.addEventListener('click', () => show(todayKey()));
   el.btnTodayInline.addEventListener('click', () => show(todayKey()));
 
   // 领域筛选。用事件委托 —— 标签栏每次渲染都会重建
@@ -212,7 +211,6 @@ async function init() {
   Object.assign(el, {
     selMonth: document.getElementById('selMonth'),
     selDay: document.getElementById('selDay'),
-    btnToday: document.getElementById('btnToday'),
     btnTodayInline: document.getElementById('btnTodayInline'),
     evtToggle: document.getElementById('evtToggle'),
     eventsList: document.getElementById('eventsList'),

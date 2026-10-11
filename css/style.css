@@ -71,7 +71,7 @@
   --print-border:#ccc;         /* 打印机对淡色边框表现差，用中灰 */
 
   /* ---- 尺寸 ---- */
-  --header-h:56px;
+  --header-h:100px;      /* 两行：站名 ＋ 日期控件（含上下内距）*/
   --content-max:720px;   /* 17px 下约 39 字/行，在 28–40 舒适区内 */
   --filter-max:860px;    /* 筛选栏单独放宽 —— 9 个标签需 767px，720 装不下 */
   --timeline-x:28px;
@@ -182,27 +182,27 @@ button { cursor:pointer; background:none; border:none; }
 
 /* 三列 grid，而非 space-between —— 两侧 1fr 吸收宽度差，
    保证日期选择器真正居中，不因左右元素宽度变化而漂移（layout.md §5.1）*/
-/* 三列 grid：日期控件在左、站名居中、回到今天在右。
-   站名居中是因为它是网站主题 —— 两侧 1fr 吸收宽度差，
-   保证标题落在真正的视觉中心，不随左右控件宽度漂移。 */
+/* 两行居中：第一行站名（网站主题，视觉焦点），第二行日期选择。
+   纵向堆叠而非三列 —— 站名与日期控件都居中，对齐同一视觉中轴，
+   不会因左右元素宽度变化而漂移。 */
 header {
   position:fixed; top:0; left:0; right:0;
-  height:var(--header-h);
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
+  min-height:var(--header-h);
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:var(--s3);
-  padding:0 var(--s4);
+  justify-content:center;
+  gap:var(--s2);
+  padding:var(--s3) var(--s4);
   background:var(--bg-sunken);
   border-bottom:1px solid var(--border);
   z-index:100;
 }
 
 .site-title {
-  justify-self:center;
   font-family:var(--font-serif);
-  font-size:19px; font-weight:700;
-  letter-spacing:.06em;
+  font-size:21px; font-weight:700;
+  letter-spacing:.08em;
   white-space:nowrap;
 }
 /* 装饰符号。⚠ 不用 emoji —— 多数 Linux 环境未装 emoji 字体，
@@ -210,7 +210,7 @@ header {
 .site-mark { color:var(--accent); margin-right:2px; }
 .links-mark { color:var(--accent-light); margin-right:var(--s1); }
 
-.date-picker { justify-self:start; display:flex; align-items:center; gap:var(--s2); }
+.date-picker { display:flex; align-items:center; gap:var(--s2); }
 
 .date-picker select {
   height:36px;
@@ -221,8 +221,6 @@ header {
   font-size:14px;
 }
 .date-picker select:hover { border-color:var(--border-accent); }
-
-#btnToday { justify-self:end; }
 
 /* 日期控件旁的紧凑「今天」按钮。与右侧的「回到今天」同功能，
    但位置更顺手 —— 改完月/日就在旁边 */
@@ -562,24 +560,13 @@ footer a:hover { color:var(--accent-deep); }
 @media (max-width:767px) {
   :root { --timeline-x:14px; --s7:32px; }
 
-  body {
-    font-size:16px;                        /* 窄屏行长控制 */
-    padding-top:96px;                      /* header 变两行，让开更多 */
-  }
+  body { font-size:16px; }                 /* 窄屏行长控制 */
 
-  /* 窄屏放不下「站名 ＋ 日期控件 ＋ 两个按钮」四组元素。
-     改为两行：上行站名居中，下行日期控件 ＋ 今天。
-     右侧那个「回到今天」隐藏 —— 功能由日期控件旁的「今天」承担 */
-  header {
-    height:auto;
-    grid-template-columns:1fr;
-    justify-items:center;
-    gap:var(--s2);
-    padding:var(--s2) var(--s3);
-  }
-  .site-title { font-size:17px; }
-  .date-picker { justify-self:center; }
-  #btnToday { display:none; }
+  /* header 本就是两行居中（见第 3 节），窄屏只需缩小字号与内距 */
+  /* 窄屏 header 略矮：字号与内距都小一档 */
+  header { padding:var(--s2) var(--s3); gap:var(--s1); }
+  body { padding-top:86px; }
+  .site-title { font-size:18px; letter-spacing:.04em; }
 
   .content { padding:0 var(--s3) var(--s7); }
   .date-hero h1 { font-size:26px; }
@@ -610,7 +597,7 @@ footer a:hover { color:var(--accent-deep); }
 /* 亮色主题的附带好处：学生可能要打印某一天带去学校（layout.md §6.2）*/
 @media print {
   body { background:var(--print-bg); padding-top:0; font-size:12pt; }
-  header, .section-toggle, #btnToday, .empty-state { display:none; }
+  header, .section-toggle, .empty-state { display:none; }
 
   .event-card {
     box-shadow:none;
