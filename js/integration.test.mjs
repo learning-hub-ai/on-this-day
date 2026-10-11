@@ -288,12 +288,15 @@ const bothHtml = nodes.selectedList.innerHTML + nodes.eventsList.innerHTML;
 const withU = [...day.selected, ...day.events].filter(e => e.u).length;
 const mainLinks = (bothHtml.match(/class="event-main-link"/g) || []).length;
 ok(mainLinks === withU, `有 u 的 ${withU} 条都渲染了主链接`, `实际 ${mainLinks}`);
-ok(bothHtml.includes('详情：'), '主链接带「详情」字样');
+// u 是刻意保守的：只在能确认条目描述这件事时才给（§6.4b）。
+// 所以多数事件没有主链接，只在底部列关联条目 —— 这是设计，不是缺陷
+ok(withU < day.total, `主链接是可选的（${withU}/${day.total} 条有）`);
+if (withU) ok(bothHtml.includes('详情：'), '主链接带「详情」字样');
 
 // 主链接必须指向真实维基 URL
 const hrefs = [...bothHtml.matchAll(/class="event-main-link"><a href="([^"]+)"/g)]
   .map(m => m[1]);
-ok(hrefs.length > 0, '抓到主链接 href');
+ok(hrefs.length === withU, `抓到 ${withU} 个主链接 href`);
 // /zh-cn/ 而非 /wiki/ —— 标题保持维基原样（可能繁体，否则 404），
 // 由这个路径前缀让目标页以简体呈现
 ok(hrefs.every(h => h.startsWith('https://zh.wikipedia.org/zh-cn/')),
