@@ -102,16 +102,28 @@ python3 scripts/check_glossary.py --next 30  # 列出下 30 个待写候选
 ## 测试
 
 ```bash
-node js/glossary.test.mjs                 # 词表匹配，14 条断言
-python3 scripts/glossary_algo_check.py    # 同一批断言的 Python 复刻
-python3 scripts/check_glossary.py         # 词表规则校验（5 项，均经反向测试）
+./run-tests.sh          # 全部：93 条断言，自动起停本地服务
 ```
 
-词表校验需要 `pypinyin` 才能核对拼音内容，但它是**可选依赖** ——
-未安装时跳过该项，其余校验照常。
+分开跑：
 
-第二个脚本存在是因为部分环境没有 Node。它验证**算法**，
-查不出 JS 语法与 import 问题 —— 两个都该跑。
+| 命令 | 覆盖 | 断言 |
+|---|---|---|
+| `python3 scripts/check_glossary.py` | 词表规则（5 项，均经反向测试）| — |
+| `python3 scripts/glossary_algo_check.py` | 注音算法的 Python 复刻 | 14 |
+| `node js/glossary.test.mjs` | 注音匹配：最长优先、转义安全 | 21 |
+| `node js/integration.test.mjs` | 端到端：真实 fetch ＋ DOM 替身 | 58 |
+
+集成测试需要本地服务（`api.js` 用相对路径 fetch，Node 的 fetch 不接受
+相对 URL）—— `run-tests.sh` 会自动起停，手动跑则先 `python3 serve.py 8750`。
+
+它覆盖的是单元测试碰不到的部分：全年 366 天逐日载入、年份升序、
+内存缓存命中、空数据回落、公元前年份渲染、XSS 转义，
+以及「含 `&` 的文本跳过注音」这个下标错位的防线。
+
+`pypinyin` 是**可选依赖** —— 装了才核对拼音内容，没装则跳过该项。
+Python 复刻脚本存在是因为部分环境没有 Node；它验证**算法**，
+查不出 JS 语法与 import 问题，所以两边都该跑。
 
 ## 设计取舍
 

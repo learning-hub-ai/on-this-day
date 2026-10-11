@@ -18,8 +18,11 @@ const MONTHS = ['一', '二', '三', '四', '五', '六',
 const el = {};          // 缓存 DOM 查询结果
 let glossary = {};      // 词表，空对象也能正常工作（spec.md §6.2 第 2 条）
 
-/** 把 'MM-DD' 拆成数字 {m, d}；非法输入返回 null */
-function parseKey(key) {
+/**
+ * 把 'MM-DD' 拆成数字 {month, day}；非法输入返回 null。
+ * 导出供 integration.test.mjs 验证 —— 它是纯函数，值得单独测。
+ */
+export function parseKey(key) {
   const m = /^(\d{2})-(\d{2})$/.exec(key || '');
   if (!m) return null;
   const month = Number(m[1]);
@@ -186,8 +189,9 @@ function flipIfClipped(gloss) {
 /**
  * 日期加减，跨月跨年循环（12-31 → 01-01）。
  * 用闰年 2024 做基准，保证 2/29 在序列里。
+ * 导出供测试 —— 跨年回绕是容易写错的边界。
  */
-function shiftDay(key, delta) {
+export function shiftDay(key, delta) {
   const p = parseKey(key);
   if (!p) return key;
   const d = new Date(2024, p.month - 1, p.day + delta);
@@ -219,4 +223,11 @@ async function init() {
   await show(initialKey(), false);
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// 浏览器里自动启动。
+// 条件判断 addEventListener 而非仅判断 document 存在 ——
+// 测试会注入一个只有 getElementById/querySelector 的 document 替身，
+// 只判断 `typeof document !== 'undefined'` 会误以为身处浏览器而崩溃。
+if (typeof document !== 'undefined' &&
+    typeof document.addEventListener === 'function') {
+  document.addEventListener('DOMContentLoaded', init);
+}

@@ -861,7 +861,7 @@ JS 分文件照 hanzi-go 的分法（取数/渲染/事件分开）。
 | 步 | 状态 | 说明 |
 |---|---|---|
 | **1** `gen_otd.py` | ✅ **完成** | 366 天全量：`selected` 1,830 条 ＋ `events` 15,106 条 = **16,936 条，3.02 MB**，0 繁体残留，人名截断自动补回 13/24 |
-| **2** 单页 | ✅ **完成** | 2a 骨架／2b 取数／2c 渲染／2d 注音交互全部完成并验收；另经一轮代码评审（§12.3b）与部署准备（§12.3c）|
+| **2** 单页 | ✅ **完成** | 2a–2d 全部完成；经代码评审（§12.3b）、部署准备（§12.3c）、**JS 首次执行与 93 条断言（§12.3d）** |
 | **3a** 词表 | 🟡 **第一批完成** | 93 词，实测命中 **23.4%** 事件、**366/366 天**。配 91 词排除名单与 `check_glossary.py` 校验。下一批目标 500 词（§12.4）|
 | **3b** 人工内容 | ⬜ 未开始 | 幂等合并已验证，可安全开始 |
 | **4** v1.1 打标 | ⬜ 可选 | 未决定是否做 |
@@ -878,7 +878,9 @@ data/glossary-exclude.json     ← 91 词排除名单，分四类写明原因
 serve.py                       ← 本地 HTTP（file:// 下 fetch 被拦）
 README.md  LICENSE             ← 部署前置（LICENSE 为三层授权，§9.2）
 js/glossary.js                 ← 最长优先匹配，已实现
-js/glossary.test.mjs           ← 14 条断言，⚠ 未执行（本机无 node）
+js/glossary.test.mjs           ← 21 条断言，✅ 已执行通过
+js/integration.test.mjs        ← 58 条端到端断言，✅ 已执行通过
+run-tests.sh                   ← 统一测试入口（自动起停本地服务）
 scripts/gen_otd.py             ← 预生成，已跑通
 scripts/survey_notes.py        ← 词表候选调查
 scripts/glossary_algo_check.py ← 算法验证（Python 复刻），14/14 通过
@@ -1073,6 +1075,59 @@ git add . && git commit -m "初始提交：规格书、布局设计、events 预
 ⚠ **LICENSE 是公开发布的前置条件**，不是可选项。仓库里有 16,936 条
 维基衍生文本，CC BY-SA 要求署名与相同方式共享；没有 LICENSE 文件的公开仓库
 不满足条款。
+
+---
+
+### 12.3d JavaScript 首次执行 ✅（2026-10-11）
+
+此前所有 JS 从未运行过 —— 本机无 node/deno/bun，只有 Python 复刻的算法验证。
+这是整个项目**最大的未验证面**。已装便携版 Node v22 并补齐测试。
+
+**结果：93 条断言全部通过**，且**发现 1 个真实缺陷**。
+
+| 测试 | 断言 | 覆盖 |
+|---|---|---|
+| `js/glossary.test.mjs` | **21** | 最长优先匹配、转义安全、上限截断 |
+| `js/integration.test.mjs` | **58** | 真实 fetch ＋ DOM 替身的端到端链路 |
+| `scripts/glossary_algo_check.py` | 14 | 算法的 Python 复刻（无 node 环境备用）|
+| `scripts/check_glossary.py` | 5 项 | 词表规则 |
+
+`run-tests.sh` 是统一入口，自动起停本地服务。
+
+**发现的缺陷**：`app.js` 末尾的启动守卫写成
+
+```js
+if (typeof document !== 'undefined') { ... }   // ❌ 太弱
+```
+
+集成测试注入的 `document` 替身只有 `getElementById`／`querySelector`，
+这个判断会误以为身处浏览器，于是在 `document.addEventListener` 上崩溃。
+改为同时判断方法存在：
+
+```js
+if (typeof document !== 'undefined' &&
+    typeof document.addEventListener === 'function') { ... }
+```
+
+**集成测试覆盖了单元测试碰不到的部分**：
+
+- `api.js` 的真实 `fetch` 路径 —— **全年 366 天逐日载入**，无空白天、
+  每条都有数字年份、年份升序
+- 内存缓存命中（第二次返回同一对象引用）与 `clearCache` 后重新取数
+- 不存在的日期 → `isEmpty`，不抛错
+- `render.js` 的 DOM 操作：精选 modifier 类、公元前显示「前 N」、
+  空状态切换、外链 `noopener`
+- **`render × glossary` 的接缝**：含 `&` 的文本跳过注音
+  （§8.4 的下标错位防线），正常文本正常注音
+- **XSS**：事件文本里的 `<img src=x onerror=...>` 被转义，无活动标签
+
+为此把 `app.js` 的 `parseKey`／`shiftDay` 改为导出 ——
+它们是纯函数，跨年回绕（`12-31` → `01-01`）是容易写错的边界，
+值得单独测。另加一条闭环检验：连翻 366 天回到原点。
+
+⚠ **仍未验证的部分**：浏览器里的视觉呈现与真实交互
+（hover、点击气泡、键盘焦点、移动端触摸）。DOM 替身只能验证
+「渲染出的 HTML 结构对不对」，验证不了「看起来对不对」。
 
 ---
 
