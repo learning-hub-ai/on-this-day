@@ -33,7 +33,7 @@ python3 serve.py          # → http://127.0.0.1:8000
 | 来源 | [Wikimedia On This Day API](https://api.wikimedia.org)（中文版）|
 | 规模 | 366 天，精选 1,830 条 ＋ 全部事件 15,106 条 = **16,936 条，3.0 MB** |
 | 处理 | `opencc` 繁→简（全量强制）、瘦身、提取关联条目、补回被截断的人名 |
-| 词表 | `data/glossary.json`，93 词，覆盖 23.4% 事件、366/366 天 |
+| 词表 | `data/glossary.json`，93 词，覆盖 23.4% 事件、**366/366 天** |
 
 重新生成：
 
@@ -84,6 +84,13 @@ python3 scripts/check_glossary.py --next 30  # 列出下 30 个待写候选
 1. **注词不注字** —— 给「徭役」而不是单给「徭」
 2. **释义 ≤12 字** —— 这是提示，不是词典
 3. **一条事件最多标 3 个** —— 渲染期约束，超出只标最靠前的
+4. **不得循环** —— 释义里不能用另一个词表条目。
+   「屠杀 → 大批杀害」是坏释义：读者查了还得再查「杀害」
+5. **不得自指** —— 释义不能重复词目 2 个以上的字。
+   「重伤 → 严重的伤」等于没解释
+
+校验脚本会拦住 4 和 5，并用 `pypinyin` 逐条核对拼音**内容** ——
+格式对但注音错，孩子会照着念错。
 
 哪些词**不该收**见 `data/glossary-exclude.json`，分四类并各自写明原因：
 教材未收但不难的（成功、使用）、分词碎片（斐、郡）、音译专名（拿破仑）、
@@ -97,8 +104,11 @@ python3 scripts/check_glossary.py --next 30  # 列出下 30 个待写候选
 ```bash
 node js/glossary.test.mjs                 # 词表匹配，14 条断言
 python3 scripts/glossary_algo_check.py    # 同一批断言的 Python 复刻
-python3 scripts/check_glossary.py         # 词表规则校验
+python3 scripts/check_glossary.py         # 词表规则校验（5 项，均经反向测试）
 ```
+
+词表校验需要 `pypinyin` 才能核对拼音内容，但它是**可选依赖** ——
+未安装时跳过该项，其余校验照常。
 
 第二个脚本存在是因为部分环境没有 Node。它验证**算法**，
 查不出 JS 语法与 import 问题 —— 两个都该跑。
