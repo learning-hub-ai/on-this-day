@@ -340,10 +340,27 @@ header {
 }
 .event-why::before { content:'※ '; color:var(--accent-light); }
 
-/* 关联条目行。u 与 l 都为空时（实测 3.1%）不渲染此行 */
+/* 主链接：这条事件的维基条目。比关联条目显眼 —— 它是「读下去」的入口 */
+.event-main-link {
+  margin-top:var(--s4);
+  font-size:14px;
+}
+.event-main-link a {
+  display:inline-flex; align-items:center; gap:2px;
+  color:var(--accent-deep);
+  text-decoration:none;
+  border-bottom:1px solid var(--border-accent);
+  padding-bottom:1px;
+}
+.event-main-link a:hover {
+  border-bottom-color:var(--accent-deep);
+}
+.link-arrow { font-size:16px; line-height:1; }
+
+/* 关联条目行 —— 延伸阅读，比主链接低一级。l 为空时不渲染 */
 .event-links {
-  margin-top:var(--s3);
-  font-size:13px;
+  margin-top:var(--s2);
+  font-size:12px;
   color:var(--text-muted);
 }
 

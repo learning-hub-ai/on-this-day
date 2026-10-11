@@ -22,6 +22,8 @@ python3 serve.py          # → http://127.0.0.1:8000
 - 任意日期可查，含 2/29；URL 形如 `#10-09`，可分享可收藏
 - **按领域筛选**：8 个分类，点击即筛，再点取消。
   标签只显示当天实有的分类 —— 点任何一个都一定有内容
+- **每条事件带「详细了解」链接**，指向最能描述该事件的维基条目；
+  底部另列关联条目作延伸阅读
 - 维基编者精选条目置顶，附自编的「为什么重要」
 - 难词注音：浅色虚下划线，点击或悬浮看拼音与极短释义
 - 键盘左右箭头翻天；Esc 收起气泡
@@ -48,6 +50,8 @@ python3 scripts/gen_otd.py --days 10-09 # 单日
 python3 scripts/gen_otd.py --dry-run    # 不写文件
 
 python3 scripts/tag_events.py           # 打领域标签（写入 tag 字段）
+# ⚠ 顺序：先 gen_otd 再 tag_events。gen_otd 会保留已有 tag，
+#   但新抓的日期需要补打标签
 python3 scripts/tag_events.py --dry-run --sample 10   # 只统计 ＋ 抽样核验
 ```
 

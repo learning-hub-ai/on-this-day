@@ -39,7 +39,7 @@ try {
 }
 
 const { loadDay, clearCache, toKey, daysInMonth } = await import('./api.js');
-const { renderDay, escapeHtml } = await import('./render.js');
+const { renderDay, escapeHtml, wikiUrl } = await import('./render.js');
 const { loadGlossary, findMarks } = await import('./glossary.js');
 
 /* ============ api.js：真实 fetch ============ */
@@ -227,7 +227,7 @@ ok(k === '01-01', '连翻 366 天回到原点');
 /* ============ 领域筛选 ============ */
 section('领域筛选');
 
-const { setCategory, getCategory, CATEGORY_ORDER } = await import('./render.js');
+const { setCategory, getCategory, CATEGORY_ORDER, displayTitle } = await import('./render.js');
 
 // 每条事件都该有 tag
 const tagged = [...day.selected, ...day.events];
@@ -273,6 +273,56 @@ ok(shown.every(c => (counts.get(c) || 0) > 0),
    '标签栏里每个分类当天都有事件');
 
 setCategory(null);   // 还原，免得影响后续断言
+
+/* ============ 事件主链接 ============ */
+section('事件主链接');
+
+// 每条有 u 的事件都该渲染「详细了解」行
+setCategory(null);
+renderDay(day, words);
+const bothHtml = nodes.selectedList.innerHTML + nodes.eventsList.innerHTML;
+const withU = [...day.selected, ...day.events].filter(e => e.u).length;
+const mainLinks = (bothHtml.match(/class="event-main-link"/g) || []).length;
+ok(mainLinks === withU, `有 u 的 ${withU} 条都渲染了主链接`, `实际 ${mainLinks}`);
+ok(bothHtml.includes('详细了解：'), '主链接带「详细了解」字样');
+
+// 主链接必须指向真实维基 URL
+const hrefs = [...bothHtml.matchAll(/class="event-main-link"><a href="([^"]+)"/g)]
+  .map(m => m[1]);
+ok(hrefs.length > 0, '抓到主链接 href');
+ok(hrefs.every(h => h.startsWith('https://zh.wikipedia.org/wiki/')),
+   '主链接全部指向中文维基');
+ok(hrefs.every(h => !h.includes(' ')), '主链接已 URL 编码');
+
+// u 不该重复出现在关联条目行里 —— 那会是同一个链接点两次
+const dupes = [...day.selected, ...day.events]
+  .filter(e => e.u && (e.l || []).includes(e.u)).length;
+ok(dupes === 0, 'u 不与 l 重复', `重复 ${dupes} 条`);
+
+// 消歧义后缀：显示用全角括号，URL 仍用原标题
+ok(displayTitle('纵贯线_(台铁)') === '纵贯线（台铁）', '消歧义后缀转全角括号');
+ok(displayTitle('海卫一') === '海卫一', '普通标题不变');
+ok(wikiUrl('纵贯线_(台铁)').includes(encodeURIComponent('纵贯线_(台铁)')),
+   'URL 保留原始下划线标题');
+// 只检查**可见文字**，不检查 href —— URL 里的下划线是必需的
+const visibleText = bothHtml.replace(/href="[^"]*"/g, '');
+ok(!visibleText.includes('_('), '可见文字里不出现裸的 _( 后缀');
+ok(bothHtml.includes('%29') || bothHtml.includes('_('),
+   'href 里仍保留消歧义后缀（URL 需要它）');
+
+// 无 u 也无 l 的事件（实测 3.1%）不该渲染任何链接行
+const noLink = [...day.selected, ...day.events].filter(e => !e.u && !e.l);
+if (noLink.length) {
+  renderDay({ key: '01-01', selected: [noLink[0]], events: [], total: 1,
+              isEmpty: false, generated: '2026-10-10' }, words);
+  const h = nodes.selectedList.innerHTML;
+  ok(!h.includes('event-main-link') && !h.includes('event-links'),
+     '无链接的事件不渲染链接行');
+} else {
+  console.log('  ⓘ 当天没有无链接事件，跳过');
+}
+
+setCategory(null);
 
 console.log(`\n${'─'.repeat(44)}`);
 console.log(`通过 ${pass} / 失败 ${fail}`);

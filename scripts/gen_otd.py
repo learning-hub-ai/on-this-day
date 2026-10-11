@@ -70,6 +70,22 @@ TRUNC_RE = re.compile(r'·(?=（|\(|，|。|、|；|$|遭|于|被|将|率|在)')
 # 关联实体最多留几个 —— 卡片底部一行放得下的数量
 MAX_LINKS = 4
 
+# 「事件型条目」的特征词。用于挑选最能**描述这件事**的主条目（spec.md §6.4b）
+#
+# 背景：API 的 pages[] 没有「哪一条是本事件的条目」这种标记，
+# 顺序也不代表相关度。实测 15.8% 的事件里，第一个条目是人物或地名，
+# 而列表后面才有真正描述该事件的条目：
+#   「能登半岛发生 7.6 地震」 pages[0]=石川县，但列表里有「2024年能登半岛地震」
+#   「卡斯特罗领导革命军控制哈瓦那」 pages[0]=菲德尔·卡斯特罗，但有「古巴革命」
+# 所以按特征词给条目打分，挑最像「事件本身」的那个当主链接。
+EVENT_TITLE_HINTS = (
+    '战争', '战役', '事件', '革命', '条约', '协定', '公约', '宣言', '运动',
+    '惨案', '危机', '起义', '政变', '暴动', '屠杀', '会议', '大会', '峰会',
+    '空难', '地震', '海啸', '飓风', '台风', '爆炸', '火灾', '沉没', '坠毁',
+    '选举', '公投', '条例', '法案', '计划', '任务', '号', '杯', '奥运',
+    '锦标赛', '博览会', '危机', '封锁', '围城', '远征', '登陆',
+)
+
 
 def s2(text):
     """
@@ -188,6 +204,35 @@ def load_selected(day):
     return data.get('selected', []), False
 
 
+def pick_main_title(titles, text):
+    """
+    从关联条目里挑出最能**描述这件事**的一个，作为主链接 `u`。
+
+    API 不提供「本事件的条目」标记，pages[] 的顺序也不代表相关度，
+    所以只能按启发式打分：
+
+      +4  标题含事件型特征词（战役/地震/革命/条约…）
+      +2  标题整体出现在事件文本里（说明是这句话的主题）
+      +1  标题较长（更具体，「2024年能登半岛地震」优于「地震」）
+
+    ⚠ 这是启发式，会选错。但比「取第一个」好得多 ——
+      实测后者在 15.8% 的事件上选了人物或地名而非事件本身。
+    """
+    if not titles:
+        return None
+
+    def score(t):
+        s = 0
+        if any(h in t for h in EVENT_TITLE_HINTS):
+            s += 4
+        if t in text:
+            s += 2
+        s += min(len(t), 12) / 12        # 长度作为弱权重，最多 +1
+        return s
+
+    return max(titles, key=score)
+
+
 def slim(raw):
     """
     一条原始事件 → 产物格式（spec.md §6.1）。
@@ -210,10 +255,14 @@ def slim(raw):
     item['t'], n_fixed = repair_truncated_names(item['t'], titles)
     if n_fixed:
         item['_fixed'] = n_fixed       # 供统计，写文件前剔除
+
     if titles:
-        item['u'] = titles[0]
-        if len(titles) > 1:
-            item['l'] = titles[1:MAX_LINKS + 1]
+        # u = 最能描述这件事的条目；l = 其余关联条目（见 §6.4b）
+        main = pick_main_title(titles, item['t'])
+        item['u'] = main
+        others = [t for t in titles if t != main][:MAX_LINKS]
+        if others:
+            item['l'] = others
     return item
 
 
@@ -221,6 +270,14 @@ def is_hand_edited(item):
     """人工编辑过的标志：写了 why、notes、sensitive，或 src 改成了 own。"""
     return bool(item.get('why') or item.get('notes')
                 or item.get('sensitive') or item.get('src') == 'own')
+
+
+# 由其他脚本写入、本脚本不该覆盖的字段
+#
+# ⚠ `tag` 由 scripts/tag_events.py 写入。本脚本重跑时若不保留，
+#   标签会被静默清空，前端的分类筛选栏就空了 —— 实测踩过一次。
+#   所以 --force 也必须保留这些字段，只重算 API 来源的部分。
+DERIVED_FIELDS = ('tag',)
 
 
 def repair_truncated_names(text, titles):
@@ -269,15 +326,16 @@ def repair_truncated_names(text, titles):
     return text, fixed
 
 
-def merge_idempotent(fresh, existing):
+def merge_idempotent(fresh, existing, force=False):
     """
-    幂等合并（spec.md §7.1）：重跑不冲掉人工改写。
+    幂等合并（spec.md §7.1）：重跑不冲掉人工改写，也不清空派生字段。
 
     按 (y, t 前 12 字) 配对 —— 文本可能被人工改写，所以用前缀而非全文。
     配到的旧条目若已人工编辑，整条保留，只补 API 新增的结构字段。
+    `tag` 这类派生字段**无论是否人工编辑都保留**（见 DERIVED_FIELDS）。
     """
     if not existing:
-        return fresh
+        return fresh, 0
     old_map = {}
     for group in ('selected', 'events'):
         for it in existing.get(group) or []:
@@ -287,12 +345,19 @@ def merge_idempotent(fresh, existing):
     kept = 0
     for it in fresh:
         old = old_map.get((it.get('y'), (it.get('t') or '')[:12]))
-        if old and is_hand_edited(old):
+        if not old:
+            out.append(it)
+            continue
+        if is_hand_edited(old) and not force:
             merged = dict(it)          # 先取新的结构字段（l / u）
             merged.update(old)         # 人工内容覆盖之，优先级更高
             out.append(merged)
             kept += 1
         else:
+            # 未人工编辑：用新数据，但保住派生字段（tag 等）
+            for field in DERIVED_FIELDS:
+                if field in old:
+                    it[field] = old[field]
             out.append(it)
     return out, kept
 
@@ -356,12 +421,15 @@ def main():
                     if TRUNC_RE.search(it['t']):
                         stats['trunc'].append(f"{day} {it['t'][:48]}")
 
+            # 即使 --force 也要读旧文件 —— 派生字段（tag）必须保留，
+            # 否则 tag_events.py 的成果会被静默清空
             out_path = os.path.join(OUT_DIR, f'{day}.json')
-            if os.path.exists(out_path) and not args.force:
+            if os.path.exists(out_path):
                 with open(out_path, encoding='utf-8') as f:
                     existing = json.load(f)
                 for group in ('selected', 'events'):
-                    doc[group], kept = merge_idempotent(doc[group], existing)
+                    doc[group], kept = merge_idempotent(
+                        doc[group], existing, force=args.force)
                     stats['kept'] += kept
 
             blob = json.dumps(doc, ensure_ascii=False, separators=(',', ':'))
