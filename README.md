@@ -2,6 +2,8 @@
 
 按日期浏览历史上发生过的有影响力的事件。面向 10–18 岁的中文读者，以六年级为设计基准。
 
+**在线使用**：https://learning-hub-ai.github.io/on-this-day/
+
 纯前端单页，无后端、无构建、无运行时依赖。全年 366 天数据预生成后随仓库发布，
 断网也能用。
 
@@ -114,6 +116,8 @@ python3 scripts/check_glossary.py --next 30  # 列出下 30 个待写候选
 
 ## 部署到 GitHub Pages
 
+**已部署**：https://learning-hub-ai.github.io/on-this-day/
+
 **不需要服务器。** GitHub Pages 本身就是 HTTP 服务 ——
 `serve.py` 只是本地开发用的替代品（因为 `file://` 下 `fetch` 被拦）。
 
@@ -124,6 +128,14 @@ git push -u origin main
 
 然后在仓库 **Settings → Pages** 里把 Source 设为 `main` 分支的根目录。
 几分钟后站点在 `https://<用户名>.github.io/on-this-day/` 上线。
+
+⚠ 若同一账号下多个仓库各用一个 **fine-grained token**，推送前需要：
+
+```bash
+git config --global credential.useHttpPath true
+```
+
+否则 git 只按主机名匹配凭据，会把别的仓库的 token 发给 GitHub 而被拒。
 
 ### 为什么不需要构建步骤
 
