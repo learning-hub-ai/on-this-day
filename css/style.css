@@ -260,15 +260,36 @@ header {
   color:var(--text-muted);
 }
 
-/* 日期出处。比副标题更淡 —— 是溯源信息，不抢正文注意力，
-   但必须存在：它是「这件事发生在这一天」这个声明的依据 */
+/* 日期出处。必须看得出是可点的链接 —— 它承载「这件事凭什么发生在这一天」
+   的依据，读者要能一眼发现并点进去核对。
+   初版把它做成与周围同色的 12px 文字 ＋ 细下划线，实测几乎看不出是链接。
+   改为：赭红文字 ＋ 浅底药丸 ＋ 箭头，做成明确的可点控件。 */
 .hero-source {
-  margin-top:var(--s1);
+  margin-top:var(--s3);
   font-size:12px;
   color:var(--text-muted);
 }
-.hero-source a { color:var(--text-muted); text-decoration:underline; }
-.hero-source a:hover { color:var(--accent-deep); }
+.hero-source a {
+  display:inline-flex; align-items:center; gap:3px;
+  margin-left:var(--s1);
+  padding:2px var(--s2);
+  color:var(--accent-deep);
+  background:var(--accent-wash);
+  border:1px solid var(--border-accent);
+  border-radius:var(--r-full);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background var(--fast) var(--ease),
+             border-color var(--fast) var(--ease);
+}
+.hero-source a:hover {
+  background:var(--bg-card);
+  border-color:var(--accent);
+}
+.hero-source a::after {
+  content:'↗';                 /* 外链指示 —— 新窗口打开 */
+  font-size:11px;
+}
 
 /* 标题下的短横，像文章题下的分隔线 */
 .date-hero::after {
