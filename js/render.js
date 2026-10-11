@@ -294,7 +294,7 @@ export function renderDay(day, words = {}) {
     const [m, dd] = day.key.split('-').map(Number);
     const page = `${m}月${dd}日`;
     d.sourceLink.href = wikiUrl(page);
-    d.sourceLink.textContent = `查看维基百科「${page}」原始条目`;
+    d.sourceLink.textContent = `维基百科「${page}」原始条目`;
   }
 
   if (day.isEmpty) {
