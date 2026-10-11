@@ -239,11 +239,18 @@ def slim(raw):
 
     只存条目**标题**，不存 URL —— 完整 percent-encoded URL 约 84 字节，
     标题约 18 字节，差 5 倍。前端用 encodeURIComponent 还原（spec.md §6.4）。
+
+    ⚠ **条目标题绝不做繁简转换。** 标题是维基的条目标识符，不是正文 ——
+      `市場花園行動` 转成 `市场花园行动` 后那个条目根本不存在，链接 404。
+      实测抽查 60 个标题有 11 个因此失效（18%）。
+      正文（`t`）必须转简体给读者看；标题（`u`/`l`）必须保持原样给 URL 用。
+      两者目的不同，不能一起处理。
     """
     titles = []
     for p in raw.get('pages') or []:
-        t = s2(p.get('title', '')).strip()
-        if t and not YEAR_RE.match(t) and t not in titles:
+        # 不转简体 —— 见上方警告
+        t = (p.get('title') or '').strip()
+        if t and not YEAR_RE.match(s2(t)) and t not in titles:
             titles.append(t)
 
     item = {
@@ -251,8 +258,13 @@ def slim(raw):
         't': s2(raw.get('text', '')),
         'src': 'wiki',
     }
-    # 补回被截断的人名（spec.md §10.1）。实测 24 条里 22 条可自动补回
-    item['t'], n_fixed = repair_truncated_names(item['t'], titles)
+    # 补回被截断的人名（spec.md §10.1）。实测 24 条里 13 条可自动补回
+    #
+    # ⚠ 传**转成简体**的标题 —— titles 本身保持维基原样（可能是繁体，
+    #   因为 URL 要用），但这里是把人名插进已转简体的正文，
+    #   不转换会在简体句子里留下「卡西姆·蘇萊曼尼」这种混排。
+    item['t'], n_fixed = repair_truncated_names(
+        item['t'], [s2(t) for t in titles])
     if n_fixed:
         item['_fixed'] = n_fixed       # 供统计，写文件前剔除
 
@@ -263,6 +275,17 @@ def slim(raw):
         others = [t for t in titles if t != main][:MAX_LINKS]
         if others:
             item['l'] = others
+
+        # 显示用的简体变体。标题本身必须保持维基原样（URL 要用），
+        # 但读者读简体 —— 所以预生成时另存一份转换后的文字。
+        # 只在与原标题不同时才写，避免 366 个文件白白变大。
+        main_disp = s2(main)
+        if main_disp != main:
+            item['ud'] = main_disp
+        if others:
+            others_disp = [s2(t) for t in others]
+            if others_disp != others:
+                item['ld'] = others_disp
     return item
 
 

@@ -294,8 +294,10 @@ ok(bothHtml.includes('详情：'), '主链接带「详情」字样');
 const hrefs = [...bothHtml.matchAll(/class="event-main-link"><a href="([^"]+)"/g)]
   .map(m => m[1]);
 ok(hrefs.length > 0, '抓到主链接 href');
-ok(hrefs.every(h => h.startsWith('https://zh.wikipedia.org/wiki/')),
-   '主链接全部指向中文维基');
+// /zh-cn/ 而非 /wiki/ —— 标题保持维基原样（可能繁体，否则 404），
+// 由这个路径前缀让目标页以简体呈现
+ok(hrefs.every(h => h.startsWith('https://zh.wikipedia.org/zh-cn/')),
+   '主链接指向中文维基的简体变体路径');
 ok(hrefs.every(h => !h.includes(' ')), '主链接已 URL 编码');
 
 // 外链必须新开页 —— 点进去就离开本站，不该顶掉当前日期
@@ -318,6 +320,22 @@ ok(displayTitle('纵贯线_(台铁)') === '纵贯线（台铁）', '消歧义后
 ok(displayTitle('海卫一') === '海卫一', '普通标题不变');
 ok(wikiUrl('纵贯线_(台铁)').includes(encodeURIComponent('纵贯线_(台铁)')),
    'URL 保留原始下划线标题');
+
+// 繁体标题必须原样进 URL —— 转成简体那个条目就不存在了（实测 18% 失效）
+ok(wikiUrl('市場花園行動').includes(encodeURIComponent('市場花園行動')),
+   '繁体标题原样进 URL');
+const tradTitled = [...day.selected, ...day.events].filter(e => e.ud);
+if (tradTitled.length) {
+  const e0 = tradTitled[0];
+  ok(e0.ud !== e0.u, 'ud 是 u 的简体变体，两者不同');
+  renderDay({ key: '01-01', selected: [e0], events: [], total: 1,
+              isEmpty: false, generated: '2026-10-10' }, words);
+  const h0 = nodes.selectedList.innerHTML;
+  ok(h0.includes(encodeURIComponent(e0.u)), 'href 用原标题（繁体）');
+  ok(h0.includes(e0.ud), '显示用简体变体');
+} else {
+  console.log('  ⓘ 当天无繁体标题事件，跳过');
+}
 // 只检查**可见文字**，不检查 href —— URL 里的下划线是必需的
 const visibleText = bothHtml.replace(/href="[^"]*"/g, '');
 ok(!visibleText.includes('_('), '可见文字里不出现裸的 _( 后缀');

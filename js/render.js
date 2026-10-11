@@ -12,7 +12,7 @@
 
 import { applyMarksSafe } from './glossary.js';
 
-const WIKI_BASE = 'https://zh.wikipedia.org/wiki/';
+const WIKI_BASE = 'https://zh.wikipedia.org/zh-cn/';
 
 /**
  * 分类的显示顺序与图标。顺序与 scripts/tag_events.py 的 CATEGORIES 一致。
@@ -78,6 +78,11 @@ export function escapeHtml(s) {
  * 数据里只存标题（标题 18 字节 vs 完整 URL 84 字节，spec.md §6.4），
  * URL 在此还原。
  *
+ * ⚠ 用 `/zh-cn/` 而非 `/wiki/`：
+ *   条目标题保持维基原样（可能是繁体，否则链接 404，见 gen_otd.slim），
+ *   但 `/zh-cn/` 让目标页面以**简体**呈现 —— 受众读简体。
+ *   两个需求靠这个路径前缀同时满足。
+ *
  * ⚠ 标题里的下划线是维基 URL 的词间分隔符，**必须保留** ——
  *   `纵贯线_(台铁)` 去掉下划线就打不开了。
  */
@@ -88,12 +93,16 @@ export function wikiUrl(title) {
 /**
  * 条目标题 → 适合展示的文字。
  *
- * 维基用 `_(消歧义)` 后缀区分同名条目：`纵贯线_(台铁)`、
- * `圣荷西_(加利福尼亚州)`。实测全年有 1,763 处。
- * 直接显示会露出下划线这种 URL 内部结构，对读者是噪音 ——
- * 改成全角括号，并把下划线还原成空格。
+ * 去掉维基的消歧义后缀：`_(消歧义)` 用于区分同名条目
+ * （`纵贯线_(台铁)`、`圣荷西_(加利福尼亚州)`），实测全年 1,763 处。
+ * 直接显示会露出下划线这种 URL 内部结构，对读者是噪音。
  *
- * ⚠ 只改**显示**，URL 仍用原始标题（见 wikiUrl）。
+ * ⚠ **不在这里做繁简转换。** 标题可能是繁体（为了 URL 正确），
+ *   但转换需要 908 个字的映射表 —— 放进前端与「零依赖」冲突。
+ *   改为预生成时产出 `ud`/`ld`（display 变体）字段，
+ *   前端优先用它，缺失时回落到原标题。见 gen_otd.slim。
+ *
+ * 只改**显示**，URL 仍用原始标题（见 wikiUrl）。
  */
 export function displayTitle(title) {
   return String(title ?? '')
@@ -172,17 +181,19 @@ function renderEvent(item, words, isSelected) {
     parts.push(
       `<p class="event-main-link"><a href="${wikiUrl(item.u)}"` +
       ` target="_blank" rel="noopener noreferrer" hreflang="zh">` +
-      `详情：${escapeHtml(displayTitle(item.u))}` +
+      `详情：${escapeHtml(displayTitle(item.ud || item.u))}` +
       `<span class="link-arrow" aria-hidden="true">›</span></a></p>`
     );
   }
 
   // 其余关联条目。u 与 l 都为空时不渲染（实测 3.1%，spec.md §6.4）
   if (others.length) {
-    const links = others.map(t =>
+    // href 用原标题（URL 要求），显示用简体变体 ld（缺失则回落原标题）
+    const disp = item.ld || others;
+    const links = others.map((t, i) =>
       `<a class="entity-link" href="${wikiUrl(t)}"` +
       ` target="_blank" rel="noopener noreferrer" hreflang="zh">` +
-      `${escapeHtml(displayTitle(t))}</a>`
+      `${escapeHtml(displayTitle(disp[i] ?? t))}</a>`
     ).join(' · ');
     parts.push('<p class="event-links">' +
                `<span class="links-mark" aria-hidden="true">·</span> ${links}</p>`);
