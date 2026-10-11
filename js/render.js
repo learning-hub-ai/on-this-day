@@ -161,13 +161,13 @@ function renderEvent(item, words, isSelected) {
   }
 
   // 主链接：最能描述这件事的维基条目（gen_otd.pick_main_title 挑的）。
-  // 单独一行、带「详细了解」字样 —— 底部那行关联条目是「延伸阅读」，
+  // 单独一行、带「详情」字样 —— 底部那行关联条目是「延伸阅读」，
   // 两者作用不同，不能混在一起（spec.md §6.4b）
   if (item.u) {
     parts.push(
       `<p class="event-main-link"><a href="${wikiUrl(item.u)}"` +
       ` rel="noopener noreferrer" hreflang="zh">` +
-      `详细了解：${escapeHtml(displayTitle(item.u))}` +
+      `详情：${escapeHtml(displayTitle(item.u))}` +
       `<span class="link-arrow" aria-hidden="true">›</span></a></p>`
     );
   }

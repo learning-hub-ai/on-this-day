@@ -281,14 +281,14 @@ setCategory(null);   // 还原，免得影响后续断言
 /* ============ 事件主链接 ============ */
 section('事件主链接');
 
-// 每条有 u 的事件都该渲染「详细了解」行
+// 每条有 u 的事件都该渲染「详情」行
 setCategory(null);
 renderDay(day, words);
 const bothHtml = nodes.selectedList.innerHTML + nodes.eventsList.innerHTML;
 const withU = [...day.selected, ...day.events].filter(e => e.u).length;
 const mainLinks = (bothHtml.match(/class="event-main-link"/g) || []).length;
 ok(mainLinks === withU, `有 u 的 ${withU} 条都渲染了主链接`, `实际 ${mainLinks}`);
-ok(bothHtml.includes('详细了解：'), '主链接带「详细了解」字样');
+ok(bothHtml.includes('详情：'), '主链接带「详情」字样');
 
 // 主链接必须指向真实维基 URL
 const hrefs = [...bothHtml.matchAll(/class="event-main-link"><a href="([^"]+)"/g)]
