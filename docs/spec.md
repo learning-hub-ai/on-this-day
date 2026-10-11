@@ -776,7 +776,7 @@ const wikiUrl = t => 'https://zh.wikipedia.org/wiki/' + encodeURIComponent(t);
 | 要求 | 做法 |
 |---|---|
 | XSS | `escapeHtml` 转义**所有** API 文本（第三方内容，当不可信处理）|
-| 外链 | `rel="noopener noreferrer"` |
+| 外链 | **`target="_blank"`**（离开本站不该顶掉当前页）＋ `rel="noopener noreferrer"` |
 | 无障碍 | 表单控件带 `aria-label`；注音触发元素可键盘聚焦 |
 | 键盘 | 日期选择与折叠可键盘操作 |
 | 焦点 | `:focus-visible` 可见焦点环 |

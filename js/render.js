@@ -160,13 +160,18 @@ function renderEvent(item, words, isSelected) {
                '<span class="sensitive-badge">※ 建议和家长一起读</span></p>');
   }
 
+  // 所有外链一律 target="_blank" —— 点进去就离开本站了，
+  // 不该顶掉用户正在浏览的日期。rel="noopener noreferrer" 是配套的
+  // 安全要求：前者断开 window.opener 防新页面反向操作本页，
+  // 后者不泄露来源 URL。
+  //
   // 主链接：最能描述这件事的维基条目（gen_otd.pick_main_title 挑的）。
   // 单独一行、带「详情」字样 —— 底部那行关联条目是「延伸阅读」，
   // 两者作用不同，不能混在一起（spec.md §6.4b）
   if (item.u) {
     parts.push(
       `<p class="event-main-link"><a href="${wikiUrl(item.u)}"` +
-      ` rel="noopener noreferrer" hreflang="zh">` +
+      ` target="_blank" rel="noopener noreferrer" hreflang="zh">` +
       `详情：${escapeHtml(displayTitle(item.u))}` +
       `<span class="link-arrow" aria-hidden="true">›</span></a></p>`
     );
@@ -176,7 +181,8 @@ function renderEvent(item, words, isSelected) {
   if (others.length) {
     const links = others.map(t =>
       `<a class="entity-link" href="${wikiUrl(t)}"` +
-      ` rel="noopener noreferrer" hreflang="zh">${escapeHtml(displayTitle(t))}</a>`
+      ` target="_blank" rel="noopener noreferrer" hreflang="zh">` +
+      `${escapeHtml(displayTitle(t))}</a>`
     ).join(' · ');
     parts.push('<p class="event-links">' +
                `<span class="links-mark" aria-hidden="true">·</span> ${links}</p>`);

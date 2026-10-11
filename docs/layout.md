@@ -576,6 +576,21 @@ header {
 用 B 时须把注音下划线改为 `--accent` `#2563eb`（5.17:1），
 或加粗到 2px。方案 A 的 3.29:1 刚过线，可用。
 
+### 5.6b 外链一律新开页
+
+点维基链接就离开本站了，不该顶掉用户正在浏览的日期 ——
+回来还得重新选一次。所以**全部外链带 `target="_blank"`**：
+事件主链接、关联条目、footer 的维基与许可证链接。
+
+`target="_blank"` 必须配 `rel="noopener noreferrer"`：
+
+| 属性 | 作用 |
+|---|---|
+| `noopener` | 断开 `window.opener` —— 否则新页面能用 JS 反向操作本页（标签钓鱼） |
+| `noreferrer` | 不发送 `Referer`，不泄露来源 URL |
+
+实测浏览器渲染后 **144 个链接全部带齐两者**，并由集成测试断言守住。
+
 ### 5.7 实体内链
 
 ```css
@@ -752,7 +767,7 @@ header {
 | 折叠区 | `aria-expanded` ＋ `aria-controls` |
 | 注音 | `tabindex="0"` 可聚焦；`aria-expanded` 标状态；气泡 `role="tooltip"` |
 | 时间轴 | `<ol>` 语义列表（事件有顺序）；竖线与圆点是 `::before` 纯装饰 |
-| 外链 | `rel="noopener noreferrer"`；指向维基时标 `hreflang="zh"` |
+| 外链 | **`target="_blank"`** ＋ `rel="noopener noreferrer"`；指向维基时标 `hreflang="zh"` |
 | 焦点环 | 全局 `:focus-visible`，不用 `outline:none` |
 | 对比度 | 见 §3.2（方案 A）/ §4.2（方案 B），正文与元信息均过 AA |
 | 点击目标 | 移动端 ≥44×44px（折叠触发行、注音词、按钮）|

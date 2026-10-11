@@ -298,6 +298,16 @@ ok(hrefs.every(h => h.startsWith('https://zh.wikipedia.org/wiki/')),
    '主链接全部指向中文维基');
 ok(hrefs.every(h => !h.includes(' ')), '主链接已 URL 编码');
 
+// 外链必须新开页 —— 点进去就离开本站，不该顶掉当前日期
+const anchors = [...bothHtml.matchAll(/<a\b[^>]*>/g)].map(m => m[0]);
+ok(anchors.length > 0, `抓到 ${anchors.length} 个链接`);
+ok(anchors.every(a => a.includes('target="_blank"')),
+   '所有外链带 target="_blank"',
+   anchors.filter(a => !a.includes('target="_blank"'))[0] || '');
+// target="_blank" 必须配 noopener：否则新页面能通过 window.opener 操作本页
+ok(anchors.every(a => a.includes('rel="noopener noreferrer"')),
+   '所有外链带 rel="noopener noreferrer"');
+
 // u 不该重复出现在关联条目行里 —— 那会是同一个链接点两次
 const dupes = [...day.selected, ...day.events]
   .filter(e => e.u && (e.l || []).includes(e.u)).length;
