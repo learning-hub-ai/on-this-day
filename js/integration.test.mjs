@@ -127,7 +127,11 @@ for (const id of ['heroDate', 'heroMeta', 'selectedList', 'eventsList',
                   'evtCount', 'emptyState', 'fetchDate']) {
   nodes[id] = makeNode(id);
 }
-for (const id of ['filterBar']) { nodes[id] = makeNode(id); }
+for (const id of ['filterBar', 'evtToggle']) { nodes[id] = makeNode(id); }
+// evtToggle 需要 aria 属性读写
+nodes.evtToggle._attrs = {};
+nodes.evtToggle.setAttribute = function (k, v) { this._attrs[k] = v; };
+nodes.evtToggle.getAttribute = function (k) { return this._attrs[k] ?? null; };
 for (const sel of ['.selected-section', '.events-section', '.content']) {
   nodes[sel] = makeNode(sel);
 }
@@ -323,6 +327,50 @@ if (noLink.length) {
 }
 
 setCategory(null);
+
+/* ============ 精选为空时自动展开 ============ */
+section('精选为空时自动展开全部事件');
+
+const { setEventsExpanded, isEventsExpanded } = await import('./render.js');
+
+// 有精选时：默认收起
+setCategory(null);
+setEventsExpanded(false);
+renderDay(day, words);
+ok(day.selected.length > 0, '测试前提：当天有精选');
+ok(isEventsExpanded() === false, '有精选时「全部事件」保持收起');
+ok(nodes.eventsList.hidden === true, 'eventsList 已隐藏');
+
+// 构造「精选为空但有其余事件」的情形
+setEventsExpanded(false);
+renderDay({ key: '01-01', selected: [], events: day.events,
+            total: day.events.length, isEmpty: false,
+            generated: '2026-10-10' }, words);
+ok(isEventsExpanded() === true, '精选为空时自动展开');
+ok(nodes.eventsList.hidden === false, 'eventsList 已显示');
+ok(nodes.selectedSection === undefined ||
+   nodes['.selected-section'].hidden === true, '精选区隐藏');
+
+// 按分类筛到「只有非精选事件」时也该自动展开 —— 这是真实场景
+const catOnlyInEvents = [...new Set(day.events.map(e => e.tag))]
+  .find(c => !day.selected.some(s => s.tag === c));
+if (catOnlyInEvents) {
+  setEventsExpanded(false);
+  setCategory(catOnlyInEvents);
+  renderDay(day, words);
+  ok(isEventsExpanded() === true,
+     `筛到「${catOnlyInEvents}」（只存在于非精选）时自动展开`);
+  setCategory(null);
+} else {
+  console.log('  ⓘ 当天无此类分类，跳过');
+}
+
+// 两者都空：显示空状态，不该去展开
+setEventsExpanded(false);
+renderDay({ key: '01-01', selected: [], events: [], total: 0,
+            isEmpty: true, generated: null }, words);
+ok(isEventsExpanded() === false, '完全无数据时不展开（走空状态）');
+ok(nodes.emptyState.hidden === false, '显示空状态');
 
 console.log(`\n${'─'.repeat(44)}`);
 console.log(`通过 ${pass} / 失败 ${fail}`);

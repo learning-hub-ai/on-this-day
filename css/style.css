@@ -73,6 +73,7 @@
   /* ---- 尺寸 ---- */
   --header-h:56px;
   --content-max:720px;   /* 17px 下约 39 字/行，在 28–40 舒适区内 */
+  --filter-max:860px;    /* 筛选栏单独放宽 —— 9 个标签需 767px，720 装不下 */
   --timeline-x:28px;
 }
 
@@ -94,6 +95,7 @@ html { -webkit-text-size-adjust:100%; }
 
 body {
   font-family:var(--font-sans);
+  overflow-x:hidden;            /* 防止任何子元素横向撑破页面 */
   background:var(--bg);
   color:var(--text);
   font-size:17px;              /* 为六年级阅读放大（layout.md §1.2）*/
@@ -180,6 +182,9 @@ button { cursor:pointer; background:none; border:none; }
 
 /* 三列 grid，而非 space-between —— 两侧 1fr 吸收宽度差，
    保证日期选择器真正居中，不因左右元素宽度变化而漂移（layout.md §5.1）*/
+/* 三列 grid：日期控件在左、站名居中、回到今天在右。
+   站名居中是因为它是网站主题 —— 两侧 1fr 吸收宽度差，
+   保证标题落在真正的视觉中心，不随左右控件宽度漂移。 */
 header {
   position:fixed; top:0; left:0; right:0;
   height:var(--header-h);
@@ -194,16 +199,18 @@ header {
 }
 
 .site-title {
-  justify-self:start;
-  font-size:15px; font-weight:700;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  justify-self:center;
+  font-family:var(--font-serif);
+  font-size:19px; font-weight:700;
+  letter-spacing:.06em;
+  white-space:nowrap;
 }
 /* 装饰符号。⚠ 不用 emoji —— 多数 Linux 环境未装 emoji 字体，
    星平面字符（U+1F4C5 等）会渲染成豆腐块。只用 BMP 符号 */
 .site-mark { color:var(--accent); margin-right:2px; }
 .links-mark { color:var(--accent-light); margin-right:var(--s1); }
 
-.date-picker { justify-self:center; display:flex; gap:var(--s2); }
+.date-picker { justify-self:start; display:flex; align-items:center; gap:var(--s2); }
 
 .date-picker select {
   height:36px;
@@ -216,6 +223,26 @@ header {
 .date-picker select:hover { border-color:var(--border-accent); }
 
 #btnToday { justify-self:end; }
+
+/* 日期控件旁的紧凑「今天」按钮。与右侧的「回到今天」同功能，
+   但位置更顺手 —— 改完月/日就在旁边 */
+.btn-today-inline {
+  height:36px;
+  padding:0 10px;
+  color:var(--accent-deep);
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-sm);
+  font-size:13px;
+  white-space:nowrap;
+  transition:background var(--fast) var(--ease),
+             border-color var(--fast) var(--ease);
+}
+.btn-today-inline:hover {
+  background:var(--accent-wash);
+  border-color:var(--border-accent);
+}
+.btn-today-inline:active { transform:scale(.97); }
 
 
 /* === 4. date-hero === */
@@ -376,20 +403,31 @@ header {
 /* --- 领域筛选标签栏 --- */
 
 /* 只显示当天实有的分类（render.js）—— 空分类不渲染，
-   所以用户点任何一个都一定有内容（spec.md §5.6）*/
+   所以用户点任何一个都一定有内容（spec.md §5.6）
+
+   ⚠ 9 个标签（全部 ＋ 8 分类）在 720px 正文宽里实测需 767px，必然换行。
+     所以筛选栏**单独放宽到 --filter-max**，突破正文容器 ——
+     正文 720px 是为阅读行长定的（§2.3），标签栏没有这个约束。 */
 .filter-bar {
-  display:flex; flex-wrap:wrap; gap:var(--s2);
+  display:flex; flex-wrap:nowrap;
+  gap:var(--s2);
   margin-bottom:var(--s6);
+  width:var(--filter-max);
+  max-width:100%;
+  /* 容器居中时向左右各溢出一点，保持与正文同一视觉中轴 */
+  margin-left:calc((var(--content-max) - var(--filter-max)) / 2);
 }
 
 .chip {
-  display:inline-flex; align-items:center; gap:var(--s1);
-  min-height:32px;
-  padding:var(--s1) var(--s3);
+  display:inline-flex; align-items:center; gap:3px;
+  flex:0 0 auto;                     /* 不压缩，保证文字不折行 */
+  min-height:30px;
+  padding:var(--s1) 10px;
   background:var(--bg-card);
   border:1px solid var(--border);
   border-radius:var(--r-full);
-  font-size:13px;
+  font-size:12.5px;
+  white-space:nowrap;
   color:var(--text-sub);
   transition:background var(--fast) var(--ease),
              border-color var(--fast) var(--ease),
@@ -524,12 +562,24 @@ footer a:hover { color:var(--accent-deep); }
 @media (max-width:767px) {
   :root { --timeline-x:14px; --s7:32px; }
 
-  body { font-size:16px; }                 /* 窄屏行长控制 */
+  body {
+    font-size:16px;                        /* 窄屏行长控制 */
+    padding-top:96px;                      /* header 变两行，让开更多 */
+  }
 
-  header { grid-template-columns:auto 1fr auto; gap:var(--s2); padding:0 var(--s3); }
-  /* 窄屏缩短标题而不是整个隐藏 —— 隐藏后 header 左侧会空掉，
-     只剩一个符号，看不出这是什么站 */
-  .site-title { font-size:14px; }
+  /* 窄屏放不下「站名 ＋ 日期控件 ＋ 两个按钮」四组元素。
+     改为两行：上行站名居中，下行日期控件 ＋ 今天。
+     右侧那个「回到今天」隐藏 —— 功能由日期控件旁的「今天」承担 */
+  header {
+    height:auto;
+    grid-template-columns:1fr;
+    justify-items:center;
+    gap:var(--s2);
+    padding:var(--s2) var(--s3);
+  }
+  .site-title { font-size:17px; }
+  .date-picker { justify-self:center; }
+  #btnToday { display:none; }
 
   .content { padding:0 var(--s3) var(--s7); }
   .date-hero h1 { font-size:26px; }
@@ -537,10 +587,21 @@ footer a:hover { color:var(--accent-deep); }
   .event-card { padding:var(--s3) var(--s4); }
   .event-text { font-size:16px; }
 
+  /* 筛选栏：桌面上单行放宽到 860px，窄屏放不下 ——
+     改为横向滚动，保持单行且不溢出页面（不回到换行，
+     因为换行会把高度推到两三行，挤掉首屏内容）*/
+  .filter-bar {
+    width:auto;
+    margin-left:0;
+    overflow-x:auto;
+    padding-bottom:var(--s1);
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;                  /* Firefox 隐藏滚动条 */
+  }
+  .filter-bar::-webkit-scrollbar { display:none; }
+
   /* nowrap 在窄屏会溢出 */
   .gloss-pop { white-space:normal; max-width:70vw; }
-
-  #btnToday { padding:var(--s2) var(--s3); font-size:13px; }
 }
 
 

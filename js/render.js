@@ -40,6 +40,7 @@ const el = {
   selectedList: null, selectedSection: null,
   eventsList: null, eventsSection: null, evtCount: null,
   emptyState: null, fetchDate: null, content: null, filterBar: null,
+  evtToggle: null,
 };
 
 function dom() {
@@ -55,6 +56,7 @@ function dom() {
   el.fetchDate = document.getElementById('fetchDate');
   el.content = document.querySelector('.content');
   el.filterBar = document.getElementById('filterBar');
+  el.evtToggle = document.getElementById('evtToggle');
   return el;
 }
 
@@ -227,6 +229,23 @@ function renderFilterBar(day, active) {
   d.filterBar.innerHTML = chips.join('');
 }
 
+/**
+ * 展开／收起「全部事件」。
+ * `aria-expanded` 与 `hidden` 必须同步 —— 前者给屏幕阅读器，后者控制显示。
+ * 导出供 app.js 的折叠按钮复用，避免两处各写一遍同步逻辑。
+ */
+export function setEventsExpanded(open) {
+  const d = dom();
+  if (d.evtToggle) d.evtToggle.setAttribute('aria-expanded', String(!!open));
+  if (d.eventsList) d.eventsList.hidden = !open;
+}
+
+/** 当前是否展开 */
+export function isEventsExpanded() {
+  const d = dom();
+  return d.evtToggle?.getAttribute('aria-expanded') === 'true';
+}
+
 /** 按分类过滤。active 为 null 时原样返回 */
 function filterByCategory(list, active) {
   if (!active) return list;
@@ -277,6 +296,13 @@ export function renderDay(day, words = {}) {
   d.evtCount.textContent = String(events.length);
   d.eventsList.innerHTML =
     events.map(it => renderEvent(it, words, false)).join('');
+
+  // 精选为空时自动展开「全部事件」—— 否则页面上什么都看不到，
+  // 只剩一个折叠标题。按分类筛选时很容易出现这种情况：
+  // 某分类当天只有非精选事件（如 10/24 的航空航天）。
+  if (selected.length === 0 && events.length > 0) {
+    setEventsExpanded(true);
+  }
 
   // 切换日期时时间轴淡入 180ms。不做整页淡出 ——
   // 那会让人以为在加载（layout.md §7.1）

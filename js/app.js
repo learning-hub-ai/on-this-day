@@ -9,7 +9,8 @@
    ============================================ */
 
 import { toKey, todayKey, daysInMonth, loadDay } from './api.js';
-import { renderDay, setLoading, setCategory, getCategory } from './render.js';
+import { renderDay, setLoading, setCategory, getCategory,
+         setEventsExpanded, isEventsExpanded } from './render.js';
 import { loadGlossary } from './glossary.js';
 
 const MONTHS = ['一', '二', '三', '四', '五', '六',
@@ -110,6 +111,7 @@ function bindEvents() {
   el.selDay.addEventListener('change', () => show(keyFromSelects()));
 
   el.btnToday.addEventListener('click', () => show(todayKey()));
+  el.btnTodayInline.addEventListener('click', () => show(todayKey()));
 
   // 领域筛选。用事件委托 —— 标签栏每次渲染都会重建
   el.filterBar.addEventListener('click', (e) => {
@@ -127,11 +129,9 @@ function bindEvents() {
     if (btn) show(todayKey());
   });
 
-  // 折叠「全部事件」。aria-expanded 与 hidden 同步，供屏幕阅读器识别
+  // 折叠「全部事件」。同步逻辑收在 render.js，两处共用一份
   el.evtToggle.addEventListener('click', () => {
-    const open = el.evtToggle.getAttribute('aria-expanded') === 'true';
-    el.evtToggle.setAttribute('aria-expanded', String(!open));
-    el.eventsList.hidden = open;
+    setEventsExpanded(!isEventsExpanded());
   });
 
   // 注音气泡：点击切换。移动端无 hover，键盘用户也需要可触发的方式
@@ -213,6 +213,7 @@ async function init() {
     selMonth: document.getElementById('selMonth'),
     selDay: document.getElementById('selDay'),
     btnToday: document.getElementById('btnToday'),
+    btnTodayInline: document.getElementById('btnTodayInline'),
     evtToggle: document.getElementById('evtToggle'),
     eventsList: document.getElementById('eventsList'),
     filterBar: document.getElementById('filterBar'),
