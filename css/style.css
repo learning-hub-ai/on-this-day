@@ -71,7 +71,7 @@
   --print-border:#ccc;         /* 打印机对淡色边框表现差，用中灰 */
 
   /* ---- 尺寸 ---- */
-  --header-h:100px;      /* 两行：站名 ＋ 日期控件（含上下内距）*/
+  --header-h:108px;      /* 两行：站名 28px ＋ 日期控件（含上下内距）*/
   --content-max:720px;   /* 17px 下约 39 字/行，在 28–40 舒适区内 */
   --filter-max:860px;    /* 筛选栏单独放宽 —— 9 个标签需 767px，720 装不下 */
   --timeline-x:28px;
@@ -201,8 +201,9 @@ header {
 
 .site-title {
   font-family:var(--font-serif);
-  font-size:21px; font-weight:700;
-  letter-spacing:.08em;
+  font-size:28px; font-weight:700;
+  letter-spacing:.1em;
+  line-height:1.25;
   white-space:nowrap;
 }
 /* 装饰符号。⚠ 不用 emoji —— 多数 Linux 环境未装 emoji 字体，
@@ -565,8 +566,8 @@ footer a:hover { color:var(--accent-deep); }
   /* header 本就是两行居中（见第 3 节），窄屏只需缩小字号与内距 */
   /* 窄屏 header 略矮：字号与内距都小一档 */
   header { padding:var(--s2) var(--s3); gap:var(--s1); }
-  body { padding-top:86px; }
-  .site-title { font-size:18px; letter-spacing:.04em; }
+  body { padding-top:88px; }
+  .site-title { font-size:22px; letter-spacing:.06em; }
 
   .content { padding:0 var(--s3) var(--s7); }
   .date-hero h1 { font-size:26px; }
