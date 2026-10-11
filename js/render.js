@@ -40,7 +40,7 @@ const el = {
   selectedList: null, selectedSection: null,
   eventsList: null, eventsSection: null, evtCount: null,
   emptyState: null, fetchDate: null, content: null, filterBar: null,
-  evtToggle: null,
+  evtToggle: null, sourceLink: null,
 };
 
 function dom() {
@@ -57,6 +57,7 @@ function dom() {
   el.content = document.querySelector('.content');
   el.filterBar = document.getElementById('filterBar');
   el.evtToggle = document.getElementById('evtToggle');
+  el.sourceLink = document.getElementById('sourceLink');
   return el;
 }
 
@@ -285,6 +286,16 @@ export function renderDay(day, words = {}) {
 
   d.heroDate.textContent = formatDate(day.key);
   if (day.generated) d.fetchDate.textContent = day.generated.slice(0, 7);
+
+  // 日期出处 —— 指向维基百科该日期条目。
+  // 这是「为什么说这件事发生在这一天」的依据：本页事件全部取自该条目，
+  // 日期不是本项目判断的。读者可点进去核对原始列表。
+  if (d.sourceLink) {
+    const [m, dd] = day.key.split('-').map(Number);
+    const page = `${m}月${dd}日`;
+    d.sourceLink.href = wikiUrl(page);
+    d.sourceLink.textContent = `维基百科「${page}」条目`;
+  }
 
   if (day.isEmpty) {
     d.selectedSection.hidden = true;

@@ -127,7 +127,7 @@ for (const id of ['heroDate', 'heroMeta', 'selectedList', 'eventsList',
                   'evtCount', 'emptyState', 'fetchDate']) {
   nodes[id] = makeNode(id);
 }
-for (const id of ['filterBar', 'evtToggle']) { nodes[id] = makeNode(id); }
+for (const id of ['filterBar', 'evtToggle', 'sourceLink']) { nodes[id] = makeNode(id); }
 // evtToggle 需要 aria 属性读写
 nodes.evtToggle._attrs = {};
 nodes.evtToggle.setAttribute = function (k, v) { this._attrs[k] = v; };
@@ -402,6 +402,25 @@ renderDay({ key: '01-01', selected: [], events: [], total: 0,
             isEmpty: true, generated: null }, words);
 ok(isEventsExpanded() === false, '完全无数据时不展开（走空状态）');
 ok(nodes.emptyState.hidden === false, '显示空状态');
+
+/* ============ 日期出处 ============ */
+section('日期出处链接');
+
+setCategory(null);
+renderDay(day, words);
+ok(nodes.sourceLink !== undefined, 'sourceLink 节点存在');
+ok(nodes.sourceLink.href === 'https://zh.wikipedia.org/zh-cn/' +
+   encodeURIComponent('10月9日'),
+   '出处链接指向维基「10月9日」条目', nodes.sourceLink.href);
+ok(nodes.sourceLink.textContent.includes('10月9日'), '出处文字含日期');
+
+// 换一天应该跟着变 —— 否则会把 A 日的事件归到 B 日的出处上
+const other = await loadDay('02-29');
+renderDay(other, words);
+ok(nodes.sourceLink.href.includes(encodeURIComponent('2月29日')),
+   '切换日期后出处链接同步更新', nodes.sourceLink.href);
+
+renderDay(day, words);   // 还原
 
 console.log(`\n${'─'.repeat(44)}`);
 console.log(`通过 ${pass} / 失败 ${fail}`);

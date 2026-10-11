@@ -260,6 +260,16 @@ header {
   color:var(--text-muted);
 }
 
+/* 日期出处。比副标题更淡 —— 是溯源信息，不抢正文注意力，
+   但必须存在：它是「这件事发生在这一天」这个声明的依据 */
+.hero-source {
+  margin-top:var(--s1);
+  font-size:12px;
+  color:var(--text-muted);
+}
+.hero-source a { color:var(--text-muted); text-decoration:underline; }
+.hero-source a:hover { color:var(--accent-deep); }
+
 /* 标题下的短横，像文章题下的分隔线 */
 .date-hero::after {
   content:'';
