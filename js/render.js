@@ -14,11 +14,32 @@ import { applyMarksSafe } from './glossary.js';
 
 const WIKI_BASE = 'https://zh.wikipedia.org/wiki/';
 
+/**
+ * 分类的显示顺序与图标。顺序与 scripts/tag_events.py 的 CATEGORIES 一致。
+ *
+ * ⚠ 图标只用 BMP 符号，不用 emoji —— 多数 Linux 环境未装 emoji 字体，
+ *   星平面字符（U+1F680 等）会渲染成豆腐块。
+ */
+export const CATEGORY_ORDER = [
+  ['航空航天', '✦'],
+  ['科技', '✧'],
+  ['政治', '◉'],
+  ['军事', '◈'],
+  ['文化艺术', '◇'],
+  ['体育', '◎'],
+  ['人物', '○'],
+  ['其他', '·'],
+];
+const CATEGORY_ICON = new Map(CATEGORY_ORDER);
+
+/** 当前选中的分类。null = 全部 */
+let activeCategory = null;
+
 const el = {
   heroDate: null, heroMeta: null,
   selectedList: null, selectedSection: null,
   eventsList: null, eventsSection: null, evtCount: null,
-  emptyState: null, fetchDate: null, content: null,
+  emptyState: null, fetchDate: null, content: null, filterBar: null,
 };
 
 function dom() {
@@ -33,6 +54,7 @@ function dom() {
   el.emptyState = document.getElementById('emptyState');
   el.fetchDate = document.getElementById('fetchDate');
   el.content = document.querySelector('.content');
+  el.filterBar = document.getElementById('filterBar');
   return el;
 }
 
@@ -101,14 +123,20 @@ function renderEvent(item, words, isSelected) {
   if (isSelected) classes.push('event--selected');
   if (item.sensitive) classes.push('event--sensitive');
 
-  const parts = [`<p class="event-text">${html}</p>`];
+  const parts = [];
+  if (item.tag && item.tag !== '其他') {
+    const icon = CATEGORY_ICON.get(item.tag) || '';
+    parts.push(`<p class="event-tag"><span aria-hidden="true">${icon}</span> ` +
+               `${escapeHtml(item.tag)}</p>`);
+  }
+  parts.push(`<p class="event-text">${html}</p>`);
 
   if (item.why) {
     parts.push(`<p class="event-why">${escapeHtml(item.why)}</p>`);
   }
   if (item.sensitive) {
     parts.push('<p class="event-meta-row">' +
-               '<span class="sensitive-badge">⚑ 建议和家长一起读</span></p>');
+               '<span class="sensitive-badge">※ 建议和家长一起读</span></p>');
   }
   // u 与 l 都为空时不渲染链接行 —— 实测 3.1% 的事件如此（spec.md §6.4）
   if (titles.length) {
@@ -117,12 +145,70 @@ function renderEvent(item, words, isSelected) {
       ` rel="noopener noreferrer" hreflang="zh">${escapeHtml(t)}</a>`
     ).join(' · ');
     parts.push('<p class="event-links">' +
-               `<span aria-hidden="true">🔗</span> ${links}</p>`);
+               `<span class="links-mark" aria-hidden="true">·</span> ${links}</p>`);
   }
 
   return `<li class="${classes.join(' ')}">` +
          `<div class="event-year">${formatYear(item.y)}</div>` +
          `<article class="event-card">${parts.join('')}</article></li>`;
+}
+
+/**
+ * 渲染领域筛选标签栏。
+ *
+ * **只显示当天实际存在的分类** —— 这是 spec.md §5.6 的核心教训：
+ * 「筛掉一半内容的筛选器，比没有筛选器更坏」。让用户点进一个空页，
+ * 他无法分辨「这天没有体育事件」与「分类器漏了」。
+ * 空分类不渲染，问题就不存在。
+ *
+ * @param {Object} day   api.loadDay() 的结果
+ * @param {string|null} active 当前选中分类
+ */
+function renderFilterBar(day, active) {
+  const d = dom();
+  if (!d.filterBar) return;
+
+  const counts = new Map();
+  for (const item of [...day.selected, ...day.events]) {
+    const tag = item.tag || '其他';
+    counts.set(tag, (counts.get(tag) || 0) + 1);
+  }
+
+  const total = day.selected.length + day.events.length;
+  const chips = [
+    `<button type="button" class="chip${active === null ? ' chip--on' : ''}"` +
+    ` data-cat="" aria-pressed="${active === null}">全部` +
+    `<span class="chip-n">${total}</span></button>`,
+  ];
+
+  for (const [cat, icon] of CATEGORY_ORDER) {
+    const n = counts.get(cat);
+    if (!n) continue;                 // 当天没有这一类 → 不渲染
+    const on = active === cat;
+    chips.push(
+      `<button type="button" class="chip${on ? ' chip--on' : ''}"` +
+      ` data-cat="${escapeHtml(cat)}" aria-pressed="${on}">` +
+      `<span class="chip-i" aria-hidden="true">${icon}</span>` +
+      `${escapeHtml(cat)}<span class="chip-n">${n}</span></button>`
+    );
+  }
+  d.filterBar.innerHTML = chips.join('');
+}
+
+/** 按分类过滤。active 为 null 时原样返回 */
+function filterByCategory(list, active) {
+  if (!active) return list;
+  return list.filter(it => (it.tag || '其他') === active);
+}
+
+/** 设置当前分类并重渲染。供 app.js 调用 */
+export function setCategory(cat) {
+  activeCategory = cat || null;
+}
+
+/** 当前分类 */
+export function getCategory() {
+  return activeCategory;
 }
 
 /** 渲染一整天。data 来自 api.loadDay()，永不为 null */
@@ -137,21 +223,28 @@ export function renderDay(day, words = {}) {
     d.eventsSection.hidden = true;
     d.emptyState.hidden = false;
     d.heroMeta.textContent = '';
+    if (d.filterBar) d.filterBar.innerHTML = '';
     return;
   }
 
   d.emptyState.hidden = true;
-  d.heroMeta.textContent =
-    `维基精选 ${day.selected.length} 条 · 全部事件 ${day.events.length} 条`;
+  renderFilterBar(day, activeCategory);
 
-  d.selectedSection.hidden = day.selected.length === 0;
+  const selected = filterByCategory(day.selected, activeCategory);
+  const events = filterByCategory(day.events, activeCategory);
+
+  d.heroMeta.textContent = activeCategory
+    ? `${activeCategory} · 精选 ${selected.length} 条 · 其余 ${events.length} 条`
+    : `维基精选 ${day.selected.length} 条 · 全部事件 ${day.events.length} 条`;
+
+  d.selectedSection.hidden = selected.length === 0;
   d.selectedList.innerHTML =
-    day.selected.map(it => renderEvent(it, words, true)).join('');
+    selected.map(it => renderEvent(it, words, true)).join('');
 
-  d.eventsSection.hidden = day.events.length === 0;
-  d.evtCount.textContent = String(day.events.length);
+  d.eventsSection.hidden = events.length === 0;
+  d.evtCount.textContent = String(events.length);
   d.eventsList.innerHTML =
-    day.events.map(it => renderEvent(it, words, false)).join('');
+    events.map(it => renderEvent(it, words, false)).join('');
 
   // 切换日期时时间轴淡入 180ms。不做整页淡出 ——
   // 那会让人以为在加载（layout.md §7.1）

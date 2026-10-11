@@ -198,6 +198,10 @@ header {
   font-size:15px; font-weight:700;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
+/* 装饰符号。⚠ 不用 emoji —— 多数 Linux 环境未装 emoji 字体，
+   星平面字符（U+1F4C5 等）会渲染成豆腐块。只用 BMP 符号 */
+.site-mark { color:var(--accent); margin-right:2px; }
+.links-mark { color:var(--accent-light); margin-right:var(--s1); }
 
 .date-picker { justify-self:center; display:flex; gap:var(--s2); }
 
@@ -334,7 +338,7 @@ header {
   font-size:15px; line-height:1.7;
   color:var(--text-sub);
 }
-.event-why::before { content:'💡 '; }
+.event-why::before { content:'※ '; color:var(--accent-light); }
 
 /* 关联条目行。u 与 l 都为空时（实测 3.1%）不渲染此行 */
 .event-links {
@@ -352,6 +356,57 @@ header {
 }
 .entity-link:hover { border-bottom-color:var(--accent-deep); }
 
+/* --- 领域筛选标签栏 --- */
+
+/* 只显示当天实有的分类（render.js）—— 空分类不渲染，
+   所以用户点任何一个都一定有内容（spec.md §5.6）*/
+.filter-bar {
+  display:flex; flex-wrap:wrap; gap:var(--s2);
+  margin-bottom:var(--s6);
+}
+
+.chip {
+  display:inline-flex; align-items:center; gap:var(--s1);
+  min-height:32px;
+  padding:var(--s1) var(--s3);
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-full);
+  font-size:13px;
+  color:var(--text-sub);
+  transition:background var(--fast) var(--ease),
+             border-color var(--fast) var(--ease),
+             color var(--fast) var(--ease);
+}
+.chip:hover { border-color:var(--border-accent); color:var(--text); }
+.chip:active { transform:scale(.97); }
+
+/* 选中态：实心赭红。对比度由 --bg-card 文字保证 */
+.chip--on {
+  background:var(--accent);
+  border-color:var(--accent);
+  color:var(--bg-card);
+}
+.chip--on .chip-n { color:var(--bg-card); opacity:.75; }
+
+.chip-i { color:var(--accent); }
+.chip--on .chip-i { color:var(--bg-card); }
+
+.chip-n {
+  font-size:11px;
+  color:var(--text-muted);
+  margin-left:1px;
+}
+
+/* 卡片上的分类标记 —— 让用户看得见这条为什么被归入该类 */
+.event-tag {
+  font-size:12px;
+  color:var(--accent);
+  letter-spacing:.04em;
+  margin-bottom:var(--s2);
+}
+
+/* --- 折叠触发行 --- */
 /* 折叠触发行：整行可点，44px 高（移动端点击目标下限）*/
 /* .selected-section 无样式，仅作 render.js 的 hidden 切换锚点 —— 保留类名 */
 .events-section { margin-top:var(--s8); }
@@ -429,7 +484,8 @@ header {
   padding:var(--s8) var(--s4);
   color:var(--text-muted);
 }
-.empty-icon { font-size:40px; display:block; margin-bottom:var(--s4); }
+.empty-icon { font-size:40px; display:block; margin-bottom:var(--s4);
+               color:var(--border); }
 .empty-hint { font-size:14px; margin:var(--s4) 0 var(--s3); }
 
 /* CC BY-SA 的强制要求，不是装饰（spec.md §9.1）*/
@@ -454,7 +510,9 @@ footer a:hover { color:var(--accent-deep); }
   body { font-size:16px; }                 /* 窄屏行长控制 */
 
   header { grid-template-columns:auto 1fr auto; gap:var(--s2); padding:0 var(--s3); }
-  .site-title span:last-child { display:none; }   /* 只留 📅 */
+  /* 窄屏缩短标题而不是整个隐藏 —— 隐藏后 header 左侧会空掉，
+     只剩一个符号，看不出这是什么站 */
+  .site-title { font-size:14px; }
 
   .content { padding:0 var(--s3) var(--s7); }
   .date-hero h1 { font-size:26px; }

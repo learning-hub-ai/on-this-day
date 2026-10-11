@@ -9,7 +9,7 @@
    ============================================ */
 
 import { toKey, todayKey, daysInMonth, loadDay } from './api.js';
-import { renderDay, setLoading } from './render.js';
+import { renderDay, setLoading, setCategory, getCategory } from './render.js';
 import { loadGlossary } from './glossary.js';
 
 const MONTHS = ['一', '二', '三', '四', '五', '六',
@@ -111,6 +111,16 @@ function bindEvents() {
 
   el.btnToday.addEventListener('click', () => show(todayKey()));
 
+  // 领域筛选。用事件委托 —— 标签栏每次渲染都会重建
+  el.filterBar.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    const cat = chip.dataset.cat || null;
+    // 再点一次已选中的分类 = 取消筛选，回到全部
+    setCategory(cat === getCategory() ? null : cat);
+    show(keyFromSelects(), false);
+  });
+
   // 空状态里的「回到今天」—— 用委托，因为该按钮可能被重渲染
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-action="today"]');
@@ -205,6 +215,7 @@ async function init() {
     btnToday: document.getElementById('btnToday'),
     evtToggle: document.getElementById('evtToggle'),
     eventsList: document.getElementById('eventsList'),
+    filterBar: document.getElementById('filterBar'),
   });
 
   // 任一节点缺失说明 HTML 与 JS 不同步，早报错好于后面莫名崩溃

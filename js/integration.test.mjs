@@ -127,6 +127,7 @@ for (const id of ['heroDate', 'heroMeta', 'selectedList', 'eventsList',
                   'evtCount', 'emptyState', 'fetchDate']) {
   nodes[id] = makeNode(id);
 }
+for (const id of ['filterBar']) { nodes[id] = makeNode(id); }
 for (const sel of ['.selected-section', '.events-section', '.content']) {
   nodes[sel] = makeNode(sel);
 }
@@ -222,6 +223,56 @@ ok(shiftDay('bad', 1) === 'bad', 'shiftDay 非法输入原样返回');
 let k = '01-01';
 for (let i = 0; i < 366; i++) k = shiftDay(k, 1);
 ok(k === '01-01', '连翻 366 天回到原点');
+
+/* ============ 领域筛选 ============ */
+section('领域筛选');
+
+const { setCategory, getCategory, CATEGORY_ORDER } = await import('./render.js');
+
+// 每条事件都该有 tag
+const tagged = [...day.selected, ...day.events];
+ok(tagged.every(e => typeof e.tag === 'string'), '每条事件都有 tag 字段');
+const validTags = new Set(CATEGORY_ORDER.map(([c]) => c));
+ok(tagged.every(e => validTags.has(e.tag)),
+   'tag 都是合法分类', [...new Set(tagged.map(e => e.tag))].join(','));
+
+// 全部视图
+setCategory(null);
+renderDay(day, words);
+const allCount = (nodes.selectedList.innerHTML.match(/<li class="event/g) || []).length
+               + (nodes.eventsList.innerHTML.match(/<li class="event/g) || []).length;
+ok(allCount === day.total, `全部视图渲染 ${day.total} 条`, `实际 ${allCount}`);
+ok(nodes['filterBar'].innerHTML.includes('chip--on'), '「全部」默认选中');
+ok(nodes['filterBar'].innerHTML.includes('data-cat=""'), '有「全部」标签');
+
+// 挑一个当天实有的分类来筛
+const counts = new Map();
+for (const e of tagged) counts.set(e.tag, (counts.get(e.tag) || 0) + 1);
+const [someCat, someN] = [...counts].find(([c]) => c !== '其他') || [];
+ok(someCat !== undefined, `当天有可筛分类（${someCat}）`);
+
+setCategory(someCat);
+renderDay(day, words);
+const filtered = (nodes.selectedList.innerHTML.match(/<li class="event/g) || []).length
+               + (nodes.eventsList.innerHTML.match(/<li class="event/g) || []).length;
+ok(filtered === someN, `筛选 ${someCat} 得 ${someN} 条`, `实际 ${filtered}`);
+ok(filtered < day.total, '筛选后少于全部');
+ok(nodes.heroMeta.textContent.includes(someCat), '副标题显示当前分类');
+
+// 空分类不渲染标签 —— §5.6 的核心保证
+const bar = nodes['filterBar'].innerHTML;
+for (const [cat] of CATEGORY_ORDER) {
+  if (!counts.has(cat)) {
+    ok(!bar.includes(`data-cat="${cat}"`), `空分类「${cat}」不出现在标签栏`);
+    break;
+  }
+}
+// 标签栏里每个分类的计数都 > 0
+const shown = [...bar.matchAll(/data-cat="([^"]+)"/g)].map(m => m[1]);
+ok(shown.every(c => (counts.get(c) || 0) > 0),
+   '标签栏里每个分类当天都有事件');
+
+setCategory(null);   // 还原，免得影响后续断言
 
 console.log(`\n${'─'.repeat(44)}`);
 console.log(`通过 ${pass} / 失败 ${fail}`);

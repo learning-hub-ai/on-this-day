@@ -11,7 +11,7 @@
 
 <header>
   <div class="site-title">
-    <span aria-hidden="true">📅</span> <span>历史上的今天</span>
+    <span class="site-mark" aria-hidden="true">◷</span> <span>历史上的今天</span>
   </div>
 
   <div class="date-picker">
@@ -30,6 +30,10 @@
   </section>
 
   <!-- 精选：维基编者挑选的当日最值得一提的 5 条（spec.md §3.2）-->
+  <!-- 领域筛选。标签由 render.js 按当天实有分类生成 ——
+       空分类直接不显示，避免点进去空页（spec.md §5.6 的教训）-->
+  <nav class="filter-bar" id="filterBar" role="group" aria-label="按领域筛选"></nav>
+
   <section class="selected-section" aria-labelledby="selTitle">
     <h2 id="selTitle" class="section-title">精选</h2>
     <ol class="timeline" id="selectedList"></ol>
@@ -46,7 +50,7 @@
   </section>
 
   <div class="empty-state" id="emptyState" hidden>
-    <span class="empty-icon" aria-hidden="true">📭</span>
+    <span class="empty-icon" aria-hidden="true">◌</span>
     <p>这一天还没有整理好的事件</p>
     <p class="empty-hint">换一天看看，或者</p>
     <button class="btn-secondary" type="button" data-action="today">回到今天</button>

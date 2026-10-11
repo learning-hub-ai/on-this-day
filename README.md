@@ -20,6 +20,8 @@ python3 serve.py          # → http://127.0.0.1:8000
 ## 功能
 
 - 任意日期可查，含 2/29；URL 形如 `#10-09`，可分享可收藏
+- **按领域筛选**：8 个分类，点击即筛，再点取消。
+  标签只显示当天实有的分类 —— 点任何一个都一定有内容
 - 维基编者精选条目置顶，附自编的「为什么重要」
 - 难词注音：浅色虚下划线，点击或悬浮看拼音与极短释义
 - 键盘左右箭头翻天；Esc 收起气泡
@@ -34,6 +36,7 @@ python3 serve.py          # → http://127.0.0.1:8000
 | 规模 | 366 天，精选 1,830 条 ＋ 全部事件 15,106 条 = **16,936 条，3.0 MB** |
 | 处理 | `opencc` 繁→简（全量强制）、瘦身、提取关联条目、补回被截断的人名 |
 | 词表 | `data/glossary.json`，93 词，覆盖 23.4% 事件、**366/366 天** |
+| 分类 | 离线打标 8 类，抽样精度 **92%**，44.5% 归入「其他」|
 
 重新生成：
 
@@ -43,6 +46,9 @@ pip install opencc-python-reimplemented jieba
 python3 scripts/gen_otd.py              # 全年，约 30 分钟（API 限流）
 python3 scripts/gen_otd.py --days 10-09 # 单日
 python3 scripts/gen_otd.py --dry-run    # 不写文件
+
+python3 scripts/tag_events.py           # 打领域标签（写入 tag 字段）
+python3 scripts/tag_events.py --dry-run --sample 10   # 只统计 ＋ 抽样核验
 ```
 
 脚本**幂等** —— 重跑不会覆盖人工写的 `why` / `notes` / `sensitive`。
