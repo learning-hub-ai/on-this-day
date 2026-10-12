@@ -27,7 +27,7 @@
 
   <section class="date-hero">
     <h1 id="heroDate">10 月 9 日</h1>
-    <p id="heroMeta" class="hero-meta">维基精选 5 条 · 全部事件 41 条</p>
+    <p id="heroMeta" class="hero-meta">共 39 条 · 维基精选 5 条 · 更多 34 条</p>
     <!-- 日期出处：本页全部事件都来自维基百科该日期条目，这是日期声明的依据 -->
     <p class="hero-source">
       事件与日期取自<a id="sourceLink" href="https://zh.wikipedia.org/zh-cn/10月9日"
@@ -45,12 +45,19 @@
     <ol class="timeline" id="selectedList"></ol>
   </section>
 
-  <!-- 全部事件：默认折叠（layout.md §5.8）-->
+  <!-- 更多事件：默认折叠（layout.md §5.8）。
+       ⚠ 标题用「更多事件」：
+         - 不能叫「全部事件」—— 这一节**不含**上面的精选，叫「全部」
+           会和精选区的条数对不上，用户会以为数字错了（§6.5）。
+         - 不能叫「其他事件」—— 「其他」是八个分类之一（占 45%），
+           同屏出现会和分类筛选栏的「其他」撞义。
+         - 不用「其余事件」—— 要先知道上面挑走了一部分才讲得通，且偏书面。
+           「更多」不预设前提，也更口语，适合 10 岁基准读者。 -->
   <section class="events-section" aria-labelledby="evtTitle">
     <button class="section-toggle" id="evtToggle" type="button"
             aria-expanded="false" aria-controls="eventsList">
       <span class="toggle-arrow" aria-hidden="true">▸</span>
-      <span id="evtTitle">全部事件（<span id="evtCount">41</span>）</span>
+      <span id="evtTitle">更多事件（<span id="evtCount">34</span>）</span>
     </button>
     <ol class="timeline" id="eventsList" hidden></ol>
   </section>

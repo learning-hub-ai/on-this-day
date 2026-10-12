@@ -128,7 +128,7 @@ function bindEvents() {
     if (btn) show(todayKey());
   });
 
-  // 折叠「全部事件」。同步逻辑收在 render.js，两处共用一份
+  // 折叠「更多事件」。同步逻辑收在 render.js，两处共用一份
   el.evtToggle.addEventListener('click', () => {
     setEventsExpanded(!isEventsExpanded());
   });

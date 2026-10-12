@@ -522,6 +522,61 @@ def repair_from_events_twin(selected, events):
     return fixed
 
 
+def dedup_events_against_selected(selected, events):
+    """
+    从 `events` 里移除已出现在 `selected` 的事件（spec.md §6.5）。
+
+    两个端点**不是互斥的**：`events` 是当日全部事件，`selected` 是维基
+    编者从其中挑出的精选。页面把精选置顶、其余折叠在下面，若不去重，
+    同一件事会先在精选里出现、再在「全部事件」里出现一次。
+
+    实测：366 天里 **365 天**存在重复，共 1,313 条完全相同。
+
+    ⚠ 只按「正文完全相同」去重不够 —— 另有 **299 条**同年、相似度
+    ≥0.90 但文本微异，仅差一个配图标记或地区词：
+
+        精选: 德国、法国…正式启用欧元（图）。
+        其余: 德国、法国…正式启用欧元。          ← 少了（图）
+
+        精选: 义大利北部奇斯帕达纳共和国…
+        其余: 意大利北部奇斯帕达纳共和国…        ← 义/意 地区词
+
+    所以用两道判据：
+      1. 去掉「（图）」后正文完全相同
+      2. 同年且相似度 ≥0.90
+
+    门槛 0.90 的依据：同年不同事件的相似度实测远低于此（§10.1c-2 测过
+    同类配对，错误配对低至 0.15）；而真正的重复都在 0.94 以上。
+
+    ⚠ 必须在 `repair_from_events_twin()` **之后**调用 ——
+    补回残缺正文要用 events 里的孪生条目，先去重会把孪生删掉。
+    """
+    if not selected or not events:
+        return 0
+
+    sel_norm = {e['t'].replace('（图）', ''): e['y'] for e in selected}
+    kept, removed = [], 0
+    for ev in events:
+        probe = ev['t'].replace('（图）', '')
+        if probe in sel_norm:
+            removed += 1
+            continue
+        dup = False
+        for s in selected:
+            if s['y'] != ev['y']:
+                continue
+            a = s['t'].replace('（图）', '')
+            if difflib.SequenceMatcher(None, a, probe).ratio() >= 0.90:
+                dup = True
+                break
+        if dup:
+            removed += 1
+        else:
+            kept.append(ev)
+    events[:] = kept
+    return removed
+
+
 def merge_idempotent(fresh, existing, force=False):
     """
     幂等合并（spec.md §7.1）：重跑不冲掉人工改写，也不清空派生字段。
@@ -615,6 +670,12 @@ def main():
             n_twin = repair_from_events_twin(doc['selected'], doc['events'])
             stats['twin'] = stats.get('twin', 0) + n_twin
 
+            # 去掉 events 里已出现在 selected 的事件（§6.5）
+            # ⚠ 必须在 repair_from_events_twin() **之后** ——
+            #   补回残缺正文要用 events 里的孪生，先去重会把孪生删掉
+            n_dup = dedup_events_against_selected(doc['selected'], doc['events'])
+            stats['dup'] = stats.get('dup', 0) + n_dup
+
             doc = {
                 'date': day,
                 'generated': today,
@@ -659,6 +720,8 @@ def main():
     print('\n' + '=' * 56)
     if stats.get('twin'):
         print(f'selected 残缺正文已用 events 孪生补回 {stats["twin"]} 条（§10.1c）')
+    if stats.get('dup'):
+        print(f'events 里与精选重复的已移除 {stats["dup"]} 条（§6.5）')
     print(f'成功 {stats["ok"]} / {len(days)} 天'
           + ('（dry-run，未写文件）' if args.dry_run else ''))
     print(f'体积 {stats["bytes"] / 1024 / 1024:.2f} MB')

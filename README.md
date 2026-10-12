@@ -175,8 +175,25 @@ Pages 只支持静态文件，所以**将来若想改成实时调 Wikimedia API*
 
 ## 测试
 
+**浏览器里跑（不需要装 Node）：**
+
 ```bash
-./run-tests.sh          # 全部：93 条断言，自动起停本地服务
+python3 serve.py 8000     # 然后打开 http://127.0.0.1:8000/test.html
+```
+
+`test.html` 在真实浏览器里验证数据契约、计数自洽、渲染与外链安全。
+页面上直接显示每条断言的通过/失败，失败时给出是哪一天、哪一条。
+带 `?all=1` 可跑全量（含 366 天逐日检查），便于无头浏览器与 CI：
+
+```bash
+google-chrome --headless --dump-dom 'http://127.0.0.1:8000/test.html?all=1'
+# 跑完在 <body> 上写 data-fail / data-pass，脚本可直接判断成败
+```
+
+**命令行跑：**
+
+```bash
+./run-tests.sh          # 全部，自动起停本地服务
 ```
 
 分开跑：
@@ -186,7 +203,8 @@ Pages 只支持静态文件，所以**将来若想改成实时调 Wikimedia API*
 | `python3 scripts/check_glossary.py` | 词表规则（5 项，均经反向测试）| — |
 | `python3 scripts/glossary_algo_check.py` | 注音算法的 Python 复刻 | 14 |
 | `node js/glossary.test.mjs` | 注音匹配：最长优先、转义安全 | 21 |
-| `node js/integration.test.mjs` | 端到端：真实 fetch ＋ DOM 替身 | 58 |
+| `node js/integration.test.mjs` | 端到端：真实 fetch ＋ DOM 替身 | 105 |
+| `test.html`（浏览器）| 数据契约、计数、渲染安全 | 30+ |
 
 集成测试需要本地服务（`api.js` 用相对路径 fetch，Node 的 fetch 不接受
 相对 URL）—— `run-tests.sh` 会自动起停，手动跑则先 `python3 serve.py 8750`。
@@ -194,6 +212,9 @@ Pages 只支持静态文件，所以**将来若想改成实时调 Wikimedia API*
 它覆盖的是单元测试碰不到的部分：全年 366 天逐日载入、年份升序、
 内存缓存命中、空数据回落、公元前年份渲染、XSS 转义，
 以及「含 `&` 的文本跳过注音」这个下标错位的防线。
+
+浏览器版与 Node 版断言有重叠但**不互相替代** —— 浏览器能发现
+DOM 替身发现不了的问题（真实 `innerHTML` 解析、真实 `a.rel` 归一化）。
 
 `pypinyin` 是**可选依赖** —— 装了才核对拼音内容，没装则跳过该项。
 Python 复刻脚本存在是因为部分环境没有 Node；它验证**算法**，

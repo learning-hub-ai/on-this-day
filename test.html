@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>测试 · 历史上的今天</title>
+<!--
+  浏览器内测试页 —— 直接打开就能看结果，不需要装 Node。
+
+      python3 serve.py 8000      然后访问  http://127.0.0.1:8000/test.html
+
+  和 js/*.test.mjs 的分工：
+    - 这一页：在**真实浏览器**里跑，用真实数据文件验证数据契约与渲染结果。
+      失败时直接显示是哪一天、哪一条，便于自查。
+    - js/integration.test.mjs：在 Node 里跑，接 CI / pre-push 钩子。
+  两者断言重叠但不互相替代 —— 浏览器能发现 Node 的 DOM 替身发现不了的问题
+  （真实 innerHTML 解析、真实 a.rel 归一化等）。
+
+  ⚠ renderDay() 直接写页面上的真实节点，所以下方 #sandbox 里按
+    index.html 的结构放了一份同 id 的替身。改 index.html 的结构时，
+    这里要同步 —— 否则测试会以「找不到节点」的形式失败。
+-->
+<style>
+  :root{
+    --bg:#faf6ee; --card:#fffdf8; --text:#3b2f2a; --sub:#6b5a4e;
+    --ok:#2f6b3f; --bad:#9c2f2f; --warn:#8a6a2f;
+    --border:#e0d5c3; --accent:#9c4a2f;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:24px;
+    background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  }
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--sub);font-size:14px;margin:0 0 20px}
+  .bar{
+    display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    padding:14px 16px;margin-bottom:20px;
+    background:var(--card);border:1px solid var(--border);border-radius:8px;
+    position:sticky;top:0;z-index:5;
+  }
+  button{
+    font:inherit;font-size:14px;padding:8px 16px;cursor:pointer;
+    background:var(--accent);color:#fff;border:none;border-radius:6px;
+  }
+  button:hover{opacity:.9}
+  button:disabled{opacity:.5;cursor:default}
+  button.sec{background:transparent;color:var(--accent);border:1px solid var(--border)}
+  .tally{margin-left:auto;font-variant-numeric:tabular-nums;font-size:14px}
+  .tally b{font-size:18px}
+  .t-ok{color:var(--ok)} .t-bad{color:var(--bad)} .t-run{color:var(--warn)}
+  section.grp{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:8px;margin-bottom:14px;overflow:hidden;
+  }
+  section.grp > h2{
+    font-size:15px;margin:0;padding:12px 16px;
+    background:rgba(156,74,47,.06);border-bottom:1px solid var(--border);
+  }
+  section.grp > h2 .n{font-weight:400;color:var(--sub);font-size:13px;margin-left:6px}
+  ul{list-style:none;margin:0;padding:0}
+  li{padding:8px 16px;border-bottom:1px solid rgba(224,213,195,.5);font-size:14px}
+  li:last-child{border-bottom:none}
+  li .ic{display:inline-block;width:20px}
+  li.pass .ic{color:var(--ok)} li.fail .ic{color:var(--bad)}
+  li.fail{background:rgba(156,47,47,.05)}
+  li .why{display:block;margin:4px 0 0 20px;color:var(--bad);font-size:13px;
+          font-family:ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap}
+  .hide-pass li.pass{display:none}
+  .empty{padding:14px 16px;color:var(--sub);font-size:14px}
+  footer{margin-top:24px;color:var(--sub);font-size:13px}
+  code{background:rgba(0,0,0,.04);padding:1px 5px;border-radius:3px;font-size:13px}
+  /* 渲染替身：测试用，不展示 */
+  #sandbox{position:absolute;left:-9999px;top:0;width:900px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>测试 · 历史上的今天</h1>
+  <p class="lede">
+    在真实浏览器里验证数据契约、计数自洽与渲染安全。需先启动
+    <code>python3 serve.py 8000</code>。
+  </p>
+
+  <div class="bar">
+    <button id="run">运行全部测试</button>
+    <button id="runFast" class="sec">快速（跳过 366 天全量）</button>
+    <label style="font-size:14px;color:var(--sub)">
+      <input type="checkbox" id="onlyFail"> 只看失败
+    </label>
+    <span class="tally" id="tally">尚未运行</span>
+  </div>
+
+  <div id="out"></div>
+
+  <footer>
+    全量测试会读取 366 个数据文件，约数秒。<br>
+    Node 版本：<code>python3 serve.py 8750</code> 后
+    <code>node js/integration.test.mjs</code>。
+  </footer>
+</div>
+
+<!-- renderDay() 需要的真实节点，结构对齐 index.html -->
+<div id="sandbox" aria-hidden="true">
+  <h1 id="heroDate"></h1>
+  <p id="heroMeta"></p>
+  <!-- ⚠ sourceLink 的 target/rel 由 index.html 的静态标记提供（renderDay
+       只改 href 与文字），所以替身这里也必须带上 —— 否则「全部外链
+       带 rel」那条会以测试替身自身的缺陷形式失败，而不是真有问题。 -->
+  <p><a id="sourceLink" href="#" target="_blank" rel="noopener noreferrer"></a></p>
+  <div id="filterBar"></div>
+  <p id="emptyState" hidden></p>
+  <div class="content">
+    <section class="selected-section"><div id="selectedList"></div></section>
+    <section class="events-section">
+      <button id="evtToggle" aria-expanded="false">
+        <span id="evtTitle">更多事件（<span id="evtCount">0</span>）</span>
+      </button>
+      <div id="eventsList"></div>
+    </section>
+  </div>
+  <span id="fetchDate"></span>
+</div>
+
+<script type="module">
+import { loadDay, toKey, todayKey, daysInMonth } from './js/api.js';
+import { loadGlossary, findMarks, MAX_MARKS_PER_EVENT } from './js/glossary.js';
+import { renderDay, escapeHtml, wikiUrl, formatYear, setCategory } from './js/render.js';
+
+/* ---------- 极简测试框架 ---------- */
+const groups = [];
+let cur = null;
+function group(name, fn, slow = false) { groups.push({ name, fn, slow }); }
+function ok(cond, name, detail = '') {
+  cur.items.push({ pass: !!cond, name, detail: cond ? '' : String(detail) });
+}
+function eq(a, b, name) {
+  ok(a === b, name, `期望 ${JSON.stringify(b)}，实际 ${JSON.stringify(a)}`);
+}
+
+const out = document.getElementById('out');
+const tally = document.getElementById('tally');
+
+function paint() {
+  out.innerHTML = '';
+  for (const g of groups) {
+    if (!g.items) continue;
+    const p = g.items.filter(i => i.pass).length;
+    const f = g.items.length - p;
+    const sec = document.createElement('section');
+    sec.className = 'grp';
+    const head = document.createElement('h2');
+    head.textContent = g.name;
+    const n = document.createElement('span');
+    n.className = 'n';
+    n.textContent = f ? `${p} 通过 · ${f} 失败` : `${p} 通过`;
+    if (f) n.style.color = 'var(--bad)';
+    head.appendChild(n);
+    sec.appendChild(head);
+    const ul = document.createElement('ul');
+    for (const it of g.items) {
+      const li = document.createElement('li');
+      li.className = it.pass ? 'pass' : 'fail';
+      const ic = document.createElement('span');
+      ic.className = 'ic';
+      ic.textContent = it.pass ? '✅' : '❌';
+      li.appendChild(ic);
+      li.appendChild(document.createTextNode(it.name));
+      if (!it.pass && it.detail) {
+        const w = document.createElement('span');
+        w.className = 'why';
+        w.textContent = it.detail;
+        li.appendChild(w);
+      }
+      ul.appendChild(li);
+    }
+    sec.appendChild(ul);
+    out.appendChild(sec);
+  }
+  const all = groups.flatMap(g => g.items || []);
+  const p = all.filter(i => i.pass).length;
+  const f = all.length - p;
+  tally.innerHTML = '';
+  const b = document.createElement('b');
+  b.className = f ? 't-bad' : 't-ok';
+  b.textContent = f ? String(f) : String(p);
+  tally.appendChild(b);
+  tally.appendChild(document.createTextNode(f ? ` 失败 · ${p} 通过` : ' 全部通过'));
+}
+
+/* ---------- 工具 ---------- */
+const norm = s => s.replace(/（图）/g, '');
+
+// Dice 系数（按二元组）—— 够用来识别「是不是同一件事」
+function similar(a, b) {
+  if (a === b) return 1;
+  const bg = s => {
+    const m = new Map();
+    for (let i = 0; i < s.length - 1; i++) {
+      const g = s.slice(i, i + 2);
+      m.set(g, (m.get(g) || 0) + 1);
+    }
+    return m;
+  };
+  const A = bg(a), B = bg(b);
+  let inter = 0, total = 0;
+  for (const [g, c] of A) { total += c; if (B.has(g)) inter += Math.min(c, B.get(g)); }
+  for (const [, c] of B) total += c;
+  return total ? (2 * inter) / total : 0;
+}
+
+function allDayKeys() {
+  const out = [];
+  for (let m = 1; m <= 12; m++)
+    for (let d = 1; d <= daysInMonth(m); d++) out.push(toKey(m, d));
+  return out;
+}
+
+/* 找出某天里 events 与 selected 重复的条目 */
+function dupsIn(day) {
+  const selSet = new Set(day.selected.map(e => norm(e.t)));
+  const exact = day.events.filter(e => selSet.has(norm(e.t)));
+  const near = day.events.filter(e => !selSet.has(norm(e.t)) &&
+    day.selected.some(s => s.y === e.y && similar(norm(s.t), norm(e.t)) >= 0.90));
+  return { exact, near };
+}
+
+/* ---------- 测试 ---------- */
+
+group('数据契约', async () => {
+  const day = await loadDay('10-12');
+  ok(day && typeof day === 'object', 'loadDay 返回对象');
+  eq(day.key, '10-12', 'key 字段正确');
+  ok(Array.isArray(day.selected), 'selected 是数组');
+  ok(Array.isArray(day.events), 'events 是数组');
+  ok(day.selected.length > 0, `selected 非空（${day.selected.length} 条）`);
+  ok(day.events.length > 0, `events 非空（${day.events.length} 条）`);
+  const all = [...day.selected, ...day.events];
+  ok(all.every(e => typeof e.y === 'number' && Number.isFinite(e.y)),
+     '每条都有有限数字年份 y');
+  ok(all.every(e => typeof e.t === 'string' && e.t.length > 0),
+     '每条都有非空正文 t');
+  ok(all.every(e => e.src === 'wiki' || e.src === 'own'),
+     '每条都有合法 src（wiki / own）');
+  ok(all.every(e => !e.ud || e.u), 'ud 存在时 u 必存在（§6.4c）');
+});
+
+group('计数不再有歧义（§6.5）', async () => {
+  const day = await loadDay('10-12');
+  const { exact, near } = dupsIn(day);
+
+  // 本组核心：events 必须**不含**精选里的事件。
+  // 否则「更多 N 条」和页面实际卡片数对不上 —— 这正是用户报的困惑：
+  // 旧文案「全部事件 34 条」，而页面上有 39 张卡片。
+  eq(exact.length, 0, 'events 不含与精选完全相同的事件',
+     exact.slice(0, 3).map(e => e.t.slice(0, 36)).join(' | '));
+  eq(near.length, 0, 'events 不含与精选高度相似的事件（≥0.90）',
+     near.slice(0, 3).map(e => e.t.slice(0, 36)).join(' | '));
+
+  const sel = day.selected.length, rest = day.events.length;
+  ok(sel + rest > 0, `共 ${sel + rest} = 精选 ${sel} + 更多 ${rest}`);
+
+  // 文案自身的断言：渲染后那一行必须把三个数都写出来，且加得起来
+  const words = await loadGlossary();
+  renderDay(day, words);
+  const meta = document.getElementById('heroMeta').textContent;
+  ok(meta.includes(`${sel} 条`), `文案含精选条数（${sel}）：${meta}`);
+  ok(meta.includes(`${rest} 条`), `文案含更多条数（${rest}）`);
+  ok(meta.includes(`${sel + rest} 条`), `文案含合计条数（${sel + rest}）`);
+  ok(!meta.includes('全部事件'), '文案不再使用有歧义的「全部事件」');
+
+  // 折叠区标题也必须是「更多」，且数字与 events 长度一致
+  eq(document.getElementById('evtCount').textContent, String(rest),
+     '折叠区条数与 events 长度一致');
+  ok(document.getElementById('evtTitle').textContent.includes('更多'),
+     '折叠区标题用「更多事件」');
+});
+
+group('页面卡片数 = 文案合计数', async () => {
+  // 最直接的验证：真实渲染后数一遍 DOM 里的卡片
+  const day = await loadDay('10-12');
+  const words = await loadGlossary();
+  setCategory(null);
+  renderDay(day, words);
+  const cards = document.querySelectorAll('#sandbox .event-card').length;
+  const expect = day.selected.length + day.events.length;
+  eq(cards, expect, `DOM 卡片数 ${cards} 等于 精选+更多 ${expect}`);
+
+  // 同一条事件不应在页面上出现两次
+  const texts = [...document.querySelectorAll('#sandbox .event-text')]
+    .map(n => norm(n.textContent));
+  const seen = new Set(), dup = [];
+  for (const t of texts) { if (seen.has(t)) dup.push(t); seen.add(t); }
+  eq(dup.length, 0, '页面上没有重复出现的事件',
+     dup.slice(0, 3).map(t => t.slice(0, 36)).join(' | '));
+});
+
+group('全年 366 天计数自洽', async () => {
+  const keys = allDayKeys();
+  const failLoad = [], dupDays = [];
+  let totalSel = 0, totalRest = 0;
+  for (const k of keys) {
+    const day = await loadDay(k);
+    if (!day || day.isEmpty) { failLoad.push(k); continue; }
+    totalSel += day.selected.length;
+    totalRest += day.events.length;
+    const { exact, near } = dupsIn(day);
+    if (exact.length || near.length) dupDays.push(`${k}(${exact.length}+${near.length})`);
+  }
+  eq(failLoad.length, 0, '366 天全部可加载',
+     `失败：${failLoad.slice(0, 6).join(', ')}`);
+  eq(dupDays.length, 0, '没有任何一天存在精选/其余重复',
+     `仍有重复：${dupDays.slice(0, 8).join(', ')}`);
+  ok(totalSel > 0 && totalRest > 0,
+     `全年合计：精选 ${totalSel} · 其余 ${totalRest} · 共 ${totalSel + totalRest}`);
+}, true);
+
+group('文本质量（抽查 12 天）', async () => {
+  const sample = ['01-01','02-29','03-15','04-30','05-24','06-06',
+                  '07-04','08-19','09-04','10-12','11-28','12-25'];
+  const trad = [], headless = [], lonely = [];
+  for (const k of sample) {
+    const day = await loadDay(k);
+    for (const e of [...day.selected, ...day.events]) {
+      if (/[這個們來說時後點電話國學會賣東]/.test(e.t)) trad.push(`${k} ${e.t.slice(0,30)}`);
+      if (/^(?:和(?!谐|平|解|约|议)|与(?!会|其)|及|、|，)/.test(e.t))
+        headless.push(`${k} ${e.t.slice(0,30)}`);
+      if (/·(?=[，。、）]|$)|(?:^|[，。、（])·/.test(e.t))
+        lonely.push(`${k} ${e.t.slice(0,30)}`);
+    }
+  }
+  eq(trad.length, 0, '无繁体残留', trad.slice(0, 3).join(' | '));
+
+  // 上游残缺：events 端点里也没有完好版本的，只能人工修。
+  // 全年共 8 条（spec.md §10.1 同一张清单），抽查的 12 天里落了 3 条。
+  // 这里断言「不超过已知数量」而不是「为 0 」—— 否则每次跑都红，
+  // 红灯就失去意义了。修完人工清单后把下面两个数字改成 0。
+  const KNOWN_HEADLESS = 1;   // 11-28 1660 皇家学会（与等12名科学家…）
+  const KNOWN_LONELY = 2;     // 04-30 1789 华盛顿、11-28 1919 阿斯特
+  ok(headless.length <= KNOWN_HEADLESS,
+     `句首丢主语不超过已知的 ${KNOWN_HEADLESS} 条（实际 ${headless.length}）`,
+     headless.join(' | '));
+  ok(lonely.length <= KNOWN_LONELY,
+     `人名截断不超过已知的 ${KNOWN_LONELY} 条（实际 ${lonely.length}）`,
+     lonely.join(' | '));
+});
+
+group('已知上游残缺清单（全年 5 条，待人工修）', async () => {
+  // 把残缺条目列出来，而不是让它们以「失败」的形式出现 ——
+  // 这是待办清单，不是回归。数量变多才算回归。
+  const keys = allDayKeys();
+  const broken = [];
+  for (const k of keys) {
+    const day = await loadDay(k);
+    if (!day || day.isEmpty) continue;
+    for (const e of day.selected) {
+      if (/^(?:和(?!谐|平|解|约|议)|与(?!会|其)|及|、|，)/.test(e.t) ||
+          /·(?=[，。、）]|$)|(?:^|[，。、（])·/.test(e.t))
+        broken.push(`${k} ${e.y} ${e.t.slice(0, 34)}`);
+    }
+  }
+  ok(broken.length <= 5,
+     `残缺条目不超过已知的 5 条（实际 ${broken.length}）`,
+     broken.join('\n'));
+  for (const b of broken) ok(true, `待人工修：${b}`);
+}, true);
+
+group('渲染与外链安全', async () => {
+  const day = await loadDay('10-12');
+  const words = await loadGlossary();
+  renderDay(day, words);
+
+  ok(document.querySelectorAll('#sandbox .event-card').length > 0, '渲染出事件卡片');
+  ok(document.getElementById('heroDate').textContent.includes('10'),
+     `标题含日期：${document.getElementById('heroDate').textContent}`);
+
+  const links = [...document.querySelectorAll('#sandbox a')];
+  ok(links.length > 0, `渲染出 ${links.length} 个链接`);
+  // 点出去就离开本站，不该顶掉用户正在看的日期（layout.md §5.6b）
+  const noBlank = links.filter(a => a.target !== '_blank');
+  eq(noBlank.length, 0, '全部链接 target=_blank',
+     noBlank.slice(0, 3).map(a => a.textContent).join(' | '));
+  const noRel = links.filter(a =>
+    !(a.rel || '').includes('noopener') || !(a.rel || '').includes('noreferrer'));
+  eq(noRel.length, 0, '全部链接含 rel=noopener noreferrer',
+     noRel.slice(0, 3).map(a => a.textContent).join(' | '));
+
+  // 出处链接必须指向当天的维基日期条目
+  const src = document.getElementById('sourceLink');
+  ok(src.href.includes('10') && src.href.includes('12'),
+     `出处链接指向 10月12日：${decodeURIComponent(src.href).slice(-24)}`);
+});
+
+group('XSS 防护', async () => {
+  eq(escapeHtml('<img src=x onerror=alert(1)>'),
+     '&lt;img src=x onerror=alert(1)&gt;', 'escapeHtml 转义尖括号');
+  ok(escapeHtml('a&b').includes('&amp;'), 'escapeHtml 转义 &');
+  ok(escapeHtml('"q"').includes('&quot;'), 'escapeHtml 转义双引号');
+
+  // 把恶意正文灌进真实渲染链路，再检查有没有可执行节点落地
+  const words = await loadGlossary();
+  const evil = {
+    key: '10-12',
+    generated: '2026-10',
+    selected: [{ y: 2000, t: '<img src=x onerror="alert(1)">', src: 'wiki' }],
+    events: [{ y: 2001, t: '<script>alert(2)<\/script>', src: 'wiki' }],
+  };
+  renderDay(evil, words);
+  eq(document.querySelectorAll('#sandbox img, #sandbox script').length, 0,
+     '恶意正文渲染后无 img / script 节点');
+  ok(document.querySelector('#sandbox .event-text').textContent.includes('<img'),
+     '恶意内容以纯文本显示（而非被解析）');
+});
+
+group('注音（glossary）', async () => {
+  const words = await loadGlossary();
+  const keys = Object.keys(words);
+  ok(keys.length > 0, `词表 ${keys.length} 词`);
+  ok(keys.every(k => words[k].p), '每词都有拼音 p');
+  ok(keys.every(k => words[k].d), '每词都有释义 d');
+  const tooLong = keys.filter(k => words[k].d.length > 12);
+  eq(tooLong.length, 0, '释义均不超过 12 字（§4.1）',
+     tooLong.slice(0, 3).map(k => `${k}:${words[k].d}`).join(' | '));
+
+  const probe = keys[0];
+  ok(findMarks(`前置${probe}后置`, words).length === 1,
+     `命中词「${probe}」被标记 1 处`);
+  eq(findMarks('完全没有难词的普通句子', {}).length, 0,
+     '空词表时静默跳过，不报错');
+  const many = findMarks(keys.slice(0, 8).join('、'), words);
+  ok(many.length <= MAX_MARKS_PER_EVENT,
+     `单条最多标 ${MAX_MARKS_PER_EVENT} 个（实际 ${many.length}）`);
+});
+
+group('日期工具', async () => {
+  eq(toKey(1, 1), '01-01', 'toKey 补零');
+  eq(toKey(10, 12), '10-12', 'toKey 两位数');
+  eq(daysInMonth(2), 29, '2 月按 29 天（含闰日）');
+  eq(daysInMonth(4), 30, '4 月 30 天');
+  ok(/^\d{2}-\d{2}$/.test(todayKey()), `todayKey 格式正确：${todayKey()}`);
+  eq(formatYear(2000), '2000', '公元年份');
+  ok(formatYear(-44).includes('前'), `公元前年份显示「前」：${formatYear(-44)}`);
+  ok(wikiUrl('测试').includes('/zh-cn/'), '维基链接走 /zh-cn/ 前缀');
+
+  const leap = await loadDay('02-29');
+  ok(leap && !leap.isEmpty, '2 月 29 日有数据');
+});
+
+/* ---------- 运行 ---------- */
+async function run(skipSlow) {
+  const btns = [...document.querySelectorAll('button')].filter(b => b.id);
+  btns.forEach(b => b.disabled = true);
+  tally.innerHTML = '<span class="t-run">运行中…</span>';
+  for (const g of groups) g.items = null;
+  paint();
+
+  for (const g of groups) {
+    if (skipSlow && g.slow) continue;
+    cur = g;
+    g.items = [];
+    try {
+      await g.fn();
+    } catch (e) {
+      g.items.push({ pass: false, name: '该组抛出异常', detail: (e && e.stack) || String(e) });
+    }
+    paint();
+    await new Promise(r => requestAnimationFrame(r));
+  }
+  btns.forEach(b => b.disabled = false);
+
+  // 给无头浏览器／CI 一个机器可读的结论
+  const all = groups.flatMap(g => g.items || []);
+  const failed = all.filter(i => !i.pass).length;
+  document.body.dataset.done = '1';
+  document.body.dataset.fail = String(failed);
+  document.body.dataset.pass = String(all.length - failed);
+}
+
+document.getElementById('run').onclick = () => run(false);
+document.getElementById('runFast').onclick = () => run(true);
+document.getElementById('onlyFail').onchange = e =>
+  out.classList.toggle('hide-pass', e.target.checked);
+
+// 打开即跑。带 ?all=1 时跑全量 —— 便于无头浏览器／CI 一次跑完：
+//   google-chrome --headless --dump-dom 'http://127.0.0.1:8000/test.html?all=1'
+// 跑完会在 <body> 上写 data-done 与 data-fail，方便脚本判断成败。
+const runAll = new URLSearchParams(location.search).get('all') === '1';
+run(!runAll);
+</script>
+</body>
+</html>

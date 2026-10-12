@@ -48,10 +48,21 @@ section('api.js — 真实取数');
 const day = await loadDay('10-09');
 ok(day.key === '10-09', 'key 正确');
 ok(day.selected.length === 5, `selected 5 条`, `实际 ${day.selected.length}`);
-ok(day.events.length === 41, `events 41 条`, `实际 ${day.events.length}`);
+// events 已在生成期去重，不含精选（§6.5）—— 去重前是 41 条
+ok(day.events.length === 39, `events 39 条（已去重）`, `实际 ${day.events.length}`);
 ok(day.isEmpty === false, 'isEmpty = false');
-ok(day.total === 46, 'total = selected + events');
+ok(day.total === 44, 'total = selected + events');
 ok(typeof day.generated === 'string', 'generated 是字符串');
+
+// events 不得包含 selected 里的事件（§6.5）。不满足时同一条会在页面上
+// 出现两次，且「其余 N 条」与实际卡片数对不上 —— 这是用户报的困惑来源。
+{
+  const norm = s => s.replace(/（图）/g, '');
+  const selSet = new Set(day.selected.map(e => norm(e.t)));
+  const dup = day.events.filter(e => selSet.has(norm(e.t)));
+  ok(dup.length === 0, 'events 不含与精选重复的事件',
+     dup.slice(0, 2).map(e => e.t.slice(0, 30)).join(' | '));
+}
 
 ok(day.events.every((e, i, a) => i === 0 || (a[i - 1].y ?? 0) <= (e.y ?? 0)),
    'events 按年份升序');
@@ -143,9 +154,23 @@ globalThis.document = {
 renderDay(day, words);
 
 ok(nodes.heroDate.textContent === '10 月 9 日', '标题日期');
-ok(nodes.heroMeta.textContent.includes('5') &&
-   nodes.heroMeta.textContent.includes('41'), '副标题含条数');
-ok(nodes.evtCount.textContent === '41', '折叠区计数');
+// 文案须把三个数都写出来且加得起来（§6.5）。
+// 两次文案演进都由用户反馈驱动：
+//   「全部事件 41 条」—— 歧义：听起来是所有，但页面上有 46 张卡片
+//   「… 其余 32 条 · 共 37 条」—— 数对上了，但「其余」偏书面、预设前提
+//   现版「共 44 条 · 维基精选 5 条 · 更多 39 条」—— 总数前置，不必做加法
+ok(nodes.heroMeta.textContent.includes('5 条') &&
+   nodes.heroMeta.textContent.includes('39 条') &&
+   nodes.heroMeta.textContent.includes('44 条'),
+   '副标题含合计/精选/更多三个数', nodes.heroMeta.textContent);
+ok(nodes.heroMeta.textContent.indexOf('共 44 条') === 0,
+   '合计数前置（用户最想知道的数放最前）', nodes.heroMeta.textContent);
+ok(!nodes.heroMeta.textContent.includes('全部事件'),
+   '副标题不再使用有歧义的「全部事件」');
+// 「其他」是八个分类之一，不能同时用作折叠区标题 —— 会撞义
+ok(!nodes.heroMeta.textContent.includes('其他'),
+   '副标题不使用与分类名撞义的「其他」');
+ok(nodes.evtCount.textContent === '39', '折叠区计数等于更多事件条数');
 ok(nodes.emptyState.hidden === true, '空状态隐藏');
 
 const html = nodes.selectedList.innerHTML;
@@ -360,7 +385,7 @@ if (noLink.length) {
 setCategory(null);
 
 /* ============ 精选为空时自动展开 ============ */
-section('精选为空时自动展开全部事件');
+section('精选为空时自动展开更多事件');
 
 const { setEventsExpanded, isEventsExpanded } = await import('./render.js');
 
@@ -369,7 +394,7 @@ setCategory(null);
 setEventsExpanded(false);
 renderDay(day, words);
 ok(day.selected.length > 0, '测试前提：当天有精选');
-ok(isEventsExpanded() === false, '有精选时「全部事件」保持收起');
+ok(isEventsExpanded() === false, '有精选时「更多事件」保持收起');
 ok(nodes.eventsList.hidden === true, 'eventsList 已隐藏');
 
 // 构造「精选为空但有其余事件」的情形

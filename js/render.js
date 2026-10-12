@@ -248,7 +248,7 @@ function renderFilterBar(day, active) {
 }
 
 /**
- * 展开／收起「全部事件」。
+ * 展开／收起「更多事件」。
  * `aria-expanded` 与 `hidden` 必须同步 —— 前者给屏幕阅读器，后者控制显示。
  * 导出供 app.js 的折叠按钮复用，避免两处各写一遍同步逻辑。
  */
@@ -312,9 +312,23 @@ export function renderDay(day, words = {}) {
   const selected = filterByCategory(day.selected, activeCategory);
   const events = filterByCategory(day.events, activeCategory);
 
+  // 计数文案（§6.5）：events 已在生成期去重，不含精选，所以
+  // 「精选 + 更多 = 共」恒成立。
+  //
+  // 文案演进（两次都是用户反馈驱动）：
+  //   初版「维基精选 5 条 · 全部事件 34 条」—— 歧义：「全部」听起来是
+  //        所有，但页面上有 39 张卡片，用户不知道该信哪个数。
+  //   二版「… · 其余 32 条 · 共 37 条」—— 数对上了，但「其余」要先知道
+  //        上面挑走了一部分才讲得通，且偏书面。
+  //   现版「共 37 条 · 维基精选 5 条 · 更多 32 条」—— 总数前置（这是
+  //        用户最想知道的数），拆分跟在后面，不必做加法。
+  //
+  // ⚠ 不能用「其他事件」—— 「其他」是八个分类之一（占 45%），
+  //   同屏出现会和分类筛选栏的「其他」撞义。
   d.heroMeta.textContent = activeCategory
-    ? `${activeCategory} · 精选 ${selected.length} 条 · 其余 ${events.length} 条`
-    : `维基精选 ${day.selected.length} 条 · 全部事件 ${day.events.length} 条`;
+    ? `${activeCategory} · 精选 ${selected.length} 条 · 更多 ${events.length} 条`
+    : `共 ${day.selected.length + day.events.length} 条 · ` +
+      `维基精选 ${day.selected.length} 条 · 更多 ${day.events.length} 条`;
 
   d.selectedSection.hidden = selected.length === 0;
   d.selectedList.innerHTML =
@@ -325,7 +339,7 @@ export function renderDay(day, words = {}) {
   d.eventsList.innerHTML =
     events.map(it => renderEvent(it, words, false)).join('');
 
-  // 精选为空时自动展开「全部事件」—— 否则页面上什么都看不到，
+  // 精选为空时自动展开「更多事件」—— 否则页面上什么都看不到，
   // 只剩一个折叠标题。按分类筛选时很容易出现这种情况：
   // 某分类当天只有非精选事件（如 10/24 的航空航天）。
   if (selected.length === 0 && events.length > 0) {
