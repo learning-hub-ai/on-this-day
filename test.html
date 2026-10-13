@@ -426,6 +426,16 @@ group('已知上游残缺清单（全年 5 条，待人工修）', async () => {
   ok(filled.length === 24,
      `已补全的标题仍在（${filled.length} 条）`,
      `实际 ${filled.length} 条 —— 少了说明 gen_otd.py 重跑把补全冲掉了`);
+  // 「（图）」死文本：gen_otd.py 的 slim() 已在入口删除
+  const tu = [];
+  for (const k of keys) {
+    const day = await loadDay(k);
+    if (!day || day.isEmpty) continue;
+    for (const e of [...day.selected, ...day.events]) {
+      if (e.t.includes('（图）')) tu.push(`${k} ${e.t.slice(0, 26)}`);
+    }
+  }
+  ok(tu.length === 0, '正文无「（图）」死文本（§10.1d）', tu.slice(0, 5).join('\n'));
   for (const b of emptyMarks) ok(true, `待人工修：${b}`);
 }, true);
 

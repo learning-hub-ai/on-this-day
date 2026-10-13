@@ -311,6 +311,22 @@ def pick_main_title(titles, text):
     return best if score(best) >= 4 else None
 
 
+# 「（图）」是维基「历史上的今天」栏目的「见配图」标记。本站不显示
+# 任何图片，所以它是死文本（全年 220 处）—— 在 slim() 里就删掉，
+# 而不是事后用脚本改数据：改数据的话没有标志位，重跑本脚本又会取回
+# API 原文，实测踩过。参见 scripts/strip_tu_marker.py（一次性清历史数据）。
+#
+# ⚠ 只删恰好四个字。宽松写法会吃掉 07-10「铃木一朗（西雅图水手）」里的球队名。
+# ⚠ 「·（图）」要整段删 —— 那个「·」连着一个被上游丢掉的名字，
+#   只删「（图）」会留下「乔治·的《弥赛亚》」这种悬空间隔号（实测 3 条）。
+TU_RE = re.compile(r'·?（图）')
+
+
+def strip_tu(text):
+    """删掉「（图）」及其前面可能悬空的间隔号。"""
+    return TU_RE.sub('', text)
+
+
 def slim(raw):
     """
     一条原始事件 → 产物格式（spec.md §6.1）。
@@ -333,7 +349,7 @@ def slim(raw):
 
     item = {
         'y': raw.get('year'),          # API 直接提供，无需从文本解析
-        't': s2(raw.get('text', '')),
+        't': strip_tu(s2(raw.get('text', ''))),
         'src': 'wiki',
     }
     # 补回被截断的人名（spec.md §10.1）。实测 24 条里 13 条可自动补回

@@ -86,7 +86,7 @@ ok(fresh !== day, 'clearCache 后重新取数');
 section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
 let sensCount = 0, sensBadType = [], sensNoViolence = [];
-let emptyMarks = [], filledTitles = 0, missingTag = [];
+let emptyMarks = [], filledTitles = 0, missingTag = [], tuMarks = [];
 // 只认这几个暴力词 —— 用来反查「标了 sensitive 的条目正文里真有暴力内容」。
 // 刻意比 tag_sensitive.py 的表短：测试要独立判断，不能照抄实现，
 // 否则脚本错了测试也跟着错。
@@ -105,6 +105,9 @@ for (let m = 1; m <= 12; m++) {
     for (const it of [...data.selected, ...data.events]) {
       if (typeof it.y !== 'number') badYear.push(`${key}:${it.t?.slice(0, 12)}`);
       if (/《》|「」/.test(it.t)) emptyMarks.push(`${key}:${it.t.slice(0, 18)}`);
+      // 「（图）」是维基的「见配图」标记，本站不显示图片 —— 死文本。
+      // gen_otd.py 的 slim() 已在入口删除；这里守住它不再回来。
+      if (it.t.includes('（图）')) tuMarks.push(`${key}:${it.t.slice(0, 18)}`);
       if (it.filled_title === true) filledTitles++;
       if ('sensitive' in it) {
         sensCount++;
@@ -139,6 +142,9 @@ ok(filledTitles === 24,
 ok(missingTag.length === 0,
    '每条都有 tag（改过正文要重跑 tag_events.py）',
    missingTag.slice(0, 4).join(' | '));
+ok(tuMarks.length === 0,
+   '正文无「（图）」死文本（§10.1d）',
+   tuMarks.slice(0, 4).join(' | '));
 
 /* ============ glossary.js：真实词表 ============ */
 section('glossary.js — 真实词表');
