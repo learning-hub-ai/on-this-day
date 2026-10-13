@@ -86,7 +86,7 @@ ok(fresh !== day, 'clearCache 后重新取数');
 section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
 let sensCount = 0, sensBadType = [], sensNoViolence = [];
-let emptyMarks = [], filledTitles = 0;
+let emptyMarks = [], filledTitles = 0, missingTag = [];
 // 只认这几个暴力词 —— 用来反查「标了 sensitive 的条目正文里真有暴力内容」。
 // 刻意比 tag_sensitive.py 的表短：测试要独立判断，不能照抄实现，
 // 否则脚本错了测试也跟着错。
@@ -112,6 +112,10 @@ for (let m = 1; m <= 12; m++) {
         if (it.sensitive !== true) sensBadType.push(`${key}:${it.sensitive}`);
         if (!VIOLENT_RE.test(it.t)) sensNoViolence.push(`${key}:${it.t.slice(0, 20)}`);
       }
+      // tag 必须存在 —— 它由 tag_events.py 写入，而补全正文会改变配对
+      // 前缀，实测 11-16 补全后 tag 就空了（分类筛选栏会少一条）。
+      // 流程要求：改完正文必须重跑 tag_events.py。
+      if (!it.tag) missingTag.push(`${key}:${it.t.slice(0, 18)}`);
     }
   }
 }
@@ -132,6 +136,9 @@ ok(emptyMarks.length <= 5,
 ok(filledTitles === 24,
    `补全的标题仍在（${filledTitles} 条，带 filled_title 标志）`,
    `实际 ${filledTitles} 条 —— 少了说明 gen_otd.py 重跑把补全冲掉了`);
+ok(missingTag.length === 0,
+   '每条都有 tag（改过正文要重跑 tag_events.py）',
+   missingTag.slice(0, 4).join(' | '));
 
 /* ============ glossary.js：真实词表 ============ */
 section('glossary.js — 真实词表');

@@ -587,7 +587,7 @@ def dedup_events_against_selected(selected, events):
     return removed
 
 
-def merge_idempotent(fresh, existing, force=False):
+def merge_idempotent(fresh, existing, force=False, group=None):
     """
     幂等合并（spec.md §7.1）：重跑不冲掉人工改写，也不清空派生字段。
 
@@ -600,6 +600,14 @@ def merge_idempotent(fresh, existing, force=False):
       后，前 12 字从「音乐剧《》首次在百老汇上」变成「音乐剧《音乐之声》首次在」，
       旧条目永远匹配不到，is_hand_edited() 根本没机会被问到，补全被静默冲掉。
       所以第一轮前缀配对失败后，要再用「同年 + 去掉空标记后的正文」兜一次。
+
+    ⚠ 兜底键必须**拒绝歧义匹配**。实测 05-22 同一天有两条近重复：
+          精选  …制作的《吃豆人》在东京发行。            ← 补全过
+          更多  …制作的《吃豆人》在东京发行，为1980年代…
+      两条的兜底键都是「日本南梦宫游戏设计师岩谷」，dict 后写覆盖前写，
+      结果精选那条的补全被配到 events 上，补全被冲掉。
+      因此兜底键只在**全天唯一**时才用；一旦有两条撞上同一个键，
+      两条都不进兜底表 —— 配不上顶多退回「用新数据」，配错则会改错条目。
     """
     if not existing:
         return fresh, 0
@@ -610,10 +618,21 @@ def merge_idempotent(fresh, existing, force=False):
 
     old_map = {}
     old_alt = {}      # 兜底键：同年 + 抹掉标记内容后的前 12 字
-    for group in ('selected', 'events'):
-        for it in existing.get(group) or []:
+    alt_dupes = set()  # 撞键的兜底键 —— 有歧义就不能用，见上面注释
+    # ⚠ 兜底表只收**当前这一组**的旧条目。05-22 的两条近重复分别在
+    #   selected 和 events，正文前 12 字完全相同 —— 任何基于前缀的键都
+    #   分不开，能分开的只有组别。调用方本来就是按组调用的，把组传进来
+    #   即可；不限定组的话 events 的条目会覆盖 selected 的同键条目。
+    groups = (group,) if group else ('selected', 'events')
+    for grp in groups:
+        for it in existing.get(grp) or []:
             old_map[(it.get('y'), (it.get('t') or '')[:12])] = it
-            old_alt[(it.get('y'), strip_marks(it.get('t'))[:12])] = it
+            alt_key = (it.get('y'), strip_marks(it.get('t'))[:12])
+            if alt_key in old_alt:
+                alt_dupes.add(alt_key)
+            old_alt[alt_key] = it
+    for k in alt_dupes:          # 歧义的一律剔除，宁可配不上也不配错
+        old_alt.pop(k, None)
 
     out = []
     kept = 0
@@ -724,7 +743,7 @@ def main():
                     existing = json.load(f)
                 for group in ('selected', 'events'):
                     doc[group], kept = merge_idempotent(
-                        doc[group], existing, force=args.force)
+                        doc[group], existing, force=args.force, group=group)
                     stats['kept'] += kept
 
             blob = json.dumps(doc, ensure_ascii=False, separators=(',', ':'))
