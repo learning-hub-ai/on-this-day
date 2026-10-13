@@ -29,6 +29,17 @@
 适用于 `index.html`、`css/`、`js/`、`scripts/`、`serve.py`、`docs/`，
 以及数据的组织方式与字段设计。
 
+### 站点图标的字形来源
+
+`assets/icon.svg` 里「史」的轮廓取自 **Noto Sans CJK SC Black**，
+该字体以 [SIL Open Font License 1.1](https://openfontlicense.org/) 发布。
+
+OFL 允许把字体用于任何设计工作，**无需额外许可**；把单个字形转为
+路径嵌入图标**不构成字体软件的再分发**，因此不触发 OFL 的署名与
+同名条款。此处标注只为留痕，不是许可要求。
+
+图标的构图、配色与圆角仍归本条（版权所有）。
+
 ## 三、自编内容 —— 版权所有
 
 同第二条。适用于：
