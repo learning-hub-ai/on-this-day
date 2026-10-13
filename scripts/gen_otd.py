@@ -62,7 +62,22 @@ MAX_RETRY = 6
 RETRY_AFTER_CAP = 120
 
 # 年份条目，从关联实体里剔除（spec.md §6.4）
-YEAR_RE = re.compile(r'^-?\d+年$|^\d+年代$|^公元前\d+年$')
+# 纯日期/年份型条目标题 —— 这类**不是**「某天发生的事」，不该进 u 或 l。
+#
+# ⚠ 「前539年」曾漏判：旧模式只认「公元前N年」，不认维基实际在用的
+#   简写「前N年」。实测漏掉 54 条 u 和 59 处 l，于是出现
+#   「居鲁士攻占巴比伦。详情：前539年」—— 点进去是整年的大事记，
+#   根本不是这件事。
+YEAR_RE = re.compile(
+    r'^(?:公元)?前?\d+年$'        # 1492年 / 前539年 / 公元前539年
+    r'|^\d+年代$'                 # 1960年代
+    r'|^(?:公元)?前?\d+世纪$'      # 20世纪 / 前5世纪
+    r'|^\d+月\d+日$'              # 11月26日
+    r'|^\d+年\d+月$'              # 1949年10月
+    r'|^(?:\d+年)?大事[记記]$'     # 1949年大事记
+)
+# ⚠ 不要加「年表$」—— 实测会误杀「化學元素發現年表」，那是个真条目。
+#   本模式只排除「标题本身就是一个年份/日期」，不排除「某主题的年表」。
 # 人名截断：间隔号后紧跟括号/标点/句子成分，说明姓氏丢了（spec.md §10.1）
 #   命中：马拉拉·（图）遭到…       ← 姓氏「优素福扎伊」丢失
 #   不命中：「1·2」火灾、8·10 事件  ← 这是日期型事件名，不是人名
@@ -297,6 +312,11 @@ def pick_main_title(titles, text):
 
     def score(t):
         s = 0.0
+        # ⚠ 纯年份标题不算事件信号。「前539年」也能匹配 \d{3,4}年，
+        #   于是「居鲁士攻占巴比伦」的详情一度指向整年大事记 ——
+        #   正好是这条 +5 规则想排除的反面。先排除纯日期标题。
+        if YEAR_RE.match(t):
+            return -10
         if re.search(r'\d{3,4}年', t):
             s += 5
         if any(h in t for h in EVENT_TITLE_HINTS):
@@ -408,6 +428,14 @@ def is_hand_edited(item):
 #   标签会被静默清空，前端的分类筛选栏就空了 —— 实测踩过一次。
 #   所以 --force 也必须保留这些字段，只重算 API 来源的部分。
 DERIVED_FIELDS = ('tag',)
+
+# 人工写的字段 —— 重跑时必须保留这些，其余（u / l / ud / ld / y）
+# 都是 API 派生的结构字段，一律用新算出来的值。
+#
+# ⚠ `t` 在列表里，因为补全空书名号（§10.1c）改的就是正文。
+#   但这也意味着：上游若真的修了正文，带标志位的条目不会自动更新 ——
+#   这是有意的取舍，`--force` 可以覆盖。
+MANUAL_FIELDS = ('t', 'why', 'notes', 'sensitive', 'filled_title', 'src')
 
 
 def repair_truncated_names(text, titles):
@@ -661,8 +689,17 @@ def merge_idempotent(fresh, existing, force=False, group=None):
             out.append(it)
             continue
         if is_hand_edited(old) and not force:
-            merged = dict(it)          # 先取新的结构字段（l / u）
-            merged.update(old)         # 人工内容覆盖之，优先级更高
+            # ⚠ 只保留**人工写的**字段，结构字段一律用新的。
+            #   旧写法是 merged = dict(it); merged.update(old) —— old 全盘
+            #   覆盖，连 u / l 也一起盖回去。于是修好了 pick_main_title
+            #   的纯年份 bug 之后，带 sensitive 的条目仍然留着
+            #   「详情：前217年」—— 因为那条被整体保留了。
+            #   u / l / ud / ld / y 都是 API 派生的，没有人工内容，
+            #   必须跟着新逻辑走。
+            merged = dict(it)
+            for k in MANUAL_FIELDS:
+                if k in old:
+                    merged[k] = old[k]
             out.append(merged)
             kept += 1
         else:

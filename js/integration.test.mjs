@@ -49,9 +49,9 @@ const day = await loadDay('10-09');
 ok(day.key === '10-09', 'key 正确');
 ok(day.selected.length === 5, `selected 5 条`, `实际 ${day.selected.length}`);
 // events 已在生成期去重，不含精选（§6.5）—— 去重前是 41 条
-ok(day.events.length === 39, `events 39 条（已去重）`, `实际 ${day.events.length}`);
+ok(day.events.length === 38, `events 38 条（已去重）`, `实际 ${day.events.length}`);
 ok(day.isEmpty === false, 'isEmpty = false');
-ok(day.total === 44, 'total = selected + events');
+ok(day.total === 43, 'total = selected + events');
 ok(typeof day.generated === 'string', 'generated 是字符串');
 
 // events 不得包含 selected 里的事件（§6.5）。不满足时同一条会在页面上
@@ -87,6 +87,11 @@ section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
 let sensCount = 0, sensBadType = [], sensNoViolence = [];
 let emptyMarks = [], filledTitles = 0, missingTag = [], tuMarks = [];
+// 纯日期型条目标题不该当「详情」—— 读者点进去是整年大事记，
+// 不是这件事。实测曾出现「居鲁士攻占巴比伦。详情：前539年」。
+// 刻意不含「年表$」——「化學元素發現年表」是真条目，实测会误杀。
+const DATEONLY_RE = /^(?:公元)?前?\d+年$|^\d+年代$|^(?:公元)?前?\d+世纪$|^\d+月\d+日$|^\d+年\d+月$|^(?:\d+年)?大事[记記]$/;
+let dateLinks = [];
 // 只认这几个暴力词 —— 用来反查「标了 sensitive 的条目正文里真有暴力内容」。
 // 刻意比 tag_sensitive.py 的表短：测试要独立判断，不能照抄实现，
 // 否则脚本错了测试也跟着错。
@@ -108,6 +113,10 @@ for (let m = 1; m <= 12; m++) {
       // 「（图）」是维基的「见配图」标记，本站不显示图片 —— 死文本。
       // gen_otd.py 的 slim() 已在入口删除；这里守住它不再回来。
       if (it.t.includes('（图）')) tuMarks.push(`${key}:${it.t.slice(0, 18)}`);
+      if (it.u && DATEONLY_RE.test(it.u)) dateLinks.push(`${key}:u=${it.u}`);
+      for (const l of it.l || []) {
+        if (DATEONLY_RE.test(l)) dateLinks.push(`${key}:l=${l}`);
+      }
       if (it.filled_title === true) filledTitles++;
       if ('sensitive' in it) {
         sensCount++;
@@ -145,6 +154,9 @@ ok(missingTag.length === 0,
 ok(tuMarks.length === 0,
    '正文无「（图）」死文本（§10.1d）',
    tuMarks.slice(0, 4).join(' | '));
+ok(dateLinks.length === 0,
+   '详情与关联条目都不是纯日期型标题（§6.4e）',
+   dateLinks.slice(0, 5).join(' | '));
 
 /* ============ glossary.js：真实词表 ============ */
 section('glossary.js — 真实词表');
@@ -204,19 +216,21 @@ ok(nodes.heroDate.textContent === '10 月 9 日', '标题日期');
 // 两次文案演进都由用户反馈驱动：
 //   「全部事件 41 条」—— 歧义：听起来是所有，但页面上有 46 张卡片
 //   「… 其余 32 条 · 共 37 条」—— 数对上了，但「其余」偏书面、预设前提
-//   现版「共 44 条 · 维基精选 5 条 · 更多 39 条」—— 总数前置，不必做加法
+//   现版「共 43 条 · 维基精选 5 条 · 更多 38 条」—— 总数前置，不必做加法
+//   10-09 从 39 降到 38：删掉「（图）」后，精选的「社会活动家遭到…刺杀未遂」
+//   与 events 里同一条变成**完全相同**，被 §6.5 去重正确移除。
 ok(nodes.heroMeta.textContent.includes('5 条') &&
-   nodes.heroMeta.textContent.includes('39 条') &&
-   nodes.heroMeta.textContent.includes('44 条'),
+   nodes.heroMeta.textContent.includes('38 条') &&
+   nodes.heroMeta.textContent.includes('43 条'),
    '副标题含合计/精选/更多三个数', nodes.heroMeta.textContent);
-ok(nodes.heroMeta.textContent.indexOf('共 44 条') === 0,
+ok(nodes.heroMeta.textContent.indexOf('共 43 条') === 0,
    '合计数前置（用户最想知道的数放最前）', nodes.heroMeta.textContent);
 ok(!nodes.heroMeta.textContent.includes('全部事件'),
    '副标题不再使用有歧义的「全部事件」');
 // 「其他」是八个分类之一，不能同时用作折叠区标题 —— 会撞义
 ok(!nodes.heroMeta.textContent.includes('其他'),
    '副标题不使用与分类名撞义的「其他」');
-ok(nodes.evtCount.textContent === '39', '折叠区计数等于更多事件条数');
+ok(nodes.evtCount.textContent === '38', '折叠区计数等于更多事件条数');
 ok(nodes.emptyState.hidden === true, '空状态隐藏');
 
 const html = nodes.selectedList.innerHTML;
