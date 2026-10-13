@@ -86,6 +86,7 @@ ok(fresh !== day, 'clearCache 后重新取数');
 section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
 let sensCount = 0, sensBadType = [], sensNoViolence = [];
+let emptyMarks = [], filledTitles = 0;
 // 只认这几个暴力词 —— 用来反查「标了 sensitive 的条目正文里真有暴力内容」。
 // 刻意比 tag_sensitive.py 的表短：测试要独立判断，不能照抄实现，
 // 否则脚本错了测试也跟着错。
@@ -103,6 +104,8 @@ for (let m = 1; m <= 12; m++) {
     if (data.isEmpty) emptyDays.push(key);
     for (const it of [...data.selected, ...data.events]) {
       if (typeof it.y !== 'number') badYear.push(`${key}:${it.t?.slice(0, 12)}`);
+      if (/《》|「」/.test(it.t)) emptyMarks.push(`${key}:${it.t.slice(0, 18)}`);
+      if (it.filled_title === true) filledTitles++;
       if ('sensitive' in it) {
         sensCount++;
         // 只允许 true —— false/0/'' 这类假值会让前端判断变微妙
@@ -120,6 +123,15 @@ ok(sensBadType.length === 0, 'sensitive 只用 true，不用假值',
    sensBadType.slice(0, 3).join(','));
 ok(sensNoViolence.length === 0, '标了 sensitive 的正文确有暴力内容（无误标）',
    sensNoViolence.slice(0, 3).join(' | '));
+
+// 空书名号《》/「」—— 已补 24 条，剩 5 条无法可靠复原（§10.1）。
+// 断言「不超过 5」而不是「等于 0」：增加说明有新残缺或补全被冲掉。
+ok(emptyMarks.length <= 5,
+   `空书名号残缺 ${emptyMarks.length} 条（已知上限 5）`,
+   emptyMarks.slice(0, 6).join(' | '));
+ok(filledTitles === 24,
+   `补全的标题仍在（${filledTitles} 条，带 filled_title 标志）`,
+   `实际 ${filledTitles} 条 —— 少了说明 gen_otd.py 重跑把补全冲掉了`);
 
 /* ============ glossary.js：真实词表 ============ */
 section('glossary.js — 真实词表');

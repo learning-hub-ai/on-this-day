@@ -10,6 +10,30 @@
 <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png">
+
+<!-- 分享预览（Open Graph / Twitter Card）。
+     粘到微信、Slack、iMessage 时决定对方看到什么 —— 没有这些就只有
+     一条光秃秃的网址。
+     ⚠ og:image **必须**是绝对 URL：抓取方不在本站上下文里，相对路径
+       解析不了。其余相对路径（icon/css）不受影响。
+     ⚠ 用 PNG 不用 SVG：多数平台的抓取器不渲染 SVG。
+     theme-color 影响 Android Chrome 的地址栏配色，取站点主色。 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="历史上的今天">
+<meta property="og:title" content="历史上的今天">
+<meta property="og:description" content="按日期读历史上的大事。15,317 条、366 天，面向 10–18 岁的中文读者。">
+<meta property="og:url" content="https://learning-hub-ai.github.io/on-this-day/">
+<meta property="og:image" content="https://learning-hub-ai.github.io/on-this-day/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="历史上的今天 —— 按日期读历史上的大事">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="历史上的今天">
+<meta name="twitter:description" content="按日期读历史上的大事。15,317 条、366 天，面向 10–18 岁的中文读者。">
+<meta name="twitter:image" content="https://learning-hub-ai.github.io/on-this-day/assets/og-card.png">
+<meta name="theme-color" content="#9c4a2f">
+
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>

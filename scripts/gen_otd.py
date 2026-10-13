@@ -371,9 +371,19 @@ def slim(raw):
 
 
 def is_hand_edited(item):
-    """人工编辑过的标志：写了 why、notes、sensitive，或 src 改成了 own。"""
+    """人工编辑过的标志：写了 why、notes、sensitive，或 src 改成了 own。
+
+    ⚠ 还要认「正文补过空书名号」—— scripts/fill_empty_titles.py 把
+      「音乐剧《》首次在百老汇上演」补成「音乐剧《音乐之声》…」，
+      但这条既没有 why 也没有 sensitive，src 仍是 wiki。实测：不加
+      这条判断，重跑本脚本会把补好的标题**静默改回《》**。
+      标志用 `filled_title` 字段，由该脚本写入。
+      注意它**不进** DERIVED_FIELDS —— DERIVED_FIELDS 里的字段连
+      `--force` 都保留，而补全的标题应该允许 `--force` 冲掉重来。
+    """
     return bool(item.get('why') or item.get('notes')
-                or item.get('sensitive') or item.get('src') == 'own')
+                or item.get('sensitive') or item.get('filled_title')
+                or item.get('src') == 'own')
 
 
 # 由其他脚本写入、本脚本不该覆盖的字段
@@ -584,18 +594,34 @@ def merge_idempotent(fresh, existing, force=False):
     按 (y, t 前 12 字) 配对 —— 文本可能被人工改写，所以用前缀而非全文。
     配到的旧条目若已人工编辑，整条保留，只补 API 新增的结构字段。
     `tag` 这类派生字段**无论是否人工编辑都保留**（见 DERIVED_FIELDS）。
+
+    ⚠ 前缀配对有个盲区：**改写发生在前 12 字之内就配不上**。
+      实测 11-16「音乐剧《》首次在百老汇上演」补成「音乐剧《音乐之声》…」
+      后，前 12 字从「音乐剧《》首次在百老汇上」变成「音乐剧《音乐之声》首次在」，
+      旧条目永远匹配不到，is_hand_edited() 根本没机会被问到，补全被静默冲掉。
+      所以第一轮前缀配对失败后，要再用「同年 + 去掉空标记后的正文」兜一次。
     """
     if not existing:
         return fresh, 0
+
+    def strip_marks(s):
+        """抹掉空书名号/引号里的内容，让补全前后的正文可比。"""
+        return re.sub(r'《[^》]*》', '《》', re.sub(r'「[^」]*」', '「」', s or ''))
+
     old_map = {}
+    old_alt = {}      # 兜底键：同年 + 抹掉标记内容后的前 12 字
     for group in ('selected', 'events'):
         for it in existing.get(group) or []:
             old_map[(it.get('y'), (it.get('t') or '')[:12])] = it
+            old_alt[(it.get('y'), strip_marks(it.get('t'))[:12])] = it
 
     out = []
     kept = 0
     for it in fresh:
         old = old_map.get((it.get('y'), (it.get('t') or '')[:12]))
+        if old is None:
+            # 前缀没配上，可能是补全改了前 12 字 —— 用抹掉标记的形式再试
+            old = old_alt.get((it.get('y'), strip_marks(it.get('t'))[:12]))
         if not old:
             out.append(it)
             continue

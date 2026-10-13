@@ -407,6 +407,26 @@ group('已知上游残缺清单（全年 5 条，待人工修）', async () => {
      `残缺条目不超过已知的 5 条（实际 ${broken.length}）`,
      broken.join('\n'));
   for (const b of broken) ok(true, `待人工修：${b}`);
+
+  // 空书名号《》/「」：已补 24 条（scripts/fill_empty_titles.py），
+  // 剩 5 条链接里也找不到可靠答案 —— 01-07《查理周刊》、03-19 无候选、
+  // 09-08 缺英文原文、11-19《葛底斯堡演说》、12-21 与详情链接重复。
+  const emptyMarks = [], filled = [];
+  for (const k of keys) {
+    const day = await loadDay(k);
+    if (!day || day.isEmpty) continue;
+    for (const e of [...day.selected, ...day.events]) {
+      if (/《》|「」/.test(e.t)) emptyMarks.push(`${k} ${e.t.slice(0, 30)}`);
+      if (e.filled_title === true) filled.push(k);
+    }
+  }
+  ok(emptyMarks.length <= 5,
+     `空书名号残缺不超过已知的 5 条（实际 ${emptyMarks.length}）`,
+     emptyMarks.join('\n'));
+  ok(filled.length === 24,
+     `已补全的标题仍在（${filled.length} 条）`,
+     `实际 ${filled.length} 条 —— 少了说明 gen_otd.py 重跑把补全冲掉了`);
+  for (const b of emptyMarks) ok(true, `待人工修：${b}`);
 }, true);
 
 group('渲染与外链安全', async () => {

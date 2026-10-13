@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
+     viewBox="0 0 1200 630" role="img" aria-label="历史上的今天">
+  <!-- 分享卡片（og:image / twitter:image）。1200×630 是各平台通用比例。
+       「史」的路径与 assets/icon.svg 同源（从该文件取回），确保卡片与
+       标签栏图标是同一个字形。
+       字号刻意偏大 —— 社交流里卡片常被缩到 300px 宽，小字会糊掉。
+       内容整体垂直居中：首版贴着上方，下面三分之一空着很难看。 -->
+  <rect width="1200" height="630" fill="#faf6ee"/>
+  <rect x="0" y="0" width="1200" height="12" fill="#9c4a2f"/>
+  <g transform="translate(118 200)">
+    <rect width="230" height="230" rx="44" fill="#9c4a2f"/>
+    <path transform="translate(10 185) scale(0.21000 -0.21000)" d="M244 579H426V464H244ZM577 579H752V464H577ZM102 718V325H268L139 278C176 205 221 147 272 101C213 71 133 47 23 30C55 -3 95 -67 112 -100C240 -74 334 -35 403 13C541 -53 713 -74 923 -82C932 -31 962 35 990 70C790 69 633 77 511 123C550 184 568 252 574 325H903V718H577V849H426V718ZM423 325C418 278 407 235 382 197C342 230 306 272 275 325Z" fill="#faf6ee"/>
+  </g>
+  <text x="418" y="286" font-family="'Noto Serif CJK SC',serif" font-size="94"
+        font-weight="700" fill="#3a3027">历史上的今天</text>
+  <text x="422" y="362" font-family="'Noto Sans CJK SC',sans-serif" font-size="38"
+        fill="#6b5d4f">按日期读历史上的大事</text>
+  <text x="422" y="424" font-family="'Noto Sans CJK SC',sans-serif" font-size="31"
+        fill="#9c4a2f">15,317 条 · 366 天 · 面向 10–18 岁</text>
+  <text x="422" y="486" font-family="'Noto Sans CJK SC',sans-serif" font-size="25"
+        fill="#9a8c7d">learning-hub-ai.github.io/on-this-day</text>
+</svg>
