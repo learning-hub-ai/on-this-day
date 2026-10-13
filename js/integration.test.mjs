@@ -85,6 +85,16 @@ ok(fresh !== day, 'clearCache 后重新取数');
 /* ---- 全年扫一遍，确认没有坏文件 ---- */
 section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
+let sensCount = 0, sensBadType = [], sensNoViolence = [];
+// 只认这几个暴力词 —— 用来反查「标了 sensitive 的条目正文里真有暴力内容」。
+// 刻意比 tag_sensitive.py 的表短：测试要独立判断，不能照抄实现，
+// 否则脚本错了测试也跟着错。
+// 「焚城」是实跑后补的 —— 10-15「西关制造焚城大火，广州死亡上千人」
+// 确实该标，是这份表漏了词，不是脚本误标。
+// 第二批（枪手/袭击/爆炸/纵火/空袭/人质…）是脚本补词后同步的；
+// 同一轮里这份表也抓出一条真误标：《告台湾同胞书》「停止…炮击」
+// 讲的是停火，脚本已加豁免。
+const VIOLENT_RE = /屠杀|刺杀|遇刺|行刺|暗杀|处决|枪决|枪杀|绞刑|火刑|断头台|问吊|杀害|杀死|自杀式|集中营|毒气|酷刑|强奸|轮奸|暴行|种族清洗|种族灭绝|大清洗|核试验|核爆|原子弹|斩首|凌迟|活埋|虐杀|殉情|自尽|服毒|切腹|灭门|焚城|枪手|枪击|扫射|枪战|恐怖|炸弹|爆炸|纵火|劫机|空袭|轰炸|炮击|炮轰|击落|袭击|人质|劫持|绑架|武装分子|开枪|持枪/;
 for (let m = 1; m <= 12; m++) {
   for (let d = 1; d <= daysInMonth(m); d++) {
     const key = toKey(m, d);
@@ -93,12 +103,23 @@ for (let m = 1; m <= 12; m++) {
     if (data.isEmpty) emptyDays.push(key);
     for (const it of [...data.selected, ...data.events]) {
       if (typeof it.y !== 'number') badYear.push(`${key}:${it.t?.slice(0, 12)}`);
+      if ('sensitive' in it) {
+        sensCount++;
+        // 只允许 true —— false/0/'' 这类假值会让前端判断变微妙
+        if (it.sensitive !== true) sensBadType.push(`${key}:${it.sensitive}`);
+        if (!VIOLENT_RE.test(it.t)) sensNoViolence.push(`${key}:${it.t.slice(0, 20)}`);
+      }
     }
   }
 }
 ok(loaded === 366, `366 天全部可载入`, `实际 ${loaded}`);
 ok(emptyDays.length === 0, '无空白天', emptyDays.slice(0, 3).join(','));
 ok(badYear.length === 0, '每条都有数字年份', badYear.slice(0, 3).join(','));
+ok(sensCount > 0, `有条目标了 sensitive（${sensCount} 条，§4.3）`, '一条都没标');
+ok(sensBadType.length === 0, 'sensitive 只用 true，不用假值',
+   sensBadType.slice(0, 3).join(','));
+ok(sensNoViolence.length === 0, '标了 sensitive 的正文确有暴力内容（无误标）',
+   sensNoViolence.slice(0, 3).join(' | '));
 
 /* ============ glossary.js：真实词表 ============ */
 section('glossary.js — 真实词表');
@@ -195,6 +216,22 @@ renderDay({ key: '01-01', selected: [], events: [], total: 0,
             isEmpty: true, generated: null }, words);
 ok(nodes.emptyState.hidden === false, '空数据时显示空状态');
 ok(nodes['.selected-section'].hidden === true, '空数据时隐藏精选区');
+
+// sensitive 的渲染（§4.3）—— 标了要出现陪读提示，没标不能出现
+const sensItem = { y: 1945, t: '某地发生屠杀，造成多人死亡。', src: 'wiki',
+                   sensitive: true };
+renderDay({ key: '01-01', selected: [sensItem], events: [], total: 1,
+            isEmpty: false, generated: null }, words);
+const sensHtml = nodes.selectedList.innerHTML;
+ok(sensHtml.includes('event--sensitive'), 'sensitive 条目加 event--sensitive 类');
+ok(sensHtml.includes('建议和家长一起读'), 'sensitive 条目显示陪读提示');
+
+const plainItem = { y: 1945, t: '某地举行会议。', src: 'wiki' };
+renderDay({ key: '01-01', selected: [plainItem], events: [], total: 1,
+            isEmpty: false, generated: null }, words);
+const plainHtml = nodes.selectedList.innerHTML;
+ok(!plainHtml.includes('event--sensitive'), '未标的条目不加 sensitive 类');
+ok(!plainHtml.includes('建议和家长一起读'), '未标的条目不显示陪读提示');
 
 /* ============ 转义与注音的接缝 ============ */
 section('render × glossary 接缝');

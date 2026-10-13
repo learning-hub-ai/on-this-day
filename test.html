@@ -318,6 +318,47 @@ group('全年 366 天计数自洽', async () => {
      `全年合计：精选 ${totalSel} · 其余 ${totalRest} · 共 ${totalSel + totalRest}`);
 }, true);
 
+group('内容分级 sensitive（§4.3）', async () => {
+  // 测试自备暴力词表，不从 tag_sensitive.py 抄 —— 两边独立才互相兜底。
+  const VIOLENT = /屠杀|刺杀|遇刺|行刺|暗杀|处决|枪决|枪杀|绞刑|火刑|断头台|问吊|杀害|杀死|自杀式|集中营|毒气|酷刑|强奸|轮奸|暴行|种族清洗|种族灭绝|大清洗|核试验|核爆|原子弹|斩首|凌迟|活埋|虐杀|殉情|自尽|服毒|切腹|灭门|焚城|枪手|枪击|扫射|枪战|恐怖|炸弹|爆炸|纵火|劫机|空袭|轰炸|炮击|炮轰|击落|袭击|人质|劫持|绑架|武装分子|开枪|持枪/;
+  // 这些是人类反对暴行的叙述，**不该**标 —— 把进步标成不宜儿童是错的
+  const MUST_NOT = [
+    ['法国废除死刑。', '废除死刑'],
+    ['英国废除死刑。', '废除死刑'],
+    ['南非白人国会通过结束种族隔离政策。', '结束种族隔离'],
+    ['联合国大会通过《禁止酷刑公约》。', '禁止酷刑公约'],
+  ];
+  const keys = allDayKeys();
+  let total = 0, inSel = 0;
+  const badType = [], noViolence = [], wrongFlag = [];
+  for (const k of keys) {
+    const day = await loadDay(k);
+    if (!day || day.isEmpty) continue;
+    for (const g of ['selected', 'events']) {
+      for (const it of day[g]) {
+        if (!('sensitive' in it)) {
+          continue;
+        }
+        total++;
+        if (g === 'selected') inSel++;
+        if (it.sensitive !== true) badType.push(`${k}:${it.sensitive}`);
+        if (!VIOLENT.test(it.t)) noViolence.push(`${k}:${it.t.slice(0, 18)}`);
+        for (const [txt, label] of MUST_NOT) {
+          if (it.t === txt) wrongFlag.push(`${k}:${label}`);
+        }
+      }
+    }
+  }
+  ok(total > 0, `全年标记 ${total} 条（精选内 ${inSel} 条，首屏可见）`,
+     '一条都没标 —— §4.3 要求屠杀/刺杀/处决类必标');
+  eq(badType.length, 0, 'sensitive 只用 true，不用假值',
+     badType.slice(0, 4).join(', '));
+  eq(noViolence.length, 0, '标记的条目正文确有暴力内容（无误标）',
+     noViolence.slice(0, 4).join(' | '));
+  eq(wrongFlag.length, 0, '「废除死刑」「禁止酷刑」等进步叙述未被误标',
+     wrongFlag.slice(0, 4).join(', '));
+}, true);
+
 group('文本质量（抽查 12 天）', async () => {
   const sample = ['01-01','02-29','03-15','04-30','05-24','06-06',
                   '07-04','08-19','09-04','10-12','11-28','12-25'];
