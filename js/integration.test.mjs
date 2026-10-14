@@ -87,6 +87,9 @@ section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
 let sensCount = 0, sensBadType = [], sensNoViolence = [];
 let emptyMarks = [], filledTitles = 0, missingTag = [], tuMarks = [];
+// 详情与事件一对一（§6.4f）：u 被 ≥4 个不同日期共用就不是「那天那件事」。
+// demote_generic_links.py 负责降级；这里守住它别回来。
+const uDates = new Map();
 // 纯日期型条目标题不该当「详情」—— 读者点进去是整年大事记，
 // 不是这件事。实测曾出现「居鲁士攻占巴比伦。详情：前539年」。
 // 刻意不含「年表$」——「化學元素發現年表」是真条目，实测会误杀。
@@ -114,6 +117,12 @@ for (let m = 1; m <= 12; m++) {
       // gen_otd.py 的 slim() 已在入口删除；这里守住它不再回来。
       if (it.t.includes('（图）')) tuMarks.push(`${key}:${it.t.slice(0, 18)}`);
       if (it.u && DATEONLY_RE.test(it.u)) dateLinks.push(`${key}:u=${it.u}`);
+      const uDisp = it.ud || it.u;
+      if (uDisp) {
+        if (!uDates.has(uDisp)) uDates.set(uDisp, { dates: new Set(), years: new Set() });
+        uDates.get(uDisp).dates.add(key);
+        uDates.get(uDisp).years.add(it.y);
+      }
       for (const l of it.l || []) {
         if (DATEONLY_RE.test(l)) dateLinks.push(`${key}:l=${l}`);
       }
@@ -157,6 +166,12 @@ ok(tuMarks.length === 0,
 ok(dateLinks.length === 0,
    '详情与关联条目都不是纯日期型标题（§6.4e）',
    dateLinks.slice(0, 5).join(' | '));
+const generic = [...uDates.entries()]
+  .filter(([, v]) => v.years.size > 1 && v.dates.size >= 4)
+  .map(([u, v]) => `${u}(${v.dates.size}天/${v.years.size}年)`);
+ok(generic.length === 0,
+   '详情与事件一对一：没有跨年且被 ≥4 个日期共用的 u（§6.4f）',
+   generic.slice(0, 5).join(' | '));
 
 /* ============ glossary.js：真实词表 ============ */
 section('glossary.js — 真实词表');

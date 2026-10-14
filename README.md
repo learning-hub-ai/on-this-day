@@ -54,10 +54,22 @@ python3 scripts/gen_otd.py              # 全年，约 30 分钟（API 限流）
 python3 scripts/gen_otd.py --days 10-09 # 单日
 python3 scripts/gen_otd.py --dry-run    # 不写文件
 
+# ⚠ 完整流程有固定顺序，改了前一步后面都要重跑：
+#
+#   gen_otd.py → demote_generic_links.py → tag_sensitive.py → tag_events.py
+#
+# demote_generic_links 要全年数据齐了才能统计「某标题被多少日期共用」，
+# 所以只能在 gen_otd 之后；而 gen_otd 重跑会把降级冲掉，需补跑。
+# tag_events 按正文算分类，任何改正文的脚本之后都要重跑。
+python3 scripts/demote_generic_links.py --apply   # 详情一对一（§6.4f）
+python3 scripts/demote_generic_links.py           # 预演，不写
+python3 scripts/tag_sensitive.py --apply          # 标需陪读条目（§4.3）
 python3 scripts/tag_events.py           # 打领域标签（写入 tag 字段）
-# ⚠ 顺序：先 gen_otd 再 tag_events。gen_otd 会保留已有 tag，
-#   但新抓的日期需要补打标签
 python3 scripts/tag_events.py --dry-run --sample 10   # 只统计 ＋ 抽样核验
+
+# 一次性数据清理（已跑过，一般不需再跑）：
+python3 scripts/fill_empty_titles.py --apply  # 补空书名号（§10.1c）
+python3 scripts/strip_tu_marker.py --apply    # 清历史数据里的（图）
 ```
 
 脚本**幂等** —— 重跑不会覆盖人工写的 `why` / `notes` / `sensitive`。
