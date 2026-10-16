@@ -419,6 +419,7 @@ def is_hand_edited(item):
     """
     return bool(item.get('why') or item.get('notes')
                 or item.get('sensitive') or item.get('filled_title')
+                or item.get('filled_name')
                 or item.get('src') == 'own')
 
 
@@ -435,7 +436,8 @@ DERIVED_FIELDS = ('tag',)
 # ⚠ `t` 在列表里，因为补全空书名号（§10.1c）改的就是正文。
 #   但这也意味着：上游若真的修了正文，带标志位的条目不会自动更新 ——
 #   这是有意的取舍，`--force` 可以覆盖。
-MANUAL_FIELDS = ('t', 'why', 'notes', 'sensitive', 'filled_title', 'src')
+MANUAL_FIELDS = ('t', 'why', 'notes', 'sensitive', 'filled_title',
+                 'filled_name', 'src')
 
 
 def repair_truncated_names(text, titles):
@@ -660,6 +662,17 @@ def merge_idempotent(fresh, existing, force=False, group=None):
         """抹掉空书名号/引号里的内容，让补全前后的正文可比。"""
         return re.sub(r'《[^》]*》', '《》', re.sub(r'「[^」]*」', '「」', s or ''))
 
+    def tail_key(s):
+        """正文**末尾** 12 字。
+
+        人名补在句子前半（「义大利探险家」后面），所以前缀键会变，
+        但句尾不动 —— 实测 10-12 补入「克里斯托弗·哥伦布」后，
+        前 12 字从「义大利探险家第一次抵达美」变成「义大利探险家克里斯托弗·」，
+        主键和抹书名号的兜底键都配不上，补名被静默冲掉。
+        用句尾作第三道兜底。
+        """
+        return (s or '')[-12:]
+
     old_map = {}
     old_alt = {}      # 兜底键：同年 + 抹掉标记内容后的前 12 字
     alt_dupes = set()  # 撞键的兜底键 —— 有歧义就不能用，见上面注释
@@ -668,6 +681,8 @@ def merge_idempotent(fresh, existing, force=False, group=None):
     #   分不开，能分开的只有组别。调用方本来就是按组调用的，把组传进来
     #   即可；不限定组的话 events 的条目会覆盖 selected 的同键条目。
     groups = (group,) if group else ('selected', 'events')
+    old_tail = {}      # 兜底键二：同年 + 正文末尾 12 字（应对句子前半被补名）
+    tail_dupes = set()
     for grp in groups:
         for it in existing.get(grp) or []:
             old_map[(it.get('y'), (it.get('t') or '')[:12])] = it
@@ -675,8 +690,14 @@ def merge_idempotent(fresh, existing, force=False, group=None):
             if alt_key in old_alt:
                 alt_dupes.add(alt_key)
             old_alt[alt_key] = it
+            t_key = (it.get('y'), tail_key(it.get('t')))
+            if t_key in old_tail:
+                tail_dupes.add(t_key)
+            old_tail[t_key] = it
     for k in alt_dupes:          # 歧义的一律剔除，宁可配不上也不配错
         old_alt.pop(k, None)
+    for k in tail_dupes:
+        old_tail.pop(k, None)
 
     out = []
     kept = 0
@@ -685,6 +706,10 @@ def merge_idempotent(fresh, existing, force=False, group=None):
         if old is None:
             # 前缀没配上，可能是补全改了前 12 字 —— 用抹掉标记的形式再试
             old = old_alt.get((it.get('y'), strip_marks(it.get('t'))[:12]))
+        if old is None:
+            # 还是没配上 —— 可能是人名补在了句子前半（§10.1e），
+            # 前缀全变但句尾不动，用末尾 12 字再兜一次
+            old = old_tail.get((it.get('y'), tail_key(it.get('t'))))
         if not old:
             out.append(it)
             continue

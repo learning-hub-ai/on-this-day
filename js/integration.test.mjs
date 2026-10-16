@@ -87,6 +87,7 @@ section('api.js — 全年 366 天');
 let loaded = 0, emptyDays = [], badYear = [];
 let sensCount = 0, sensBadType = [], sensNoViolence = [];
 let emptyMarks = [], filledTitles = 0, missingTag = [], tuMarks = [];
+let filledNames = 0;
 // 详情与事件一对一（§6.4f）：u 被 ≥4 个不同日期共用就不是「那天那件事」。
 // demote_generic_links.py 负责降级；这里守住它别回来。
 const uDates = new Map();
@@ -127,6 +128,7 @@ for (let m = 1; m <= 12; m++) {
         if (DATEONLY_RE.test(l)) dateLinks.push(`${key}:l=${l}`);
       }
       if (it.filled_title === true) filledTitles++;
+      if (it.filled_name === true) filledNames++;
       if ('sensitive' in it) {
         sensCount++;
         // 只允许 true —— false/0/'' 这类假值会让前端判断变微妙
@@ -154,6 +156,9 @@ ok(sensNoViolence.length === 0, '标了 sensitive 的正文确有暴力内容（
 ok(emptyMarks.length <= 5,
    `空书名号残缺 ${emptyMarks.length} 条（已知上限 5）`,
    emptyMarks.slice(0, 6).join(' | '));
+ok(filledNames === 11,
+   `补回的人名仍在（${filledNames} 条，带 filled_name 标志）`,
+   `实际 ${filledNames} 条 —— 少了说明 gen_otd.py 重跑把补名冲掉了（§10.1e）`);
 ok(filledTitles === 24,
    `补全的标题仍在（${filledTitles} 条，带 filled_title 标志）`,
    `实际 ${filledTitles} 条 —— 少了说明 gen_otd.py 重跑把补全冲掉了`);

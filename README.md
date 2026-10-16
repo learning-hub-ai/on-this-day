@@ -67,8 +67,9 @@ python3 scripts/tag_sensitive.py --apply          # 标需陪读条目（§4.3�
 python3 scripts/tag_events.py           # 打领域标签（写入 tag 字段）
 python3 scripts/tag_events.py --dry-run --sample 10   # 只统计 ＋ 抽样核验
 
-# 一次性数据清理（已跑过，一般不需再跑）：
+# 一次性数据清理（已跑过，一般不需再跑；gen_otd 全量重跑后要补）：
 python3 scripts/fill_empty_titles.py --apply  # 补空书名号（§10.1c）
+python3 scripts/fill_missing_names.py --apply # 补缺失人名（§10.1e）
 python3 scripts/strip_tu_marker.py --apply    # 清历史数据里的（图）
 ```
 
